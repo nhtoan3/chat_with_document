@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Màn hình 03: Tải lên, theo dõi trạng thái, tìm kiếm và gỡ tài liệu (UC-04..UC-08, US-005..US-010).">
+<title>Tài liệu dự án — Chat với tài liệu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --bg:#F6F7F9; --surface:#FFFFFF; --surface-2:#F1F3F6; --surface-3:#E9ECF1;
+  --border:#E2E5EA; --border-strong:#C3C9D2;
+  --text:#1A1F27; --text-2:#465161; --muted:#5F6B7A;
+  --primary:#2450D8; --primary-hover:#1C40B0; --primary-weak:#EAF0FF; --primary-ink:#1C3FA8;
+  --success:#1B7A4B; --success-weak:#E5F4EC;
+  --warning:#8A5300; --warning-weak:#FFF3DB;
+  --danger:#B42318; --danger-weak:#FDECEA;
+  --highlight:#FFE590;
+  --demo:#6D28D9; --demo-weak:#F3EEFF;
+  --r-sm:6px; --r:10px; --r-lg:14px; --r-pill:999px;
+  --sh-sm:0 1px 2px rgba(16,24,40,.06); --sh:0 4px 16px rgba(16,24,40,.08); --sh-lg:0 16px 48px rgba(16,24,40,.20);
+  --focus:0 0 0 3px rgba(36,80,216,.40);
+  --topbar-h:56px; --sidebar-w:264px; --panel-w:440px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font:16px/1.5 var(--font);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;line-height:1.3;font-weight:650}
+h1{font-size:1.5rem} h2{font-size:1.25rem} h3{font-size:1.0625rem} h4{font-size:.9375rem}
+p{margin:0}
+a{color:var(--primary-ink)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm)}
+.ic{flex:none;display:inline-block;vertical-align:middle}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--primary);color:#fff;padding:8px 14px;border-radius:var(--r-sm);text-decoration:none}
+.skip-link:focus{top:8px}
+.muted{color:var(--muted)} .small{font-size:.875rem} .xs{font-size:.8125rem}
+.row{display:flex;align-items:center;gap:8px} .grow{flex:1} .wrap{flex-wrap:wrap}
+.stack{display:flex;flex-direction:column;gap:12px}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border-radius:var(--r);border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font-weight:550;font-size:.9375rem;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s}
+.btn:hover{background:var(--surface-2)}
+.btn:disabled,.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+.btn-primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-hover);border-color:var(--primary-hover)}
+.btn-danger{background:var(--danger);border-color:var(--danger);color:#fff}
+.btn-danger:hover{background:#951c13}
+.btn-ghost{border-color:transparent;background:transparent}
+.btn-ghost:hover{background:var(--surface-2)}
+.btn-sm{min-height:32px;padding:0 10px;font-size:.875rem;border-radius:var(--r-sm)}
+.btn-icon{width:40px;padding:0}
+.btn-icon.btn-sm{width:32px}
+.btn-block{width:100%}
+
+/* ---------- Form ---------- */
+.field{display:flex;flex-direction:column;gap:6px}
+.label{font-size:.875rem;font-weight:600;color:var(--text-2)}
+.input,.select,.textarea{width:100%;min-height:40px;padding:8px 12px;border:1px solid var(--border-strong);border-radius:var(--r);background:var(--surface)}
+.input:focus,.select:focus,.textarea:focus{border-color:var(--primary);box-shadow:var(--focus);outline:none}
+.input[aria-invalid="true"]{border-color:var(--danger)}
+.hint{font-size:.8125rem;color:var(--muted)}
+.error-text{font-size:.8125rem;color:var(--danger);display:flex;gap:6px;align-items:center}
+.search{position:relative}
+.search .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search .input{padding-left:38px}
+
+/* ---------- Badges / chips ---------- */
+.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:var(--r-pill);font-size:.8125rem;font-weight:600;white-space:nowrap;border:1px solid transparent}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+.b-ready{background:var(--success-weak);color:var(--success)}
+.b-proc{background:var(--primary-weak);color:var(--primary-ink)}
+.b-queue{background:var(--surface-3);color:var(--text-2)}
+.b-fail{background:var(--danger-weak);color:var(--danger)}
+.b-warn{background:var(--warning-weak);color:var(--warning)}
+.b-neutral{background:var(--surface-2);color:var(--text-2);border-color:var(--border)}
+.spin{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- Cards / banners ---------- */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-sm)}
+.card-pad{padding:20px}
+.banner{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:var(--r);border:1px solid;font-size:.9375rem}
+.banner .ic{margin-top:2px}
+.banner-info{background:var(--primary-weak);border-color:#C8D6FB;color:var(--primary-ink)}
+.banner-warn{background:var(--warning-weak);border-color:#F2D49B;color:var(--warning)}
+.banner-danger{background:var(--danger-weak);border-color:#F4C2BD;color:var(--danger)}
+.banner-success{background:var(--success-weak);border-color:#B9E0CA;color:var(--success)}
+.banner b{color:inherit}
+.banner .banner-body{flex:1;color:var(--text)}
+
+/* ---------- App shell ---------- */
+.topbar{position:sticky;top:0;z-index:30;height:var(--topbar-h);display:flex;align-items:center;gap:12px;padding:0 16px;background:var(--surface);border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--text);text-decoration:none}
+.brand-mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#2450D8,#5B7CF0);color:#fff;display:grid;place-items:center}
+.user-chip{display:flex;align-items:center;gap:10px;padding:4px 10px 4px 4px;border-radius:var(--r-pill);border:1px solid var(--border)}
+.avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.8125rem;background:var(--primary-weak);color:var(--primary-ink);flex:none}
+.avatar.ai{background:linear-gradient(135deg,#2450D8,#5B7CF0);color:#fff}
+.layout{display:flex;min-height:calc(100vh - var(--topbar-h))}
+.sidebar{width:var(--sidebar-w);flex:none;background:var(--surface);border-right:1px solid var(--border);padding:16px 12px;display:flex;flex-direction:column;gap:16px;position:sticky;top:var(--topbar-h);height:calc(100vh - var(--topbar-h));overflow-y:auto}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav-title{font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:8px 10px 4px}
+.nav a{display:flex;align-items:center;gap:10px;min-height:40px;padding:0 10px;border-radius:var(--r);color:var(--text-2);text-decoration:none;font-weight:550;font-size:.9375rem}
+.nav a:hover{background:var(--surface-2);color:var(--text)}
+.nav a[aria-current="page"]{background:var(--primary-weak);color:var(--primary-ink)}
+.nav .count{margin-left:auto;font-size:.75rem;font-weight:700;color:var(--muted);background:var(--surface-2);padding:2px 8px;border-radius:var(--r-pill)}
+.nav a[aria-current="page"] .count{background:#fff;color:var(--primary-ink)}
+.recent a{font-weight:450;font-size:.875rem;min-height:36px}
+.recent a span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sidebar-foot{margin-top:auto;font-size:.75rem;color:var(--muted);padding:0 10px}
+.main{flex:1;min-width:0}
+.page{max-width:1200px;margin:0 auto;padding:28px 32px 96px}
+.page-head{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.page-head .sub{color:var(--muted);margin-top:4px;font-size:.9375rem}
+.menu-btn{display:none}
+.scrim{display:none}
+
+/* ---------- Table ---------- */
+.table-wrap{overflow-x:auto}
+table.tbl{width:100%;border-collapse:collapse;font-size:.9375rem}
+.tbl th{text-align:left;font-size:.8125rem;font-weight:650;color:var(--muted);padding:10px 16px;background:var(--surface-2);border-bottom:1px solid var(--border);white-space:nowrap}
+.tbl td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tbody tr:hover{background:#FAFBFC}
+.tbl .num{text-align:right;font-variant-numeric:tabular-nums}
+.file-cell{display:flex;align-items:center;gap:10px;min-width:0}
+.file-ic{width:36px;height:36px;border-radius:8px;background:var(--danger-weak);color:var(--danger);display:grid;place-items:center;flex:none}
+.file-name{font-weight:550;overflow-wrap:anywhere}
+
+/* ---------- Tabs ---------- */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);overflow-x:auto}
+.tab{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:0;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--text-2);font-weight:550;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--primary-ink);border-bottom-color:var(--primary)}
+.tab .count{font-size:.75rem;background:var(--surface-2);padding:1px 8px;border-radius:var(--r-pill)}
+
+/* ---------- Dialog ---------- */
+dialog.dlg{border:0;padding:0;border-radius:var(--r-lg);box-shadow:var(--sh-lg);width:min(480px,calc(100vw - 32px));color:var(--text)}
+dialog.dlg::backdrop{background:rgba(16,24,40,.45)}
+.dlg-head{display:flex;align-items:flex-start;gap:12px;padding:20px 20px 8px}
+.dlg-body{padding:4px 20px 16px;color:var(--text-2);font-size:.9375rem}
+.dlg-foot{display:flex;justify-content:flex-end;gap:8px;padding:12px 20px 20px;flex-wrap:wrap}
+.dlg-icon{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;flex:none}
+.dlg-icon.danger{background:var(--danger-weak);color:var(--danger)}
+.dlg-icon.info{background:var(--primary-weak);color:var(--primary-ink)}
+
+/* ---------- Toast ---------- */
+.toasts{position:fixed;right:16px;bottom:16px;z-index:90;display:flex;flex-direction:column;gap:8px;max-width:min(380px,calc(100vw - 32px))}
+.toast{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:var(--r);background:#1F2733;color:#fff;box-shadow:var(--sh);font-size:.9375rem;animation:tin .2s ease-out}
+.toast.err{background:var(--danger)}
+.toast button{margin-left:auto;background:none;border:0;color:#fff;cursor:pointer;padding:0}
+@keyframes tin{from{transform:translateY(8px);opacity:0}}
+
+/* ---------- Empty state ---------- */
+.empty{text-align:center;padding:48px 24px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.empty-art{width:72px;height:72px;border-radius:20px;background:var(--primary-weak);color:var(--primary);display:grid;place-items:center}
+.empty p{max-width:440px;color:var(--muted)}
+
+/* ---------- Skeleton ---------- */
+.skel{background:linear-gradient(90deg,var(--surface-2) 25%,var(--surface-3) 50%,var(--surface-2) 75%);background-size:200% 100%;animation:sh 1.2s infinite;border-radius:6px;height:12px}
+@keyframes sh{to{background-position:-200% 0}}
+
+/* ---------- Demo control (design-only) ---------- */
+.demo{position:fixed;left:16px;bottom:16px;z-index:80;background:var(--demo-weak);border:1.5px dashed var(--demo);border-radius:var(--r);padding:8px 10px;box-shadow:var(--sh);max-width:calc(100vw - 32px);font-size:.8125rem}
+.demo summary{cursor:pointer;color:var(--demo);font-weight:700;list-style:none;display:flex;align-items:center;gap:6px}
+.demo summary::-webkit-details-marker{display:none}
+.demo .opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;max-width:520px}
+.demo button{border:1px solid #C9B6F5;background:#fff;color:#4C1D95;border-radius:var(--r-pill);padding:4px 10px;cursor:pointer;font-size:.8125rem}
+.demo button[aria-pressed="true"]{background:var(--demo);color:#fff;border-color:var(--demo)}
+.demo .grp{width:100%;font-weight:700;color:#4C1D95;margin-top:4px}
+
+/* ---------- Responsive ---------- */
+.mobile-note{display:none}
+@media (max-width:1279px){
+  .menu-btn{display:inline-flex}
+  .sidebar{position:fixed;left:0;top:var(--topbar-h);z-index:40;transform:translateX(-100%);transition:transform .2s;box-shadow:var(--sh-lg)}
+  body.nav-open .sidebar{transform:none}
+  body.nav-open .scrim{display:block;position:fixed;inset:var(--topbar-h) 0 0 0;background:rgba(16,24,40,.35);z-index:35}
+  .page{padding:24px 24px 96px}
+}
+@media (max-width:767px){
+  .mobile-note{display:flex}
+  .page{padding:16px 16px 96px}
+  .user-chip .who{display:none}
+  .hide-sm{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.usage{display:flex;align-items:center;gap:12px;min-width:240px}
+.meter{flex:1;height:8px;border-radius:var(--r-pill);background:var(--surface-3);overflow:hidden}
+.meter span{display:block;height:100%;background:var(--primary);border-radius:var(--r-pill)}
+.drop{border:2px dashed var(--border-strong);border-radius:var(--r-lg);background:var(--surface);padding:28px;display:flex;align-items:center;gap:20px;transition:border-color .15s,background .15s}
+.drop.over{border-color:var(--primary);background:var(--primary-weak)}
+.drop .art{width:56px;height:56px;border-radius:16px;background:var(--primary-weak);color:var(--primary);display:grid;place-items:center;flex:none}
+.queue{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.qitem{display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+.qitem.err{border-color:#F4C2BD;background:#FFF9F8}
+.qbar{height:6px;background:var(--surface-3);border-radius:var(--r-pill);overflow:hidden;margin-top:6px}
+.qbar span{display:block;height:100%;background:var(--primary);width:0;transition:width .2s}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border)}
+.toolbar .search{width:min(320px,100%)}
+.err-detail{font-size:.8125rem;color:var(--danger);margin-top:2px}
+.poll{font-size:.8125rem;color:var(--muted);display:flex;gap:6px;align-items:center}
+@media (max-width:767px){.drop{flex-direction:column;text-align:center}.tbl .hide-sm{display:none}}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Bỏ qua tới nội dung chính</a>
+<header class="topbar">
+  <button class="btn btn-ghost btn-icon menu-btn" aria-label="Mở menu điều hướng" aria-expanded="false" aria-controls="sidebar"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+  <a class="brand" href="04-chat.html"><span class="brand-mark"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span>Chat với tài liệu</span></a>
+  <span class="badge b-neutral hide-sm">MVP</span>
+  <div class="grow"></div>
+  <div class="user-chip"><span class="avatar">TH</span><span class="who small"><b>Trần Huy</b><br><span class="muted xs">Quản trị viên</span></span></div>
+  <a class="btn btn-ghost btn-icon" href="01-login.html" aria-label="Đăng xuất" title="Đăng xuất"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></a>
+</header>
+<div class="scrim"></div>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Điều hướng chính">
+  <a class="btn btn-primary btn-block" href="04-chat.html"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg> Hội thoại mới</a>
+  <div class="nav">
+    <a href="04-chat.html"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Hỏi đáp</span></a>
+    <a href="03-documents.html" aria-current="page"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg><span>Tài liệu</span><span class="count" title="5 tài liệu Sẵn sàng">5</span></a>
+    <a href="05-history.html"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Lịch sử hội thoại</span></a>
+  </div>
+  
+  <div class="nav"><div class="nav-title">Quản trị</div><a href="06-admin-users.html"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Người dùng</span></a><a href="07-admin-metrics.html"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg><span>Số liệu sử dụng</span></a></div>
+  <div class="sidebar-foot">Phiên bản MVP 0.1 · <a href="index.html">Danh mục màn hình</a></div>
+</nav>
+
+<main class="main" id="main">
+  <div class="page">
+    <div class="page-head">
+      <div class="grow">
+        <h1>Tài liệu dự án</h1>
+        <p class="sub">Mọi tài liệu ở trạng thái <b>Sẵn sàng</b> đều được dùng làm nguồn trả lời.</p>
+      </div>
+      <div class="usage" aria-label="Dung lượng bộ tài liệu"><span class="small"><b id="used">8</b>/50 tài liệu</span><div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="50" aria-valuenow="8" id="meter"><span style="width:16%"></span></div></div>
+    </div>
+
+    <div id="page-alert" aria-live="assertive"></div>
+
+    <section class="drop" id="drop" aria-labelledby="drop-title">
+      <div class="art"><svg class="ic" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v12"/></svg></div>
+      <div class="grow">
+        <h3 id="drop-title">Kéo-thả file PDF vào đây</h3>
+        <p class="muted small">Tối đa 10 file mỗi lần · mỗi file ≤ 20 MB và ≤ 300 trang · chỉ PDF có lớp văn bản (chưa hỗ trợ PDF dạng ảnh scan).</p>
+      </div>
+      <label class="btn btn-primary" for="file"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v12"/></svg> Chọn file</label>
+      <input type="file" id="file" accept="application/pdf,.pdf" multiple class="sr-only">
+    </section>
+    <div class="queue" id="queue" aria-live="polite" aria-label="Tiến trình tải lên"></div>
+
+    <section class="card" style="margin-top:24px">
+      <div class="tabs" role="tablist" aria-label="Lọc theo trạng thái" id="tabs" style="padding:0 8px"></div>
+      <div class="toolbar">
+        <div class="search"><span><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span><label for="s" class="sr-only">Tìm theo tên tệp</label><input class="input" id="s" type="search" placeholder="Tìm theo tên tệp…"></div>
+        <div class="grow"></div>
+        <span class="poll" id="poll" hidden><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg> Tự cập nhật mỗi 3 giây khi có tài liệu đang xử lý</span>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl" aria-describedby="drop-title">
+          <thead><tr><th scope="col">Tên tệp</th><th scope="col" class="num hide-sm">Số trang</th><th scope="col" class="hide-sm">Người tải lên</th><th scope="col" class="hide-sm">Ngày tải lên</th><th scope="col">Trạng thái</th><th scope="col"><span class="sr-only">Thao tác</span></th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="empty" hidden><div class="empty-art"><svg class="ic" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div><h3>Không có tài liệu phù hợp</h3><p>Thử đổi bộ lọc hoặc từ khóa tìm kiếm.</p></div>
+    </section>
+  </div>
+</main>
+</div>
+
+<dialog class="dlg" id="dlg-remove" aria-labelledby="dr-title">
+  <div class="dlg-head"><span class="dlg-icon danger"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></span><div><h3 id="dr-title">Gỡ tài liệu?</h3><p class="muted small" id="dr-name" style="overflow-wrap:anywhere"></p></div></div>
+  <div class="dlg-body">Tài liệu sẽ <b>không còn được dùng để trả lời</b> ngay sau khi gỡ. Trích dẫn tới tài liệu này trong các hội thoại cũ sẽ hiển thị "Tài liệu đã bị gỡ". Nội dung được xóa vĩnh viễn sau 30 ngày.</div>
+  <div class="dlg-foot"><button class="btn" data-close>Hủy</button><button class="btn btn-danger" id="dr-ok">Gỡ tài liệu</button></div>
+</dialog>
+
+<dialog class="dlg" id="dlg-dup" aria-labelledby="dd-title">
+  <div class="dlg-head"><span class="dlg-icon info"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span><div><h3 id="dd-title">Đã có tài liệu cùng tên</h3><p class="muted small" id="dd-name" style="overflow-wrap:anywhere"></p></div></div>
+  <div class="dlg-body">Bạn muốn thay thế bản cũ hay giữ cả hai? Nếu giữ cả hai, tệp mới sẽ được thêm hậu tố ngày tải lên.</div>
+  <div class="dlg-foot"><button class="btn" data-close>Hủy</button><button class="btn" id="dd-keep">Giữ cả hai</button><button class="btn btn-primary" id="dd-replace">Thay thế bản cũ</button></div>
+</dialog>
+
+<details class="demo">
+  <summary>◆ Trạng thái màn hình (chỉ trong bản thiết kế)</summary>
+  <div class="opts">
+    <span class="grp">Vai trò</span>
+    <button data-group="role" data-value="admin" aria-pressed="true">Quản trị viên</button>
+    <button data-group="role" data-value="member">Chuyên viên BD</button>
+    <span class="grp">Mô phỏng</span>
+    <button data-group="sim" data-value="upload">Tải 3 file mẫu</button>
+    <button data-group="sim" data-value="limit">Chọn 11 file (ERR-09)</button>
+    <button data-group="sim" data-value="invalid">File không hợp lệ</button>
+    <button data-group="sim" data-value="dup">Trùng tên (EC-08)</button>
+    <button data-group="sim" data-value="offline">Mất mạng khi tải (EC-03)</button>
+    <button data-group="sim" data-value="empty">Bộ tài liệu trống</button>
+  </div>
+</details>
+
+<script>
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+function toast(msg, type = '') {
+  let box = $('.toasts');
+  if (!box) { box = document.createElement('div'); box.className = 'toasts'; box.setAttribute('role', 'status'); box.setAttribute('aria-live', 'polite'); document.body.appendChild(box); }
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.innerHTML = `<span>${msg}</span><button aria-label="Đóng thông báo"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6L6 18M6 6l12 12"/></svg></button>`;
+  t.querySelector('button').onclick = () => t.remove();
+  box.appendChild(t);
+  if (type !== 'err') setTimeout(() => t.remove(), 5000);
+}
+function track(name, props = {}) { console.info('[telemetry]', name, props); }
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+// Navigation drawer (< 1280px)
+document.addEventListener('click', e => {
+  if (e.target.closest('.menu-btn')) { document.body.classList.toggle('nav-open'); const b = $('.menu-btn'); b && b.setAttribute('aria-expanded', document.body.classList.contains('nav-open')); }
+  if (e.target.closest('.scrim')) document.body.classList.remove('nav-open');
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.body.classList.remove('nav-open'); });
+// Design-only state switcher
+function demoGroup(group, handler) {
+  $$(`.demo [data-group="${group}"]`).forEach(b => b.addEventListener('click', () => {
+    $$(`.demo [data-group="${group}"]`).forEach(x => x.setAttribute('aria-pressed', 'false'));
+    b.setAttribute('aria-pressed', 'true');
+    handler(b.dataset.value);
+  }));
+}
+
+
+const MB = 1024 * 1024;
+let role = 'admin', filter = 'all', query = '';
+let docs = [
+  { id: 1, name: 'Hop_dong_khung_ABC_2026.pdf', pages: 42, by: 'Nguyễn Lan', at: '12/10/2026', status: 'ready' },
+  { id: 2, name: 'De_xuat_hop_tac_Minh_Phat.pdf', pages: 18, by: 'Trần Huy', at: '14/10/2026', status: 'ready' },
+  { id: 3, name: 'Bien_ban_hop_doi_tac_15-09.pdf', pages: 6, by: 'Lê Minh', at: '15/10/2026', status: 'ready' },
+  { id: 4, name: 'Dieu_khoan_bao_mat_NDA.pdf', pages: 9, by: 'Phạm An', at: '16/10/2026', status: 'ready' },
+  { id: 5, name: 'Ke_hoach_trien_khai_Q1_2027.pdf', pages: 27, by: 'Nguyễn Lan', at: '18/10/2026', status: 'ready' },
+  { id: 6, name: 'Bang_gia_dich_vu_Q4_2026.pdf', pages: 12, by: 'Nguyễn Lan', at: '22/10/2026', status: 'processing' },
+  { id: 7, name: 'Ho_so_nang_luc_Minh_Phat.pdf', pages: null, by: 'Phạm An', at: '22/10/2026', status: 'queued' },
+  { id: 8, name: 'Scan_phu_luc_hop_dong.pdf', pages: null, by: 'Trần Huy', at: '21/10/2026', status: 'failed', err: 'no_text_layer' },
+];
+let nextId = 100;
+const STATUS = {
+  ready: ['b-ready', '<span class="dot"></span>Sẵn sàng'],
+  processing: ['b-proc', '<svg class="ic spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.2-8.6"/></svg>Đang xử lý'],
+  queued: ['b-queue', '<span class="dot"></span>Đang chờ xử lý'],
+  uploading: ['b-proc', 'Đang tải lên'],
+  failed: ['b-fail', '<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>Lỗi'],
+};
+const ERR = {
+  no_text_layer: 'Không đọc được văn bản (PDF dạng ảnh chưa được hỗ trợ).',
+  encrypted_pdf: 'Tệp được bảo vệ bằng mật khẩu.',
+  too_many_pages: 'Tệp dài hơn 300 trang.',
+  corrupted: 'Tệp bị hỏng, không mở được.',
+  storage_error: 'Mất kết nối khi tải lên. Vui lòng thử lại.',
+};
+const TABS = [['all', 'Tất cả'], ['ready', 'Sẵn sàng'], ['busy', 'Đang xử lý'], ['failed', 'Lỗi']];
+const isBusy = s => ['processing', 'queued', 'uploading'].includes(s);
+
+function renderTabs() {
+  const c = { all: docs.length, ready: docs.filter(d => d.status === 'ready').length, busy: docs.filter(d => isBusy(d.status)).length, failed: docs.filter(d => d.status === 'failed').length };
+  $('#tabs').innerHTML = TABS.map(([k, l]) => `<button class="tab" role="tab" aria-selected="${filter === k}" data-k="${k}">${l}<span class="count">${c[k]}</span></button>`).join('');
+  $$('#tabs .tab').forEach(t => t.onclick = () => { filter = t.dataset.k; render(); });
+  $('.nav .count').textContent = c.ready;
+  $('#used').textContent = docs.length;
+  $('#meter').setAttribute('aria-valuenow', docs.length);
+  $('#meter span').style.width = (docs.length / 50 * 100) + '%';
+  $('#poll').hidden = c.busy === 0;
+}
+function render() {
+  renderTabs();
+  const list = docs.filter(d => (filter === 'all' || (filter === 'busy' ? isBusy(d.status) : d.status === filter)) && d.name.toLowerCase().includes(query));
+  $('#empty').hidden = list.length > 0;
+  if (!docs.length) { $('#empty h3').textContent = 'Chưa có tài liệu nào'; $('#empty p').textContent = 'Kéo-thả file PDF vào khung phía trên để bắt đầu.'; }
+  else { $('#empty h3').textContent = 'Không có tài liệu phù hợp'; $('#empty p').textContent = 'Thử đổi bộ lọc hoặc từ khóa tìm kiếm.'; }
+  $('#rows').innerHTML = list.map(d => {
+    const [cls, lbl] = STATUS[d.status];
+    const actions = [];
+    if (d.status === 'failed' && d.err === 'storage_error') actions.push(`<button class="btn btn-sm" data-retry="${d.id}"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg> Thử lại</button>`);
+    if (role === 'admin') actions.push(`<button class="btn btn-ghost btn-sm btn-icon" data-remove="${d.id}" aria-label="Gỡ ${esc(d.name)}" title="Gỡ tài liệu"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>`);
+    return `<tr>
+      <td><div class="file-cell"><span class="file-ic"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span><div><div class="file-name">${esc(d.name)}</div>${d.status === 'failed' ? `<div class="err-detail">${ERR[d.err]}</div>` : ''}</div></div></td>
+      <td class="num hide-sm">${d.pages ?? '—'}</td><td class="hide-sm">${esc(d.by)}</td><td class="hide-sm">${d.at}</td>
+      <td><span class="badge ${cls}">${lbl}</span></td>
+      <td style="text-align:right"><div class="row" style="justify-content:flex-end">${actions.join('')}</div></td></tr>`;
+  }).join('');
+}
+$('#s').addEventListener('input', e => { query = e.target.value.toLowerCase().trim(); render(); });
+
+// ---------- Upload (FR-005..007) ----------
+function alertPage(html) { $('#page-alert').innerHTML = html ? `<div class="banner banner-danger" style="margin-bottom:16px"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><div class="banner-body">${html}</div><button class="btn btn-ghost btn-sm btn-icon" aria-label="Đóng" onclick="this.parentElement.remove()"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>` : ''; }
+function validate(f) {
+  if (!/\.pdf$/i.test(f.name) || (f.type && f.type !== 'application/pdf')) return `"${esc(f.name)}" không phải tệp PDF hợp lệ.`;
+  if (f.size > 20 * MB) return `"${esc(f.name)}" vượt quá 20 MB.`;
+  return null;
+}
+function handleFiles(files) {
+  alertPage('');
+  if (files.length > 10) { alertPage(`Mỗi lần chỉ tải tối đa <b>10 tệp</b>. Bạn đã chọn ${files.length} tệp — vui lòng chọn lại.`); return; }
+  if (docs.length + files.length > 50) { alertPage('Bộ tài liệu đã đủ 50 tài liệu. Liên hệ quản trị viên để gỡ bớt.'); return; }
+  files.forEach(f => {
+    const err = validate(f);
+    if (err) { addQueueError(f.name, err); return; }
+    if (docs.some(d => d.name === f.name)) { askDuplicate(f); return; }
+    startUpload(f.name);
+  });
+}
+function addQueueError(name, msg) {
+  const el = document.createElement('div');
+  el.className = 'qitem err';
+  el.innerHTML = `<span class="file-ic"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span><div class="grow"><div class="file-name">${esc(name)}</div><div class="err-detail">${msg}</div></div><button class="btn btn-ghost btn-sm btn-icon" aria-label="Bỏ qua"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6L6 18M6 6l12 12"/></svg></button>`;
+  el.querySelector('button').onclick = () => el.remove();
+  $('#queue').appendChild(el);
+  track('document_failed', { reason_code: 'client_validation' });
+}
+function startUpload(name, opts = {}) {
+  const el = document.createElement('div');
+  el.className = 'qitem';
+  el.innerHTML = `<span class="file-ic"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span><div class="grow"><div class="row"><span class="file-name grow">${esc(name)}</span><span class="small muted pct">0%</span></div><div class="qbar"><span></span></div></div>`;
+  $('#queue').appendChild(el);
+  track('document_upload_started', { name });
+  let p = 0;
+  const t = setInterval(() => {
+    p += 12 + Math.random() * 18;
+    if (opts.failAt && p >= opts.failAt) {
+      clearInterval(t);
+      el.classList.add('err');
+      el.innerHTML = `<span class="file-ic"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.58 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg></span><div class="grow"><div class="file-name">${esc(name)}</div><div class="err-detail">Mất kết nối khi tải lên. Các tệp đã tải xong không bị ảnh hưởng.</div></div><button class="btn btn-sm"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg> Thử lại</button>`;
+      el.querySelector('button').onclick = () => { el.remove(); startUpload(name); };
+      return;
+    }
+    if (p >= 100) {
+      clearInterval(t); el.remove();
+      const d = { id: nextId++, name, pages: null, by: role === 'admin' ? 'Trần Huy' : 'Nguyễn Lan', at: '22/10/2026', status: 'queued' };
+      docs.unshift(d); render(); simulateIngest(d);
+      return;
+    }
+    el.querySelector('.qbar span').style.width = p + '%';
+    el.querySelector('.pct').textContent = Math.round(p) + '%';
+  }, 220);
+}
+function simulateIngest(d) {
+  setTimeout(() => { d.status = 'processing'; render(); }, 1500);
+  setTimeout(() => {
+    if (/scan/i.test(d.name)) { d.status = 'failed'; d.err = 'no_text_layer'; track('document_failed', { reason_code: 'no_text_layer' }); }
+    else { d.status = 'ready'; d.pages = 8 + Math.floor(Math.random() * 40); track('document_ready', { pages: d.pages }); toast(`"${d.name}" đã sẵn sàng để hỏi đáp.`); }
+    render();
+  }, 4500);
+}
+let dupFile = null;
+function askDuplicate(f) { dupFile = f; $('#dd-name').textContent = f.name; $('#dd-replace').hidden = role !== 'admin'; $('#dlg-dup').showModal(); }
+$('#dd-keep').onclick = () => { const n = dupFile.name.replace(/\.pdf$/i, '') + '_2026-10-22.pdf'; $('#dlg-dup').close(); startUpload(n); };
+$('#dd-replace').onclick = () => { docs = docs.filter(d => d.name !== dupFile.name); $('#dlg-dup').close(); render(); startUpload(dupFile.name); toast('Bản cũ sẽ được thay thế khi tệp mới xử lý xong.'); };
+
+const drop = $('#drop');
+['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
+drop.addEventListener('drop', e => handleFiles([...e.dataTransfer.files]));
+$('#file').addEventListener('change', e => { handleFiles([...e.target.files]); e.target.value = ''; });
+
+// ---------- Remove (FR-010, Admin) ----------
+let removeId = null;
+document.addEventListener('click', e => {
+  const r = e.target.closest('[data-remove]');
+  if (r) { removeId = +r.dataset.remove; $('#dr-name').textContent = docs.find(d => d.id === removeId).name; $('#dlg-remove').showModal(); }
+  const rt = e.target.closest('[data-retry]');
+  if (rt) { const d = docs.find(x => x.id === +rt.dataset.retry); docs = docs.filter(x => x !== d); render(); startUpload(d.name); }
+  if (e.target.closest('[data-close]')) e.target.closest('dialog').close();
+});
+$('#dr-ok').onclick = () => { const d = docs.find(x => x.id === removeId); docs = docs.filter(x => x.id !== removeId); $('#dlg-remove').close(); render(); toast(`Đã gỡ "${d.name}". Tài liệu không còn được dùng để trả lời.`); track('document_removed'); };
+
+// ---------- Demo controls ----------
+const fake = (name, size = 2 * MB, type = 'application/pdf') => ({ name, size, type });
+demoGroup('role', v => { role = v; $('.user-chip .who').innerHTML = v === 'admin' ? '<b>Trần Huy</b><br><span class="muted xs">Quản trị viên</span>' : '<b>Nguyễn Lan</b><br><span class="muted xs">Chuyên viên BD</span>'; $('.user-chip .avatar').textContent = v === 'admin' ? 'TH' : 'NL'; render(); });
+demoGroup('sim', v => {
+  if (v === 'upload') handleFiles([fake('Bao_cao_thi_truong_2026.pdf'), fake('Danh_sach_khach_hang_tiem_nang.pdf'), fake('Scan_bien_nhan.pdf')]);
+  if (v === 'limit') handleFiles(Array.from({ length: 11 }, (_, i) => fake(`Tai_lieu_${i + 1}.pdf`)));
+  if (v === 'invalid') handleFiles([fake('Ghi_chu_cuoc_hop.docx', 1 * MB, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'), fake('Ban_ve_thiet_ke.pdf', 34 * MB)]);
+  if (v === 'dup') handleFiles([fake('Hop_dong_khung_ABC_2026.pdf')]);
+  if (v === 'offline') startUpload('Phu_luc_bao_gia.pdf', { failAt: 55 });
+  if (v === 'empty') { docs = []; render(); }
+});
+render();
+// Simulate polling of the processing documents (FR-006)
+setTimeout(() => { const d = docs.find(x => x.id === 6); if (d) { d.status = 'ready'; render(); toast('"Bang_gia_dich_vu_Q4_2026.pdf" đã sẵn sàng để hỏi đáp.'); } }, 6000);
+setTimeout(() => { const d = docs.find(x => x.id === 7); if (d) { d.status = 'processing'; render(); } }, 7000);
+
+</script>
+</body>
+</html>

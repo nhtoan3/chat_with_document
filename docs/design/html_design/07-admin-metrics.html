@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Màn hình 07: Bảng số liệu sử dụng theo tuần cho Admin/Quản lý (UC-19, US-022, MET-003).">
+<title>Số liệu sử dụng — Chat với tài liệu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --bg:#F6F7F9; --surface:#FFFFFF; --surface-2:#F1F3F6; --surface-3:#E9ECF1;
+  --border:#E2E5EA; --border-strong:#C3C9D2;
+  --text:#1A1F27; --text-2:#465161; --muted:#5F6B7A;
+  --primary:#2450D8; --primary-hover:#1C40B0; --primary-weak:#EAF0FF; --primary-ink:#1C3FA8;
+  --success:#1B7A4B; --success-weak:#E5F4EC;
+  --warning:#8A5300; --warning-weak:#FFF3DB;
+  --danger:#B42318; --danger-weak:#FDECEA;
+  --highlight:#FFE590;
+  --demo:#6D28D9; --demo-weak:#F3EEFF;
+  --r-sm:6px; --r:10px; --r-lg:14px; --r-pill:999px;
+  --sh-sm:0 1px 2px rgba(16,24,40,.06); --sh:0 4px 16px rgba(16,24,40,.08); --sh-lg:0 16px 48px rgba(16,24,40,.20);
+  --focus:0 0 0 3px rgba(36,80,216,.40);
+  --topbar-h:56px; --sidebar-w:264px; --panel-w:440px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font:16px/1.5 var(--font);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;line-height:1.3;font-weight:650}
+h1{font-size:1.5rem} h2{font-size:1.25rem} h3{font-size:1.0625rem} h4{font-size:.9375rem}
+p{margin:0}
+a{color:var(--primary-ink)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm)}
+.ic{flex:none;display:inline-block;vertical-align:middle}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--primary);color:#fff;padding:8px 14px;border-radius:var(--r-sm);text-decoration:none}
+.skip-link:focus{top:8px}
+.muted{color:var(--muted)} .small{font-size:.875rem} .xs{font-size:.8125rem}
+.row{display:flex;align-items:center;gap:8px} .grow{flex:1} .wrap{flex-wrap:wrap}
+.stack{display:flex;flex-direction:column;gap:12px}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border-radius:var(--r);border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font-weight:550;font-size:.9375rem;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s}
+.btn:hover{background:var(--surface-2)}
+.btn:disabled,.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+.btn-primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-hover);border-color:var(--primary-hover)}
+.btn-danger{background:var(--danger);border-color:var(--danger);color:#fff}
+.btn-danger:hover{background:#951c13}
+.btn-ghost{border-color:transparent;background:transparent}
+.btn-ghost:hover{background:var(--surface-2)}
+.btn-sm{min-height:32px;padding:0 10px;font-size:.875rem;border-radius:var(--r-sm)}
+.btn-icon{width:40px;padding:0}
+.btn-icon.btn-sm{width:32px}
+.btn-block{width:100%}
+
+/* ---------- Form ---------- */
+.field{display:flex;flex-direction:column;gap:6px}
+.label{font-size:.875rem;font-weight:600;color:var(--text-2)}
+.input,.select,.textarea{width:100%;min-height:40px;padding:8px 12px;border:1px solid var(--border-strong);border-radius:var(--r);background:var(--surface)}
+.input:focus,.select:focus,.textarea:focus{border-color:var(--primary);box-shadow:var(--focus);outline:none}
+.input[aria-invalid="true"]{border-color:var(--danger)}
+.hint{font-size:.8125rem;color:var(--muted)}
+.error-text{font-size:.8125rem;color:var(--danger);display:flex;gap:6px;align-items:center}
+.search{position:relative}
+.search .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search .input{padding-left:38px}
+
+/* ---------- Badges / chips ---------- */
+.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:var(--r-pill);font-size:.8125rem;font-weight:600;white-space:nowrap;border:1px solid transparent}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+.b-ready{background:var(--success-weak);color:var(--success)}
+.b-proc{background:var(--primary-weak);color:var(--primary-ink)}
+.b-queue{background:var(--surface-3);color:var(--text-2)}
+.b-fail{background:var(--danger-weak);color:var(--danger)}
+.b-warn{background:var(--warning-weak);color:var(--warning)}
+.b-neutral{background:var(--surface-2);color:var(--text-2);border-color:var(--border)}
+.spin{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- Cards / banners ---------- */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-sm)}
+.card-pad{padding:20px}
+.banner{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:var(--r);border:1px solid;font-size:.9375rem}
+.banner .ic{margin-top:2px}
+.banner-info{background:var(--primary-weak);border-color:#C8D6FB;color:var(--primary-ink)}
+.banner-warn{background:var(--warning-weak);border-color:#F2D49B;color:var(--warning)}
+.banner-danger{background:var(--danger-weak);border-color:#F4C2BD;color:var(--danger)}
+.banner-success{background:var(--success-weak);border-color:#B9E0CA;color:var(--success)}
+.banner b{color:inherit}
+.banner .banner-body{flex:1;color:var(--text)}
+
+/* ---------- App shell ---------- */
+.topbar{position:sticky;top:0;z-index:30;height:var(--topbar-h);display:flex;align-items:center;gap:12px;padding:0 16px;background:var(--surface);border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--text);text-decoration:none}
+.brand-mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#2450D8,#5B7CF0);color:#fff;display:grid;place-items:center}
+.user-chip{display:flex;align-items:center;gap:10px;padding:4px 10px 4px 4px;border-radius:var(--r-pill);border:1px solid var(--border)}
+.avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.8125rem;background:var(--primary-weak);color:var(--primary-ink);flex:none}
+.avatar.ai{background:linear-gradient(135deg,#2450D8,#5B7CF0);color:#fff}
+.layout{display:flex;min-height:calc(100vh - var(--topbar-h))}
+.sidebar{width:var(--sidebar-w);flex:none;background:var(--surface);border-right:1px solid var(--border);padding:16px 12px;display:flex;flex-direction:column;gap:16px;position:sticky;top:var(--topbar-h);height:calc(100vh - var(--topbar-h));overflow-y:auto}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav-title{font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:8px 10px 4px}
+.nav a{display:flex;align-items:center;gap:10px;min-height:40px;padding:0 10px;border-radius:var(--r);color:var(--text-2);text-decoration:none;font-weight:550;font-size:.9375rem}
+.nav a:hover{background:var(--surface-2);color:var(--text)}
+.nav a[aria-current="page"]{background:var(--primary-weak);color:var(--primary-ink)}
+.nav .count{margin-left:auto;font-size:.75rem;font-weight:700;color:var(--muted);background:var(--surface-2);padding:2px 8px;border-radius:var(--r-pill)}
+.nav a[aria-current="page"] .count{background:#fff;color:var(--primary-ink)}
+.recent a{font-weight:450;font-size:.875rem;min-height:36px}
+.recent a span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sidebar-foot{margin-top:auto;font-size:.75rem;color:var(--muted);padding:0 10px}
+.main{flex:1;min-width:0}
+.page{max-width:1200px;margin:0 auto;padding:28px 32px 96px}
+.page-head{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.page-head .sub{color:var(--muted);margin-top:4px;font-size:.9375rem}
+.menu-btn{display:none}
+.scrim{display:none}
+
+/* ---------- Table ---------- */
+.table-wrap{overflow-x:auto}
+table.tbl{width:100%;border-collapse:collapse;font-size:.9375rem}
+.tbl th{text-align:left;font-size:.8125rem;font-weight:650;color:var(--muted);padding:10px 16px;background:var(--surface-2);border-bottom:1px solid var(--border);white-space:nowrap}
+.tbl td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tbody tr:hover{background:#FAFBFC}
+.tbl .num{text-align:right;font-variant-numeric:tabular-nums}
+.file-cell{display:flex;align-items:center;gap:10px;min-width:0}
+.file-ic{width:36px;height:36px;border-radius:8px;background:var(--danger-weak);color:var(--danger);display:grid;place-items:center;flex:none}
+.file-name{font-weight:550;overflow-wrap:anywhere}
+
+/* ---------- Tabs ---------- */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);overflow-x:auto}
+.tab{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:0;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--text-2);font-weight:550;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--primary-ink);border-bottom-color:var(--primary)}
+.tab .count{font-size:.75rem;background:var(--surface-2);padding:1px 8px;border-radius:var(--r-pill)}
+
+/* ---------- Dialog ---------- */
+dialog.dlg{border:0;padding:0;border-radius:var(--r-lg);box-shadow:var(--sh-lg);width:min(480px,calc(100vw - 32px));color:var(--text)}
+dialog.dlg::backdrop{background:rgba(16,24,40,.45)}
+.dlg-head{display:flex;align-items:flex-start;gap:12px;padding:20px 20px 8px}
+.dlg-body{padding:4px 20px 16px;color:var(--text-2);font-size:.9375rem}
+.dlg-foot{display:flex;justify-content:flex-end;gap:8px;padding:12px 20px 20px;flex-wrap:wrap}
+.dlg-icon{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;flex:none}
+.dlg-icon.danger{background:var(--danger-weak);color:var(--danger)}
+.dlg-icon.info{background:var(--primary-weak);color:var(--primary-ink)}
+
+/* ---------- Toast ---------- */
+.toasts{position:fixed;right:16px;bottom:16px;z-index:90;display:flex;flex-direction:column;gap:8px;max-width:min(380px,calc(100vw - 32px))}
+.toast{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:var(--r);background:#1F2733;color:#fff;box-shadow:var(--sh);font-size:.9375rem;animation:tin .2s ease-out}
+.toast.err{background:var(--danger)}
+.toast button{margin-left:auto;background:none;border:0;color:#fff;cursor:pointer;padding:0}
+@keyframes tin{from{transform:translateY(8px);opacity:0}}
+
+/* ---------- Empty state ---------- */
+.empty{text-align:center;padding:48px 24px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.empty-art{width:72px;height:72px;border-radius:20px;background:var(--primary-weak);color:var(--primary);display:grid;place-items:center}
+.empty p{max-width:440px;color:var(--muted)}
+
+/* ---------- Skeleton ---------- */
+.skel{background:linear-gradient(90deg,var(--surface-2) 25%,var(--surface-3) 50%,var(--surface-2) 75%);background-size:200% 100%;animation:sh 1.2s infinite;border-radius:6px;height:12px}
+@keyframes sh{to{background-position:-200% 0}}
+
+/* ---------- Demo control (design-only) ---------- */
+.demo{position:fixed;left:16px;bottom:16px;z-index:80;background:var(--demo-weak);border:1.5px dashed var(--demo);border-radius:var(--r);padding:8px 10px;box-shadow:var(--sh);max-width:calc(100vw - 32px);font-size:.8125rem}
+.demo summary{cursor:pointer;color:var(--demo);font-weight:700;list-style:none;display:flex;align-items:center;gap:6px}
+.demo summary::-webkit-details-marker{display:none}
+.demo .opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;max-width:520px}
+.demo button{border:1px solid #C9B6F5;background:#fff;color:#4C1D95;border-radius:var(--r-pill);padding:4px 10px;cursor:pointer;font-size:.8125rem}
+.demo button[aria-pressed="true"]{background:var(--demo);color:#fff;border-color:var(--demo)}
+.demo .grp{width:100%;font-weight:700;color:#4C1D95;margin-top:4px}
+
+/* ---------- Responsive ---------- */
+.mobile-note{display:none}
+@media (max-width:1279px){
+  .menu-btn{display:inline-flex}
+  .sidebar{position:fixed;left:0;top:var(--topbar-h);z-index:40;transform:translateX(-100%);transition:transform .2s;box-shadow:var(--sh-lg)}
+  body.nav-open .sidebar{transform:none}
+  body.nav-open .scrim{display:block;position:fixed;inset:var(--topbar-h) 0 0 0;background:rgba(16,24,40,.35);z-index:35}
+  .page{padding:24px 24px 96px}
+}
+@media (max-width:767px){
+  .mobile-note{display:flex}
+  .page{padding:16px 16px 96px}
+  .user-chip .who{display:none}
+  .hide-sm{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.filters{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+.seg{display:inline-flex;border:1px solid var(--border-strong);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:none;padding:8px 14px;cursor:pointer;font-weight:550;font-size:.875rem;color:var(--text-2)}
+.seg button+button{border-left:1px solid var(--border)}
+.seg button[aria-pressed="true"]{background:var(--primary-weak);color:var(--primary-ink)}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.kpi{padding:16px}
+.kpi .l{font-size:.8125rem;color:var(--muted);font-weight:600}
+.kpi .v{font-size:1.75rem;font-weight:700;margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi .d{font-size:.8125rem;margin-top:6px;display:flex;gap:6px;align-items:center;color:var(--text-2)}
+.st-good{color:var(--success)} .st-warn{color:var(--warning)}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.chart-card{padding:18px 18px 12px}
+.chart-head{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}
+.chart-head p{font-size:.8125rem;color:var(--muted)}
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .grid line{stroke:var(--border);stroke-width:1}
+.chart .axis text{fill:var(--muted);font-size:11px;font-family:var(--font)}
+.chart .bar{fill:#2450D8}
+.chart .bar.dim{opacity:.45}
+.chart .hit{fill:transparent;cursor:pointer}
+.chart .line{fill:none;stroke:#2450D8;stroke-width:2}
+.chart .dot{fill:#2450D8;stroke:var(--surface);stroke-width:2}
+.chart .target{stroke:var(--text-2);stroke-width:1.5;stroke-dasharray:4 4}
+.chart .target-l{fill:var(--text-2);font-size:11px;font-weight:600;font-family:var(--font)}
+.chart .xhair{stroke:var(--border-strong);stroke-width:1}
+.tip{position:absolute;pointer-events:none;background:#1F2733;color:#fff;font-size:.8125rem;padding:6px 10px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-110%);box-shadow:var(--sh);z-index:5}
+.tip b{font-variant-numeric:tabular-nums}
+.note{font-size:.8125rem;color:var(--muted);display:flex;gap:6px;align-items:center;margin-top:16px}
+@media (max-width:1279px){.kpis{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:900px){.charts{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Bỏ qua tới nội dung chính</a>
+<header class="topbar">
+  <button class="btn btn-ghost btn-icon menu-btn" aria-label="Mở menu điều hướng" aria-expanded="false" aria-controls="sidebar"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+  <a class="brand" href="04-chat.html"><span class="brand-mark"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span>Chat với tài liệu</span></a>
+  <span class="badge b-neutral hide-sm">MVP</span>
+  <div class="grow"></div>
+  <div class="user-chip"><span class="avatar">TH</span><span class="who small"><b>Trần Huy</b><br><span class="muted xs">Quản trị viên</span></span></div>
+  <a class="btn btn-ghost btn-icon" href="01-login.html" aria-label="Đăng xuất" title="Đăng xuất"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></a>
+</header>
+<div class="scrim"></div>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Điều hướng chính">
+  <a class="btn btn-primary btn-block" href="04-chat.html"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg> Hội thoại mới</a>
+  <div class="nav">
+    <a href="04-chat.html"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Hỏi đáp</span></a>
+    <a href="03-documents.html"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg><span>Tài liệu</span><span class="count" title="5 tài liệu Sẵn sàng">5</span></a>
+    <a href="05-history.html"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Lịch sử hội thoại</span></a>
+  </div>
+  
+  <div class="nav"><div class="nav-title">Quản trị</div><a href="06-admin-users.html"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Người dùng</span></a><a href="07-admin-metrics.html" aria-current="page"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg><span>Số liệu sử dụng</span></a></div>
+  <div class="sidebar-foot">Phiên bản MVP 0.1 · <a href="index.html">Danh mục màn hình</a></div>
+</nav>
+
+<main class="main" id="main">
+  <div class="page">
+    <div class="page-head">
+      <div class="grow"><h1>Số liệu sử dụng</h1><p class="sub">Đánh giá mức độ sử dụng và chất lượng câu trả lời của MVP theo tuần.</p></div>
+      <span class="badge b-warn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Dữ liệu minh họa</span>
+    </div>
+
+    <div class="filters" role="group" aria-label="Bộ lọc">
+      <span class="small muted">Khoảng thời gian</span>
+      <div class="seg" id="range"><button data-w="4" aria-pressed="false">4 tuần</button><button data-w="8" aria-pressed="true">8 tuần</button><button data-w="12" aria-pressed="false">12 tuần</button></div>
+      <div class="grow"></div>
+      <button class="btn btn-sm" id="toggle-table" aria-pressed="false"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg> Xem dạng bảng</button>
+    </div>
+
+    <section class="kpis" aria-label="Chỉ số tuần gần nhất">
+      <div class="card kpi"><div class="l">Người dùng hoạt động</div><div class="v" id="k-active">—</div><div class="d" id="k-active-d"></div></div>
+      <div class="card kpi"><div class="l">Câu hỏi trong tuần</div><div class="v" id="k-q">—</div><div class="d" id="k-q-d"></div></div>
+      <div class="card kpi"><div class="l">Tỷ lệ "Hữu ích"</div><div class="v" id="k-help">—</div><div class="d" id="k-help-d"></div></div>
+      <div class="card kpi"><div class="l">Tỷ lệ "Không tìm thấy"</div><div class="v" id="k-nf">—</div><div class="d" id="k-nf-d"></div></div>
+      <div class="card kpi"><div class="l">p90 thời gian trả lời</div><div class="v" id="k-p90">—</div><div class="d" id="k-p90-d"></div></div>
+    </section>
+
+    <section class="charts" id="charts">
+      <div class="card chart-card">
+        <div class="chart-head"><div class="grow"><h3>Số câu hỏi theo tuần</h3><p>Tổng số câu hỏi đã gửi trong mỗi tuần</p></div></div>
+        <div class="chart" id="c-q"></div>
+      </div>
+      <div class="card chart-card">
+        <div class="chart-head"><div class="grow"><h3>Tỷ lệ thành viên hoạt động</h3><p>% thành viên đặt ≥ 1 câu hỏi trong tuần · mục tiêu KR3.1 ≥ 70%</p></div></div>
+        <div class="chart" id="c-a"></div>
+      </div>
+    </section>
+
+    <section class="card" id="table-view" hidden style="margin-top:16px">
+      <div class="table-wrap"><table class="tbl"><caption class="sr-only">Số liệu theo tuần</caption>
+        <thead><tr><th scope="col">Tuần bắt đầu</th><th scope="col" class="num">Người dùng hoạt động</th><th scope="col" class="num">% hoạt động</th><th scope="col" class="num">Câu hỏi</th><th scope="col" class="num">% Hữu ích</th><th scope="col" class="num">% Không tìm thấy</th><th scope="col" class="num">p90 (giây)</th></tr></thead>
+        <tbody id="t-rows"></tbody></table></div>
+    </section>
+
+    <p class="note"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Số liệu không chứa nội dung câu hỏi hay tài liệu. Người dùng được đếm qua mã định danh ẩn danh. Tổng số thành viên: 20.</p>
+  </div>
+</main>
+</div>
+
+<script>
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+function toast(msg, type = '') {
+  let box = $('.toasts');
+  if (!box) { box = document.createElement('div'); box.className = 'toasts'; box.setAttribute('role', 'status'); box.setAttribute('aria-live', 'polite'); document.body.appendChild(box); }
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.innerHTML = `<span>${msg}</span><button aria-label="Đóng thông báo"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6L6 18M6 6l12 12"/></svg></button>`;
+  t.querySelector('button').onclick = () => t.remove();
+  box.appendChild(t);
+  if (type !== 'err') setTimeout(() => t.remove(), 5000);
+}
+function track(name, props = {}) { console.info('[telemetry]', name, props); }
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+// Navigation drawer (< 1280px)
+document.addEventListener('click', e => {
+  if (e.target.closest('.menu-btn')) { document.body.classList.toggle('nav-open'); const b = $('.menu-btn'); b && b.setAttribute('aria-expanded', document.body.classList.contains('nav-open')); }
+  if (e.target.closest('.scrim')) document.body.classList.remove('nav-open');
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.body.classList.remove('nav-open'); });
+// Design-only state switcher
+function demoGroup(group, handler) {
+  $$(`.demo [data-group="${group}"]`).forEach(b => b.addEventListener('click', () => {
+    $$(`.demo [data-group="${group}"]`).forEach(x => x.setAttribute('aria-pressed', 'false'));
+    b.setAttribute('aria-pressed', 'true');
+    handler(b.dataset.value);
+  }));
+}
+
+
+const MEMBERS = 20;
+const W = [
+  ['03/08', 7, 42, 61, 14, 13.9], ['10/08', 9, 68, 64, 13, 13.2], ['17/08', 11, 95, 66, 12, 12.8], ['24/08', 12, 120, 69, 11, 12.6],
+  ['31/08', 13, 134, 70, 11, 12.4], ['07/09', 14, 151, 72, 10, 12.1], ['14/09', 13, 149, 71, 10, 12.3], ['21/09', 14, 162, 73, 10, 12.0],
+  ['28/09', 15, 170, 74, 9, 11.9], ['05/10', 14, 178, 75, 9, 11.8], ['12/10', 15, 181, 75, 9, 11.7], ['19/10', 14, 186, 76, 9, 11.8],
+].map(([w, act, q, help, nf, p90]) => ({ w, act, pct: Math.round(act / MEMBERS * 100), q, help, nf, p90 }));
+let weeks = 8;
+const fmt = n => n.toLocaleString('vi-VN');
+
+function kpis(d) {
+  const last = d[d.length - 1], prev = d[d.length - 2];
+  const delta = (a, b, unit = '') => { const x = a - b; return `${x >= 0 ? '▲' : '▼'} ${fmt(Math.abs(+x.toFixed(1)))}${unit} so với tuần trước`; };
+  $('#k-active').textContent = `${last.act}/${MEMBERS}`;
+  $('#k-active-d').innerHTML = last.pct >= 70 ? `<span class="st-good"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span> ${last.pct}% · đạt mục tiêu ≥ 70%` : `<span class="st-warn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg></span> ${last.pct}% · dưới mục tiêu 70%`;
+  $('#k-q').textContent = fmt(last.q); $('#k-q-d').textContent = delta(last.q, prev.q);
+  $('#k-help').textContent = last.help + '%';
+  $('#k-help-d').innerHTML = last.help >= 70 ? `<span class="st-good"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span> Đạt mục tiêu ≥ 70%` : `<span class="st-warn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg></span> Dưới mục tiêu 70%`;
+  $('#k-nf').textContent = last.nf + '%'; $('#k-nf-d').textContent = delta(last.nf, prev.nf, ' điểm');
+  $('#k-p90').textContent = last.p90.toFixed(1).replace('.', ',') + ' s';
+  $('#k-p90-d').innerHTML = last.p90 <= 15 ? `<span class="st-good"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></span> Đạt mục tiêu ≤ 15 s` : `<span class="st-warn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg></span> Vượt mục tiêu 15 s`;
+}
+
+// Shared geometry
+const VW = 560, VH = 260, M = { l: 40, r: 12, t: 16, b: 28 };
+const iw = VW - M.l - M.r, ih = VH - M.t - M.b;
+function niceMax(v) { const p = Math.pow(10, Math.floor(Math.log10(v))); return Math.ceil(v / p * 2) / 2 * p; }
+function axes(max, ticks, unit = '') {
+  let g = '<g class="grid">', a = '<g class="axis">';
+  for (let i = 0; i <= ticks; i++) {
+    const v = max / ticks * i, y = M.t + ih - ih * v / max;
+    g += `<line x1="${M.l}" x2="${VW - M.r}" y1="${y}" y2="${y}"/>`;
+    a += `<text x="${M.l - 8}" y="${y + 4}" text-anchor="end">${fmt(v)}${unit}</text>`;
+  }
+  return g + '</g>' + a + '</g>';
+}
+function tipAt(el, x, y, html) {
+  let t = el.querySelector('.tip'); if (!t) { t = document.createElement('div'); t.className = 'tip'; el.appendChild(t); }
+  const r = el.querySelector('svg').getBoundingClientRect(), s = r.width / VW;
+  t.style.left = x * s + 'px'; t.style.top = y * s + 'px'; t.innerHTML = html; t.hidden = false;
+}
+function hideTip(el) { const t = el.querySelector('.tip'); if (t) t.hidden = true; }
+
+function barChart(el, d) {
+  const max = niceMax(Math.max(...d.map(x => x.q)) * 1.1), step = iw / d.length, bw = Math.min(28, step - 2);
+  let bars = '', hits = '', xl = '';
+  d.forEach((x, i) => {
+    const h = ih * x.q / max, cx = M.l + step * i + step / 2, y = M.t + ih - h, r = Math.min(4, h);
+    bars += `<path class="bar" data-i="${i}" d="M${cx - bw / 2},${M.t + ih} V${y + r} q0,-${r} ${r},-${r} H${cx + bw / 2 - r} q${r},0 ${r},${r} V${M.t + ih} Z"/>`;
+    hits += `<rect class="hit" data-i="${i}" x="${M.l + step * i}" y="${M.t}" width="${step}" height="${ih}" tabindex="0" role="img" aria-label="Tuần ${x.w}: ${x.q} câu hỏi"/>`;
+    if (d.length <= 8 || i % 2 === d.length % 2) xl += `<text x="${cx}" y="${VH - 8}" text-anchor="middle">${x.w}</text>`;
+  });
+  el.innerHTML = `<svg viewBox="0 0 ${VW} ${VH}" role="img" aria-label="Biểu đồ cột: số câu hỏi theo tuần">${axes(max, 5)}<g>${bars}</g><g class="axis">${xl}</g><g>${hits}</g></svg>`;
+  $$('.hit', el).forEach(h => {
+    const show = () => { const i = +h.dataset.i, x = d[i]; $$('.bar', el).forEach(b => b.classList.toggle('dim', +b.dataset.i !== i)); tipAt(el, M.l + step * i + step / 2, M.t + ih - ih * x.q / max - 6, `Tuần ${x.w}<br><b>${fmt(x.q)}</b> câu hỏi`); };
+    const hide = () => { $$('.bar', el).forEach(b => b.classList.remove('dim')); hideTip(el); };
+    h.addEventListener('mouseenter', show); h.addEventListener('focus', show);
+    h.addEventListener('mouseleave', hide); h.addEventListener('blur', hide);
+  });
+}
+
+function lineChart(el, d) {
+  const max = 100, step = iw / (d.length - 1);
+  const X = i => M.l + step * i, Y = v => M.t + ih - ih * v / max;
+  const path = d.map((x, i) => `${i ? 'L' : 'M'}${X(i)},${Y(x.pct)}`).join(' ');
+  let xl = '';
+  d.forEach((x, i) => { if (d.length <= 8 || i % 2 === d.length % 2) xl += `<text x="${X(i)}" y="${VH - 8}" text-anchor="middle">${x.w}</text>`; });
+  const last = d[d.length - 1];
+  el.innerHTML = `<svg viewBox="0 0 ${VW} ${VH}" role="img" aria-label="Biểu đồ đường: tỷ lệ thành viên hoạt động theo tuần, mục tiêu 70%">${axes(max, 4, '%')}
+    <line class="target" x1="${M.l}" x2="${VW - M.r}" y1="${Y(70)}" y2="${Y(70)}"/><text class="target-l" x="${M.l + 6}" y="${Y(70) - 6}">Mục tiêu 70%</text>
+    <line class="xhair" id="xh" y1="${M.t}" y2="${M.t + ih}" visibility="hidden"/>
+    <path class="line" d="${path}"/>
+    <circle class="dot" cx="${X(d.length - 1)}" cy="${Y(last.pct)}" r="5"/>
+    <text class="target-l" x="${X(d.length - 1)}" y="${Y(last.pct) - 12}" text-anchor="end" style="fill:var(--text)">${last.pct}%</text>
+    <circle class="dot" id="hov" r="5" visibility="hidden"/>
+    <g class="axis">${xl}</g>
+    <rect class="hit" x="${M.l}" y="${M.t}" width="${iw}" height="${ih}" tabindex="0" aria-label="Di chuyển để xem từng tuần"/></svg>`;
+  const svg = $('svg', el), hit = $('.hit', el);
+  const at = i => { const x = d[i]; $('#xh', el).setAttribute('x1', X(i)); $('#xh', el).setAttribute('x2', X(i)); $('#xh', el).setAttribute('visibility', 'visible');
+    const h = $('#hov', el); h.setAttribute('cx', X(i)); h.setAttribute('cy', Y(x.pct)); h.setAttribute('visibility', 'visible');
+    tipAt(el, X(i), Y(x.pct) - 8, `Tuần ${x.w}<br><b>${x.pct}%</b> (${x.act}/${MEMBERS} thành viên)`); };
+  let cur = d.length - 1;
+  hit.addEventListener('mousemove', e => { const r = svg.getBoundingClientRect(), vx = (e.clientX - r.left) * VW / r.width; cur = Math.max(0, Math.min(d.length - 1, Math.round((vx - M.l) / step))); at(cur); });
+  hit.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') cur = Math.max(0, cur - 1); else if (e.key === 'ArrowRight') cur = Math.min(d.length - 1, cur + 1); else return; e.preventDefault(); at(cur); });
+  hit.addEventListener('focus', () => at(cur));
+  const hide = () => { $('#xh', el).setAttribute('visibility', 'hidden'); $('#hov', el).setAttribute('visibility', 'hidden'); hideTip(el); };
+  hit.addEventListener('mouseleave', hide); hit.addEventListener('blur', hide);
+}
+
+function table(d) {
+  $('#t-rows').innerHTML = d.slice().reverse().map(x => `<tr><td>${x.w}/2026</td><td class="num">${x.act}/${MEMBERS}</td><td class="num">${x.pct}%</td><td class="num">${fmt(x.q)}</td><td class="num">${x.help}%</td><td class="num">${x.nf}%</td><td class="num">${x.p90.toFixed(1).replace('.', ',')}</td></tr>`).join('');
+}
+function render() { const d = W.slice(-weeks); kpis(d); barChart($('#c-q'), d); lineChart($('#c-a'), d); table(d); }
+$$('#range button').forEach(b => b.onclick = () => { $$('#range button').forEach(x => x.setAttribute('aria-pressed', x === b)); weeks = +b.dataset.w; render(); });
+$('#toggle-table').onclick = e => { const on = $('#table-view').hidden; $('#table-view').hidden = !on; e.currentTarget.setAttribute('aria-pressed', on); };
+window.addEventListener('resize', () => $$('.tip').forEach(t => t.hidden = true));
+render();
+
+</script>
+</body>
+</html>

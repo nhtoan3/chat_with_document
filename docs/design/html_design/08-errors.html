@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Màn hình 08: Trang lỗi 403/404/503, phiên hết hạn và banner toàn hệ thống (ERR-01..ERR-15).">
+<title>Không tìm thấy nội dung — Chat với tài liệu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --bg:#F6F7F9; --surface:#FFFFFF; --surface-2:#F1F3F6; --surface-3:#E9ECF1;
+  --border:#E2E5EA; --border-strong:#C3C9D2;
+  --text:#1A1F27; --text-2:#465161; --muted:#5F6B7A;
+  --primary:#2450D8; --primary-hover:#1C40B0; --primary-weak:#EAF0FF; --primary-ink:#1C3FA8;
+  --success:#1B7A4B; --success-weak:#E5F4EC;
+  --warning:#8A5300; --warning-weak:#FFF3DB;
+  --danger:#B42318; --danger-weak:#FDECEA;
+  --highlight:#FFE590;
+  --demo:#6D28D9; --demo-weak:#F3EEFF;
+  --r-sm:6px; --r:10px; --r-lg:14px; --r-pill:999px;
+  --sh-sm:0 1px 2px rgba(16,24,40,.06); --sh:0 4px 16px rgba(16,24,40,.08); --sh-lg:0 16px 48px rgba(16,24,40,.20);
+  --focus:0 0 0 3px rgba(36,80,216,.40);
+  --topbar-h:56px; --sidebar-w:264px; --panel-w:440px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font:16px/1.5 var(--font);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;line-height:1.3;font-weight:650}
+h1{font-size:1.5rem} h2{font-size:1.25rem} h3{font-size:1.0625rem} h4{font-size:.9375rem}
+p{margin:0}
+a{color:var(--primary-ink)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:none;box-shadow:var(--focus);border-radius:var(--r-sm)}
+.ic{flex:none;display:inline-block;vertical-align:middle}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--primary);color:#fff;padding:8px 14px;border-radius:var(--r-sm);text-decoration:none}
+.skip-link:focus{top:8px}
+.muted{color:var(--muted)} .small{font-size:.875rem} .xs{font-size:.8125rem}
+.row{display:flex;align-items:center;gap:8px} .grow{flex:1} .wrap{flex-wrap:wrap}
+.stack{display:flex;flex-direction:column;gap:12px}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border-radius:var(--r);border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font-weight:550;font-size:.9375rem;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s}
+.btn:hover{background:var(--surface-2)}
+.btn:disabled,.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+.btn-primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-hover);border-color:var(--primary-hover)}
+.btn-danger{background:var(--danger);border-color:var(--danger);color:#fff}
+.btn-danger:hover{background:#951c13}
+.btn-ghost{border-color:transparent;background:transparent}
+.btn-ghost:hover{background:var(--surface-2)}
+.btn-sm{min-height:32px;padding:0 10px;font-size:.875rem;border-radius:var(--r-sm)}
+.btn-icon{width:40px;padding:0}
+.btn-icon.btn-sm{width:32px}
+.btn-block{width:100%}
+
+/* ---------- Form ---------- */
+.field{display:flex;flex-direction:column;gap:6px}
+.label{font-size:.875rem;font-weight:600;color:var(--text-2)}
+.input,.select,.textarea{width:100%;min-height:40px;padding:8px 12px;border:1px solid var(--border-strong);border-radius:var(--r);background:var(--surface)}
+.input:focus,.select:focus,.textarea:focus{border-color:var(--primary);box-shadow:var(--focus);outline:none}
+.input[aria-invalid="true"]{border-color:var(--danger)}
+.hint{font-size:.8125rem;color:var(--muted)}
+.error-text{font-size:.8125rem;color:var(--danger);display:flex;gap:6px;align-items:center}
+.search{position:relative}
+.search .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search .input{padding-left:38px}
+
+/* ---------- Badges / chips ---------- */
+.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:var(--r-pill);font-size:.8125rem;font-weight:600;white-space:nowrap;border:1px solid transparent}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+.b-ready{background:var(--success-weak);color:var(--success)}
+.b-proc{background:var(--primary-weak);color:var(--primary-ink)}
+.b-queue{background:var(--surface-3);color:var(--text-2)}
+.b-fail{background:var(--danger-weak);color:var(--danger)}
+.b-warn{background:var(--warning-weak);color:var(--warning)}
+.b-neutral{background:var(--surface-2);color:var(--text-2);border-color:var(--border)}
+.spin{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- Cards / banners ---------- */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-sm)}
+.card-pad{padding:20px}
+.banner{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:var(--r);border:1px solid;font-size:.9375rem}
+.banner .ic{margin-top:2px}
+.banner-info{background:var(--primary-weak);border-color:#C8D6FB;color:var(--primary-ink)}
+.banner-warn{background:var(--warning-weak);border-color:#F2D49B;color:var(--warning)}
+.banner-danger{background:var(--danger-weak);border-color:#F4C2BD;color:var(--danger)}
+.banner-success{background:var(--success-weak);border-color:#B9E0CA;color:var(--success)}
+.banner b{color:inherit}
+.banner .banner-body{flex:1;color:var(--text)}
+
+/* ---------- App shell ---------- */
+.topbar{position:sticky;top:0;z-index:30;height:var(--topbar-h);display:flex;align-items:center;gap:12px;padding:0 16px;background:var(--surface);border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--text);text-decoration:none}
+.brand-mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#2450D8,#5B7CF0);color:#fff;display:grid;place-items:center}
+.user-chip{display:flex;align-items:center;gap:10px;padding:4px 10px 4px 4px;border-radius:var(--r-pill);border:1px solid var(--border)}
+.avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.8125rem;background:var(--primary-weak);color:var(--primary-ink);flex:none}
+.avatar.ai{background:linear-gradient(135deg,#2450D8,#5B7CF0);color:#fff}
+.layout{display:flex;min-height:calc(100vh - var(--topbar-h))}
+.sidebar{width:var(--sidebar-w);flex:none;background:var(--surface);border-right:1px solid var(--border);padding:16px 12px;display:flex;flex-direction:column;gap:16px;position:sticky;top:var(--topbar-h);height:calc(100vh - var(--topbar-h));overflow-y:auto}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav-title{font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:8px 10px 4px}
+.nav a{display:flex;align-items:center;gap:10px;min-height:40px;padding:0 10px;border-radius:var(--r);color:var(--text-2);text-decoration:none;font-weight:550;font-size:.9375rem}
+.nav a:hover{background:var(--surface-2);color:var(--text)}
+.nav a[aria-current="page"]{background:var(--primary-weak);color:var(--primary-ink)}
+.nav .count{margin-left:auto;font-size:.75rem;font-weight:700;color:var(--muted);background:var(--surface-2);padding:2px 8px;border-radius:var(--r-pill)}
+.nav a[aria-current="page"] .count{background:#fff;color:var(--primary-ink)}
+.recent a{font-weight:450;font-size:.875rem;min-height:36px}
+.recent a span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sidebar-foot{margin-top:auto;font-size:.75rem;color:var(--muted);padding:0 10px}
+.main{flex:1;min-width:0}
+.page{max-width:1200px;margin:0 auto;padding:28px 32px 96px}
+.page-head{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.page-head .sub{color:var(--muted);margin-top:4px;font-size:.9375rem}
+.menu-btn{display:none}
+.scrim{display:none}
+
+/* ---------- Table ---------- */
+.table-wrap{overflow-x:auto}
+table.tbl{width:100%;border-collapse:collapse;font-size:.9375rem}
+.tbl th{text-align:left;font-size:.8125rem;font-weight:650;color:var(--muted);padding:10px 16px;background:var(--surface-2);border-bottom:1px solid var(--border);white-space:nowrap}
+.tbl td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tbody tr:hover{background:#FAFBFC}
+.tbl .num{text-align:right;font-variant-numeric:tabular-nums}
+.file-cell{display:flex;align-items:center;gap:10px;min-width:0}
+.file-ic{width:36px;height:36px;border-radius:8px;background:var(--danger-weak);color:var(--danger);display:grid;place-items:center;flex:none}
+.file-name{font-weight:550;overflow-wrap:anywhere}
+
+/* ---------- Tabs ---------- */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);overflow-x:auto}
+.tab{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:0;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--text-2);font-weight:550;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--primary-ink);border-bottom-color:var(--primary)}
+.tab .count{font-size:.75rem;background:var(--surface-2);padding:1px 8px;border-radius:var(--r-pill)}
+
+/* ---------- Dialog ---------- */
+dialog.dlg{border:0;padding:0;border-radius:var(--r-lg);box-shadow:var(--sh-lg);width:min(480px,calc(100vw - 32px));color:var(--text)}
+dialog.dlg::backdrop{background:rgba(16,24,40,.45)}
+.dlg-head{display:flex;align-items:flex-start;gap:12px;padding:20px 20px 8px}
+.dlg-body{padding:4px 20px 16px;color:var(--text-2);font-size:.9375rem}
+.dlg-foot{display:flex;justify-content:flex-end;gap:8px;padding:12px 20px 20px;flex-wrap:wrap}
+.dlg-icon{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;flex:none}
+.dlg-icon.danger{background:var(--danger-weak);color:var(--danger)}
+.dlg-icon.info{background:var(--primary-weak);color:var(--primary-ink)}
+
+/* ---------- Toast ---------- */
+.toasts{position:fixed;right:16px;bottom:16px;z-index:90;display:flex;flex-direction:column;gap:8px;max-width:min(380px,calc(100vw - 32px))}
+.toast{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:var(--r);background:#1F2733;color:#fff;box-shadow:var(--sh);font-size:.9375rem;animation:tin .2s ease-out}
+.toast.err{background:var(--danger)}
+.toast button{margin-left:auto;background:none;border:0;color:#fff;cursor:pointer;padding:0}
+@keyframes tin{from{transform:translateY(8px);opacity:0}}
+
+/* ---------- Empty state ---------- */
+.empty{text-align:center;padding:48px 24px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.empty-art{width:72px;height:72px;border-radius:20px;background:var(--primary-weak);color:var(--primary);display:grid;place-items:center}
+.empty p{max-width:440px;color:var(--muted)}
+
+/* ---------- Skeleton ---------- */
+.skel{background:linear-gradient(90deg,var(--surface-2) 25%,var(--surface-3) 50%,var(--surface-2) 75%);background-size:200% 100%;animation:sh 1.2s infinite;border-radius:6px;height:12px}
+@keyframes sh{to{background-position:-200% 0}}
+
+/* ---------- Demo control (design-only) ---------- */
+.demo{position:fixed;left:16px;bottom:16px;z-index:80;background:var(--demo-weak);border:1.5px dashed var(--demo);border-radius:var(--r);padding:8px 10px;box-shadow:var(--sh);max-width:calc(100vw - 32px);font-size:.8125rem}
+.demo summary{cursor:pointer;color:var(--demo);font-weight:700;list-style:none;display:flex;align-items:center;gap:6px}
+.demo summary::-webkit-details-marker{display:none}
+.demo .opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;max-width:520px}
+.demo button{border:1px solid #C9B6F5;background:#fff;color:#4C1D95;border-radius:var(--r-pill);padding:4px 10px;cursor:pointer;font-size:.8125rem}
+.demo button[aria-pressed="true"]{background:var(--demo);color:#fff;border-color:var(--demo)}
+.demo .grp{width:100%;font-weight:700;color:#4C1D95;margin-top:4px}
+
+/* ---------- Responsive ---------- */
+.mobile-note{display:none}
+@media (max-width:1279px){
+  .menu-btn{display:inline-flex}
+  .sidebar{position:fixed;left:0;top:var(--topbar-h);z-index:40;transform:translateX(-100%);transition:transform .2s;box-shadow:var(--sh-lg)}
+  body.nav-open .sidebar{transform:none}
+  body.nav-open .scrim{display:block;position:fixed;inset:var(--topbar-h) 0 0 0;background:rgba(16,24,40,.35);z-index:35}
+  .page{padding:24px 24px 96px}
+}
+@media (max-width:767px){
+  .mobile-note{display:flex}
+  .page{padding:16px 16px 96px}
+  .user-chip .who{display:none}
+  .hide-sm{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+body{background:var(--bg)}
+.err-top{height:var(--topbar-h);display:flex;align-items:center;padding:0 16px;background:var(--surface);border-bottom:1px solid var(--border)}
+.err-wrap{min-height:calc(100vh - var(--topbar-h));display:grid;place-items:center;padding:32px 16px 120px}
+.err-card{max-width:520px;width:100%;text-align:center;padding:40px 32px}
+.err-art{width:80px;height:80px;border-radius:24px;display:grid;place-items:center;margin:0 auto 20px}
+.err-code{font-size:.8125rem;font-weight:700;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+.err-card h1{margin-top:6px}
+.err-card p{color:var(--text-2);margin-top:10px}
+.err-actions{display:flex;justify-content:center;gap:10px;margin-top:24px;flex-wrap:wrap}
+.ref{margin-top:20px;font-size:.75rem;color:var(--muted)}
+.ref code{background:var(--surface-2);padding:2px 6px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<header class="err-top"><a class="brand" href="04-chat.html"><span class="brand-mark"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span>Chat với tài liệu</span></a></header>
+<div id="global-banner"></div>
+<main class="err-wrap" id="main">
+  <div class="card err-card" id="card" aria-live="polite"></div>
+</main>
+
+<details class="demo">
+  <summary>◆ Trạng thái màn hình (chỉ trong bản thiết kế)</summary>
+  <div class="opts">
+    <span class="grp">Trang lỗi</span>
+    <button data-group="e" data-value="404" aria-pressed="true">404 Không tìm thấy</button>
+    <button data-group="e" data-value="403">403 Không có quyền</button>
+    <button data-group="e" data-value="503">503 Gián đoạn dịch vụ</button>
+    <button data-group="e" data-value="session">Phiên hết hạn</button>
+    <span class="grp">Thông báo toàn hệ thống (banner)</span>
+    <button data-group="b" data-value="none" aria-pressed="true">Không có</button>
+    <button data-group="b" data-value="offline">Mất kết nối</button>
+    <button data-group="b" data-value="ai">AI tạm thời không khả dụng</button>
+    <button data-group="b" data-value="maint">Bảo trì theo lịch</button>
+  </div>
+</details>
+
+<script>
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+function toast(msg, type = '') {
+  let box = $('.toasts');
+  if (!box) { box = document.createElement('div'); box.className = 'toasts'; box.setAttribute('role', 'status'); box.setAttribute('aria-live', 'polite'); document.body.appendChild(box); }
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.innerHTML = `<span>${msg}</span><button aria-label="Đóng thông báo"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6L6 18M6 6l12 12"/></svg></button>`;
+  t.querySelector('button').onclick = () => t.remove();
+  box.appendChild(t);
+  if (type !== 'err') setTimeout(() => t.remove(), 5000);
+}
+function track(name, props = {}) { console.info('[telemetry]', name, props); }
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+// Navigation drawer (< 1280px)
+document.addEventListener('click', e => {
+  if (e.target.closest('.menu-btn')) { document.body.classList.toggle('nav-open'); const b = $('.menu-btn'); b && b.setAttribute('aria-expanded', document.body.classList.contains('nav-open')); }
+  if (e.target.closest('.scrim')) document.body.classList.remove('nav-open');
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.body.classList.remove('nav-open'); });
+// Design-only state switcher
+function demoGroup(group, handler) {
+  $$(`.demo [data-group="${group}"]`).forEach(b => b.addEventListener('click', () => {
+    $$(`.demo [data-group="${group}"]`).forEach(x => x.setAttribute('aria-pressed', 'false'));
+    b.setAttribute('aria-pressed', 'true');
+    handler(b.dataset.value);
+  }));
+}
+
+
+const PAGES = {
+  '404': { code: 'Lỗi 404', icon: `<svg class="ic" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>`, bg: 'var(--surface-3)', fg: 'var(--text-2)', t: 'Không tìm thấy nội dung',
+           d: 'Trang, hội thoại hoặc tài liệu bạn tìm không tồn tại hoặc bạn không có quyền xem.',
+           a: `<a class="btn btn-primary" href="04-chat.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Về trang Hỏi đáp</a><a class="btn" href="05-history.html">Xem lịch sử hội thoại</a>` },
+  '403': { code: 'Lỗi 403', icon: `<svg class="ic" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`, bg: 'var(--warning-weak)', fg: 'var(--warning)', t: 'Bạn không có quyền truy cập',
+           d: 'Chức năng này chỉ dành cho Quản trị viên. Nếu bạn cần quyền này, hãy liên hệ quản trị viên của đội.',
+           a: `<a class="btn btn-primary" href="04-chat.html">Về trang Hỏi đáp</a>` },
+  '503': { code: 'Lỗi 503', icon: `<svg class="ic" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>`, bg: 'var(--danger-weak)', fg: 'var(--danger)', t: 'Hệ thống tạm thời gián đoạn',
+           d: 'Chúng tôi đang khắc phục sự cố. Dữ liệu và tài liệu của bạn vẫn an toàn. Vui lòng thử lại sau ít phút.',
+           a: `<button class="btn btn-primary" id="retry"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg> Thử lại</button>`, ref: true },
+  'session': { code: 'Phiên đăng nhập', icon: `<svg class="ic" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`, bg: 'var(--primary-weak)', fg: 'var(--primary-ink)', t: 'Phiên đăng nhập đã hết hạn',
+           d: 'Vì lý do bảo mật, bạn cần đăng nhập lại. Sau khi đăng nhập, bạn sẽ quay về màn hình trước đó và câu hỏi đang soạn vẫn được giữ.',
+           a: `<a class="btn btn-primary" href="01-login.html">Đăng nhập lại</a>` },
+};
+const BANNERS = {
+  none: '',
+  offline: `<div class="banner banner-danger" role="alert" style="border-radius:0;border-width:0 0 1px"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.58 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg><div class="banner-body"><b>Mất kết nối mạng.</b> Một số thao tác tạm thời không thực hiện được; nội dung bạn đang soạn vẫn được giữ.</div></div>`,
+  ai: `<div class="banner banner-warn" role="status" style="border-radius:0;border-width:0 0 1px"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg><div class="banner-body"><b>Dịch vụ trả lời tạm thời không khả dụng.</b> Bạn vẫn có thể tải lên và xem tài liệu. Hệ thống sẽ tự thử lại sau 30 giây.</div></div>`,
+  maint: `<div class="banner banner-info" role="status" style="border-radius:0;border-width:0 0 1px"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div class="banner-body">Hệ thống sẽ bảo trì từ <b>19:00 đến 20:00 ngày 24/10</b>. Vui lòng lưu lại thông tin cần thiết trước thời gian này.</div></div>`,
+};
+function show(k) {
+  const p = PAGES[k];
+  $('#card').innerHTML = `<div class="err-art" style="background:${p.bg};color:${p.fg}">${p.icon}</div><div class="err-code">${p.code}</div><h1>${p.t}</h1><p>${p.d}</p><div class="err-actions">${p.a}</div>` +
+    (p.ref ? `<p class="ref">Mã tham chiếu khi liên hệ hỗ trợ: <code>trace 7f3a9c21</code></p>` : '');
+  document.title = `${p.t} — Chat với tài liệu`;
+  const r = $('#retry'); if (r) r.onclick = () => { r.disabled = true; r.innerHTML = 'Đang thử lại…'; setTimeout(() => { r.disabled = false; r.innerHTML = `<svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg> Thử lại`; toast('Hệ thống vẫn đang gián đoạn. Vui lòng thử lại sau.', 'err'); }, 1200); };
+}
+demoGroup('e', show);
+demoGroup('b', v => $('#global-banner').innerHTML = BANNERS[v]);
+show('404');
+
+</script>
+</body>
+</html>
