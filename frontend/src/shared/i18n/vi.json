@@ -1,0 +1,92 @@
+{
+  "app": {
+    "name": "Chat với tài liệu",
+    "mvp": "MVP",
+    "menu": "Mở menu điều hướng",
+    "skip": "Bỏ qua tới nội dung chính",
+    "footer": "Phiên bản MVP 0.1",
+    "readyDocs": "{{count}} tài liệu Sẵn sàng"
+  },
+  "nav": {
+    "ask": "Hỏi đáp",
+    "documents": "Tài liệu"
+  },
+  "common": {
+    "close": "Đóng",
+    "retry": "Thử lại",
+    "loading": "Đang tải…"
+  },
+  "documents": {
+    "title": "Tài liệu dự án",
+    "subtitle": "Mọi tài liệu ở trạng thái <b>Sẵn sàng</b> đều được dùng làm nguồn trả lời.",
+    "usage": "{{used}}/{{limit}} tài liệu",
+    "uploadTitle": "Tải lên tài liệu PDF",
+    "uploadHint": "Tối đa {{maxFiles}} file mỗi lần · mỗi file ≤ {{maxMb}} MB và ≤ 300 trang · chỉ PDF có lớp văn bản (chưa hỗ trợ PDF dạng ảnh scan).",
+    "chooseFiles": "Chọn file PDF",
+    "uploading": "Đang tải lên…",
+    "tooManyFiles": "Mỗi lần chỉ tải tối đa {{maxFiles}} tệp. Bạn đã chọn {{count}} tệp — vui lòng chọn lại.",
+    "rejected": "Các tệp sau không được tải lên:",
+    "uploadDone": "Đã tải lên {{count}} tệp, đang chờ xử lý.",
+    "readyToast": "\"{{name}}\" đã sẵn sàng để hỏi đáp.",
+    "autoRefresh": "Tự cập nhật mỗi 3 giây khi có tài liệu đang xử lý",
+    "columns": {
+      "filename": "Tên tệp",
+      "pages": "Số trang",
+      "uploadedAt": "Ngày tải lên",
+      "status": "Trạng thái"
+    },
+    "status": {
+      "queued": "Đang chờ xử lý",
+      "processing": "Đang xử lý",
+      "ready": "Sẵn sàng",
+      "failed": "Lỗi"
+    },
+    "emptyTitle": "Chưa có tài liệu nào",
+    "emptyBody": "Chọn file PDF phía trên để bắt đầu. Sau khi tài liệu ở trạng thái Sẵn sàng, bạn có thể đặt câu hỏi về nội dung của chúng.",
+    "loadError": "Không tải được danh sách tài liệu."
+  },
+  "ask": {
+    "title": "Hỏi đáp",
+    "sources": "{{count}} tài liệu đang dùng",
+    "processingNotice": "{{count}} tài liệu đang xử lý, chưa được dùng để trả lời.",
+    "placeholder": "Hỏi về nội dung tài liệu dự án…",
+    "placeholderLocked": "Tải lên tài liệu để bắt đầu",
+    "send": "Gửi câu hỏi",
+    "hint": "Enter để gửi · Shift+Enter để xuống dòng",
+    "counter": "{{count}}/{{max}}",
+    "tooLong": "Câu hỏi dài quá {{over}} ký tự.",
+    "thinking": "Đang tìm câu trả lời…",
+    "thinkingSub": "Có thể mất tới 20 giây",
+    "aiLabel": "Câu trả lời do AI tạo — hãy đối chiếu tài liệu gốc",
+    "errorTitle": "Hệ thống đang bận, vui lòng thử lại.",
+    "errorSub": "Câu hỏi của bạn không bị mất.",
+    "askAgain": "Hỏi lại",
+    "lockedTitle": "Tải lên tài liệu để bắt đầu",
+    "lockedBody": "Chưa có tài liệu nào ở trạng thái Sẵn sàng. Hãy tải PDF của dự án lên, sau đó quay lại đây để đặt câu hỏi.",
+    "lockedCta": "Tải lên tài liệu",
+    "welcomeTitle": "Bạn muốn tìm hiểu điều gì?",
+    "welcomeBody": "Câu trả lời chỉ dựa trên nội dung các tài liệu đã tải lên. Lịch sử hỏi đáp chỉ được giữ trong phiên này.",
+    "latency": "Trả lời trong {{seconds}} giây",
+    "you": "Bạn",
+    "ai": "AI"
+  },
+  "errors": {
+    "not_pdf": "Không phải tệp PDF hợp lệ",
+    "file_too_large": "Vượt quá 20 MB",
+    "too_many_files": "Mỗi lần chỉ tải tối đa 10 tệp",
+    "duplicate_name": "Đã có tài liệu cùng tên",
+    "collection_full": "Bộ tài liệu đã đủ 50 tài liệu. Liên hệ quản trị viên để gỡ bớt.",
+    "encrypted_pdf": "Tệp có mật khẩu",
+    "no_text_layer": "PDF dạng ảnh chưa được hỗ trợ",
+    "too_many_pages": "Dài hơn 300 trang",
+    "corrupted": "Tệp bị hỏng",
+    "transient_exhausted": "Lỗi tạm thời, hãy tải lại",
+    "question_invalid": "Câu hỏi không hợp lệ (1–2000 ký tự).",
+    "no_documents": "Chưa có tài liệu nào Sẵn sàng để trả lời.",
+    "ai_unavailable": "Hệ thống đang bận, vui lòng thử lại.",
+    "storage_error": "Không lưu được tệp. Vui lòng thử lại.",
+    "internal_error": "Hệ thống gặp lỗi. Vui lòng thử lại sau ít phút.",
+    "network": "Mất kết nối. Vui lòng kiểm tra mạng và thử lại.",
+    "unknown": "Đã xảy ra lỗi. Vui lòng thử lại."
+  }
+}
