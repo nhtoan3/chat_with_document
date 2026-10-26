@@ -1,5 +1,7 @@
 # Chi tiết công việc phát triển — MVP "Chat với tài liệu"
 
+> ⚠ **Đã được thay thế (2026-10-26):** tài liệu này mô tả phạm vi v0.3 (16 story). Phạm vi hiện tại là v0.4 (chỉ Xử lý PDF + Hỏi đáp AI); task có hiệu lực nằm trong [`tasks/`](tasks/README.md). Giữ lại để tham khảo khi làm giai đoạn 2.
+
 > **DEV-CWD-001** · v0.1 · 2026-10-26 · Tech lead
 > **Áp dụng cho:** `Implement_plan.md` v0.3 (40 SP, go-live 14/12/2026)
 > **Đọc kèm:**
