@@ -33,6 +33,15 @@ class AnthropicLLM:
             raise LLMUnavailable(f"status_{exc.status_code}") from exc
         except (anthropic.APIConnectionError, anthropic.APITimeoutError) as exc:
             raise LLMUnavailable("connection") from exc
+        except anthropic.AnthropicError as exc:
+            log.error("llm_sdk_error", error=type(exc).__name__, model=self._model)
+            raise LLMUnavailable("sdk_error") from exc
+        except TypeError as exc:
+            # The SDK raises TypeError before sending anything when no credentials are configured.
+            if "authentication" not in str(exc).lower():
+                raise
+            log.error("llm_not_configured", hint="set ANTHROPIC_API_KEY", model=self._model)
+            raise LLMUnavailable("not_configured") from exc
 
         usage = resp.usage
         log.info(
