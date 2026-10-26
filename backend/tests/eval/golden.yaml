@@ -1,0 +1,25 @@
+# Golden set (T-008). BD replaces these sample entries with ≥ 30 positive and
+# ≥ 10 negative questions about the real project PDFs.
+# type: positive = answer exists in the documents; negative = it does not.
+- id: G-001
+  type: positive
+  question: "Điều khoản tạm ứng trong hợp đồng khung với ABC là gì?"
+  expected_answer: "Tạm ứng 30% giá trị đơn hàng trong vòng 10 ngày làm việc kể từ ngày ký hợp đồng."
+- id: G-002
+  type: positive
+  question: "Mức phạt khi chậm thanh toán là bao nhiêu?"
+  expected_answer: "0,05% mỗi ngày trên số tiền chậm trả, tối đa 8% giá trị phần nghĩa vụ bị vi phạm."
+- id: G-003
+  type: positive
+  question: "Minh Phát đề xuất mức chiết khấu bao nhiêu?"
+  expected_answer: "12% cho đơn hàng từ 500 triệu đồng trở lên, thời hạn hợp tác 24 tháng."
+- id: G-004
+  type: positive
+  question: "Tóm tắt các thông tin về đối tác Minh Phát."
+  expected_answer: "Đề xuất 24 tháng, chiết khấu 12%; thống nhất thử nghiệm 3 tháng trước khi ký; gửi hồ sơ năng lực trước 30/09."
+- id: G-051
+  type: negative
+  question: "Thủ đô của Pháp là gì?"
+- id: G-052
+  type: negative
+  question: "Doanh thu năm 2025 của công ty ABC là bao nhiêu?"
