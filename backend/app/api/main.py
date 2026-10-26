@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from app.api.routers import documents
 from app.platform.config import get_settings
 from app.platform.errors import install_error_handlers
 from app.platform.logging import configure_logging, install_request_logging
@@ -22,6 +23,7 @@ def create_app() -> FastAPI:
     async def healthz() -> dict:
         return {"status": "ok"}
 
+    app.include_router(documents.router, prefix="/api/v1")
     return app
 
 
