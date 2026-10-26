@@ -1,0 +1,93 @@
+# Local development environment (T-002). Start with `make dev`.
+name: chat-with-document
+
+x-backend-env: &backend-env
+  DATABASE_URL: postgresql+asyncpg://cwd:cwd@postgres:5432/cwd
+  S3_BUCKET: cwd-documents-local
+  S3_ENDPOINT_URL: http://s3:9090
+  S3_USE_KMS: "false"
+  AWS_ACCESS_KEY_ID: local
+  AWS_SECRET_ACCESS_KEY: local
+  TEI_URL: http://tei:80
+  ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+  LLM_MODEL: ${LLM_MODEL:-claude-opus-5-5}
+  QA_TOP_N: ${QA_TOP_N:-12}
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: cwd
+      POSTGRES_PASSWORD: cwd
+      POSTGRES_DB: cwd
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cwd -d cwd"]
+      interval: 3s
+      retries: 20
+
+  s3:
+    # Local S3-compatible storage (Adobe S3Mock); creates the bucket at start-up.
+    # MinIO no longer publishes public images. On AWS the real S3 is used.
+    image: adobe/s3mock@sha256:ab01a6946750f451ca215a47e91030695b260e4003b8a5a6201d25029b8fca92
+    environment:
+      COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS: cwd-documents-local
+    ports: ["9090:9090"]
+
+  tei:
+    # CPU image of Hugging Face Text Embeddings Inference serving BAAI/bge-m3 (1024-dim).
+    # First start downloads the model (~2.3 GB) into the tei-cache volume.
+    image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.7
+    command: ["--model-id", "BAAI/bge-m3", "--max-batch-tokens", "16384"]
+    platform: linux/amd64
+    ports: ["8080:80"]
+    volumes: [tei-cache:/data]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://localhost:80/health || exit 1"]
+      interval: 10s
+      retries: 60
+
+  migrate:
+    build: ./backend
+    environment: *backend-env
+    command: ["alembic", "upgrade", "head"]
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  api:
+    build: ./backend
+    environment: *backend-env
+    command: ["uvicorn", "app.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    volumes: [./backend/app:/app/app]
+    ports: ["8000:8000"]
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+      s3: { condition: service_started }
+
+  worker:
+    build: ./backend
+    environment: *backend-env
+    command: ["python", "-m", "app.worker.main"]
+    volumes: [./backend/app:/app/app]
+    deploy:
+      replicas: 2
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+      s3: { condition: service_started }
+      tei: { condition: service_healthy }
+
+  web:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0 --port 5173"
+    environment:
+      VITE_API_PROXY: http://api:8000
+    volumes: [./frontend:/app, web-node-modules:/app/node_modules]
+    ports: ["5173:5173"]
+    depends_on: [api]
+
+volumes:
+  pgdata:
+  tei-cache:
+  web-node-modules:
