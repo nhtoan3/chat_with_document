@@ -1,4 +1,4 @@
-"""SQL access for documents (T-009)."""
+"""SQL access for documents (T-009, T-014)."""
 
 import uuid
 
@@ -28,3 +28,22 @@ async def insert_document_with_job(
         )
     )
     await conn.execute(insert(ingestion_jobs).values(document_id=doc_id))
+
+
+async def list_documents(conn: AsyncConnection) -> list[dict]:
+    rows = await conn.execute(
+        select(
+            documents.c.id,
+            documents.c.filename,
+            documents.c.pages,
+            documents.c.uploaded_at,
+            documents.c.status,
+            documents.c.error_code,
+        ).order_by(documents.c.uploaded_at.desc())
+    )
+    return [dict(r._mapping) for r in rows]
+
+
+async def ready_count(conn: AsyncConnection) -> int:
+    stmt = select(func.count()).select_from(documents).where(documents.c.status == "ready")
+    return (await conn.execute(stmt)).scalar_one()
