@@ -6,6 +6,8 @@
 > - `docs/design/SAD.md` v0.2: "Phạm vi kiến trúc cho MVP", ADR-010..012
 >
 > Tài liệu này chỉ trả lời: **làm gì, khi nào, điều kiện gì**. Chi tiết kỹ thuật nằm ở SAD; AC và DoR/DoD nằm ở `User_Stories.md`.
+>
+> **Chi tiết công việc cho developer** (task T-xxx theo từng story: endpoint, SQL, logic, file mã, kiểm thử, ước lượng, người phụ trách): xem [`Dev_Tasks.md`](Dev_Tasks.md).
 
 **Lịch sử phiên bản**
 
