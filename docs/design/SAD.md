@@ -6,6 +6,41 @@
 
 ---
 
+## ⚠ Phạm vi kiến trúc cho MVP (v0.2 — 2026-10-26)
+
+Để rút ngắn thời gian ra mắt (go-live 14/12/2026), MVP **chỉ triển khai một phần** kiến trúc mô tả trong tài liệu này. Các phần còn lại được giữ làm **thiết kế mục tiêu cho giai đoạn 2**.
+
+**Bảng đối chiếu: MVP triển khai gì thay cho thiết kế mục tiêu**
+
+| Thành phần | Thiết kế mục tiêu (§1–§4) | MVP triển khai | ADR |
+|---|---|---|---|
+| Hàng đợi & worker | Redis 7 + Celery | **Bảng `ingestion_jobs` trong PostgreSQL**; worker lấy việc bằng `SELECT … FOR UPDATE SKIP LOCKED`, poll mỗi 2 s | ADR-010 |
+| Phiên đăng nhập | Redis | **Bảng `sessions` trong PostgreSQL** (TTL trượt 8 giờ) | ADR-007 (sửa) |
+| Truy xuất | Vector + full-text + RRF | **Chỉ vector (HNSW)** + ngưỡng τ. Thêm full-text nếu golden set cho thấy cần (AR-03) | ADR-003 (sửa) |
+| Câu hỏi nối tiếp | Viết lại câu hỏi bằng LLM (≤ 10 lượt) | **Không có.** Mỗi câu hỏi độc lập, một lời gọi LLM | ADR-011 |
+| Chịu lỗi LLM | Retry + watchdog + circuit breaker | **Retry của SDK (`max_retries=2`) + timeout 30 s** | ADR-011 |
+| Rate limit | Token bucket trên Redis | **Không có** (20 người dùng nội bộ) | ADR-011 |
+| Analytics | Bảng `analytics_events`, 13 sự kiện, view tuần | **Không có.** Số liệu tính bằng SQL trên `messages` và `conversations` | ADR-011 |
+| Observability | OTel + Prometheus / Loki / Tempo / Grafana | **Log JSON (`structlog`) → CloudWatch Logs**; độ trễ lưu trong `messages` | ADR-012 |
+| Môi trường | Staging + production, Terraform | **Một môi trường AWS** (Docker Compose trên EC2) + local; golden eval bắt buộc trước mỗi lần deploy | ADR-012 |
+| CSDL | Partition theo tháng, job purge / aggregate | **Bảng thường**; gỡ tài liệu = xóa ngay; không có job định kỳ | ADR-011 |
+| Xem nguồn trích dẫn | Panel PDF.js, tô sáng đoạn trích | **Mở PDF ở tab mới tại `#page=N`** bằng trình xem sẵn của trình duyệt | ADR-011 |
+| CI | lint, test, `import-linter`, Semgrep, Trivy, `pip-audit`, gitleaks | **lint, test, `pip-audit`, gitleaks** | ADR-012 |
+
+**Giữ nguyên như thiết kế:**
+
+- Modular monolith + hexagonal ports (`LLMPort`, `EmbeddingPort`, `ObjectStoragePort`).
+- PostgreSQL + pgvector; S3 có SSE-KMS; TEI `bge-m3` tự vận hành.
+- Claude `claude-opus-5-5` với Citations + streaming SSE.
+- Chunk theo trang; cơ chế chống bịa: ngưỡng τ + sentinel `NOT_FOUND` + hậu kiểm "0 trích dẫn".
+- TLS, mã hóa at-rest, RBAC 2 vai trò, audit log (bảng thường).
+
+**Thành phần container của MVP:** `web`, `api`, `worker`, `tei` trên EC2, cùng RDS PostgreSQL và S3. Phiên bản này **bỏ** `redis` và stack observability.
+
+> `docs/design/schema.sql` vẫn là lược đồ mục tiêu. Migration MVP chỉ tạo các bảng `collections`, `users`, `sessions` (mới), `documents`, `ingestion_jobs`, `chunks`, `conversations`, `messages`, `citations`, `audit_log` (không partition). Bảng `feedback`, `analytics_events` và view `weekly_usage` để giai đoạn 2.
+
+---
+
 ## 0. Tóm tắt các ràng buộc kỹ thuật
 
 ### 0.1 Nền tảng hệ thống
@@ -57,8 +92,8 @@ Prompt không điền phần "System Foundation". Nội dung dưới đây đư�
 | Thuộc tính | Giá trị |
 |---|---|
 | Mã tài liệu | SAD-CWD-001 |
-| Phiên bản | 0.1 — `Draft` |
-| Ngày | 2026-10-22 |
+| Phiên bản | 0.2 — `Draft` (thêm "Phạm vi kiến trúc cho MVP", ADR-010..012) |
+| Ngày | 2026-10-26 (v0.1: 2026-10-22) |
 | Tác giả | Huy Toan (vai trò Kiến trúc sư) |
 | Người review | Tech lead, QA lead, Bảo mật (STK-005) — [TBD: OQ-001] |
 | Tài liệu cha | PRD-CWD-001 v0.1 |
@@ -701,13 +736,16 @@ Giả định: 20 người dùng, 10 câu hỏi mỗi người mỗi ngày, 22 n
 |---|---|---|---|
 | ADR-001 | Modular monolith (hexagonal) + worker Celery | Microservices, serverless | Proposed |
 | ADR-002 | PostgreSQL + pgvector (HNSW) + full-text trong một CSDL | Qdrant, Pinecone, OpenSearch | Proposed |
-| ADR-003 | Truy xuất lai vector + full-text gộp bằng RRF; có ngưỡng "không tìm thấy" trước khi gọi LLM | Chỉ vector; reranker cross-encoder (để giai đoạn sau, nếu golden set cho thấy cần) | Proposed — PoC |
+| ADR-003 | Truy xuất lai vector + full-text gộp bằng RRF; có ngưỡng "không tìm thấy" trước khi gọi LLM. **MVP (v0.2): chỉ vector + ngưỡng τ**; thêm full-text nếu golden set cho thấy cần | Reranker cross-encoder (để giai đoạn sau, nếu golden set cho thấy cần) | Proposed — PoC |
 | ADR-004 | Embedding `bge-m3` tự vận hành (TEI, CPU) | API embedding bên ngoài (gửi toàn văn tài liệu ra ngoài, trái TC-06) | Proposed — PoC tốc độ |
 | ADR-005 | LLM: Claude `claude-opus-5-5` qua Anthropic API, Citations + streaming, sau `LLMPort` | Bedrock (dự phòng theo OQ-008); mô hình tự vận hành (dự phòng) | **Chờ OQ-008** |
 | ADR-006 | Chunk không vượt ranh giới trang; trích dẫn ánh xạ phía server | Chunk cố định theo token, vượt trang | Proposed |
-| ADR-007 | Phiên phía server (Redis) + cookie HttpOnly; OIDC ưu tiên | JWT trong SPA | Proposed — chờ OQ-014 |
+| ADR-007 | Phiên phía server + cookie HttpOnly; OIDC ưu tiên. **MVP (v0.2): phiên lưu ở bảng `sessions` trong PostgreSQL** thay vì Redis | JWT trong SPA | Proposed — chờ OQ-014 |
 | ADR-008 | SSE trên POST (`fetch` stream) cho câu trả lời; polling cho trạng thái tài liệu | WebSocket | Proposed |
 | ADR-009 | Docker Compose trên một EC2 cho MVP | EKS / ECS | Proposed — xem lại khi vượt ×5 |
+| ADR-010 | **MVP:** hàng đợi ingestion bằng PostgreSQL (`ingestion_jobs` + `SKIP LOCKED`), bỏ Redis / Celery | Redis + Celery (giữ cho giai đoạn 2 khi cần scale worker) | Accepted (v0.2) |
+| ADR-011 | **MVP:** bỏ câu hỏi nối tiếp, circuit breaker, rate limit, analytics events, job định kỳ, panel PDF.js | Triển khai đầy đủ theo §2–§4 (giai đoạn 2) | Accepted (v0.2) |
+| ADR-012 | **MVP:** một môi trường AWS + local; log JSON → CloudWatch; CI tối giản | Staging riêng, Terraform, stack OTel / Grafana (giai đoạn 2) | Accepted (v0.2) |
 
 ---
 

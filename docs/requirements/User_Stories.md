@@ -1,6 +1,6 @@
 # User Stories & Tiêu chí chấp nhận — "Chat với tài liệu" (MVP)
 
-> **Mã tài liệu:** US-CWD-001 · **Phiên bản:** 0.1 (`Draft`) · **Ngày:** 2026-10-26 · **Tác giả:** Huy Toan (PO / BA)
+> **Mã tài liệu:** US-CWD-001 · **Phiên bản:** 0.2 (`Draft` — rút gọn phạm vi MVP, xem §2) · **Ngày:** 2026-10-26 · **Tác giả:** Huy Toan (PO / BA)
 > **Nguồn:**
 > - `docs/requirements/BRD.md` (BRD-CWD-001 v0.1)
 > - `docs/requirements/PRD.md` (PRD-CWD-001 v0.1)
@@ -35,44 +35,72 @@
 
 ## 2. Tổng quan backlog
 
-| ID | Story (tóm tắt) | Epic | Ưu tiên | SP | Trạng thái | Màn hình |
-|---|---|---|---|---|---|---|
-| US-001 | Đăng nhập bằng tài khoản được cấp | EP-01 | P0 | 5 | Blocked (OQ-014) | 01 |
-| US-002 | Chỉ người được cấp quyền xem được tài liệu | EP-01 | P0 | 3 | Blocked (OQ-008) | 03 |
-| US-003 | Hội thoại chỉ chủ sở hữu xem được | EP-01 | P0 | 2 | Ready | 04, 05 |
-| US-004 | Admin quản lý tài khoản và vai trò | EP-01 | P1 | 5 | Ready | 06 |
-| US-023 | Đăng xuất *(bổ sung)* | EP-01 | P0 | 1 | Ready | Mọi màn hình |
-| US-005 | Tải lên một hoặc nhiều PDF | EP-02 | P0 | 5 | Ready | 03 |
-| US-006 | Xem trạng thái xử lý từng tài liệu | EP-02 | P0 | 3 | Ready | 03 |
-| US-007 | Được báo rõ khi file không xử lý được | EP-02 | P0 | 3 | Ready | 03 |
-| US-008 | Mọi tài liệu Sẵn sàng đều là nguồn trả lời | EP-02 | P0 | 5 | Ready | 04 |
-| US-009 | Xem danh sách tài liệu | EP-02 | P1 | 2 | Proposed (OQ-013) | 03 |
-| US-010 | Admin gỡ tài liệu lỗi thời | EP-02 | P1 | 3 | Proposed (OQ-013) | 03 |
-| US-024 | Xử lý trùng tên tệp khi tải lên *(bổ sung)* | EP-02 | P1 | 3 | Proposed | 03 |
-| US-011 | Hỏi bằng ngôn ngữ tự nhiên, trả lời từ tài liệu | EP-03 | P0 | 8 | Ready | 04 |
-| US-012 | Câu trả lời tổng hợp từ nhiều tài liệu | EP-03 | P0 | 5 | Ready | 04 |
-| US-013 | Trích dẫn tên tài liệu và số trang | EP-03 | P0 | 5 | Proposed (OQ-013) | 04 |
-| US-014 | Báo rõ khi không tìm thấy thông tin | EP-03 | P0 | 5 | Proposed (OQ-013) | 04 |
-| US-015 | Hỏi và nhận trả lời bằng tiếng Việt / tiếng Anh | EP-03 | P0 | 3 | Blocked (OQ-010) | 04 |
-| US-016 | Câu trả lời hiện dần khi đang tạo | EP-03 | P1 | 5 | Ready | 04 |
-| US-025 | Dừng tạo câu trả lời *(bổ sung)* | EP-03 | P1 | 2 | Ready | 04 |
-| US-017 | Mở đúng trang PDF gốc từ trích dẫn | EP-03 | P1 | 5 | Ready | 04 |
-| US-018 | Đánh giá câu trả lời | EP-03 | P1 | 2 | Ready | 04 |
-| US-019 | Hỏi câu nối tiếp và bắt đầu hội thoại mới | EP-04 | P1 | 5 | Ready | 02, 04 |
-| US-020 | Xem lại lịch sử hội thoại | EP-04 | P2 | 3 | Ready | 05 |
-| US-021 | Ghi nhận số liệu sử dụng | EP-05 | P1 | 3 | Ready | — |
-| US-022 | Bảng số liệu sử dụng cho Admin / Quản lý | EP-05 | P2 | 5 | Ready | 07 |
+> **v0.2 — rút gọn phạm vi MVP:** để go-live ngày 14/12/2026, backlog được giảm **từ 96 SP xuống 40 SP**.
+>
+> - **Giữ:** story làm như AC hiện có.
+> - **Đơn giản hóa:** story vẫn làm nhưng bỏ hoặc thay một số AC (xem §2.1).
+> - **Hoãn (GĐ2):** chuyển sang giai đoạn 2; nội dung story và AC giữ nguyên để làm sau.
+>
+> Đánh đổi chính: không còn hỏi nối tiếp; đo lường bằng truy vấn SQL và khảo sát thay vì dashboard. Thiết kế kỹ thuật tương ứng: SAD "Phạm vi kiến trúc cho MVP", ADR-010..012.
+
+| ID | Story (tóm tắt) | Epic | Ưu tiên | SP gốc | Phạm vi MVP v0.2 | SP MVP | Trạng thái | Màn hình |
+|---|---|---|---|---|---|---|---|---|
+| US-001 | Đăng nhập bằng tài khoản được cấp | EP-01 | P0 | 5 | Đơn giản hóa | 2 | Blocked (OQ-014) | 01 |
+| US-002 | Chỉ người được cấp quyền xem được tài liệu | EP-01 | P0 | 3 | Đơn giản hóa | 1 | Blocked (OQ-008) | 03 |
+| US-003 | Hội thoại chỉ chủ sở hữu xem được | EP-01 | P0 | 2 | Đơn giản hóa | 1 | Ready | 04 |
+| US-004 | Admin quản lý tài khoản và vai trò | EP-01 | P1 | 5 | **Hoãn (GĐ2)** — tạo tài khoản bằng script | 0 | Deferred | 06 |
+| US-023 | Đăng xuất *(bổ sung)* | EP-01 | P0 | 1 | Giữ | 1 | Ready | Mọi màn hình |
+| US-005 | Tải lên một hoặc nhiều PDF | EP-02 | P0 | 5 | Đơn giản hóa | 3 | Ready | 03 |
+| US-006 | Xem trạng thái xử lý từng tài liệu | EP-02 | P0 | 3 | Giữ (gộp danh sách cơ bản của US-009) | 3 | Ready | 03 |
+| US-007 | Được báo rõ khi file không xử lý được | EP-02 | P0 | 3 | Đơn giản hóa | 2 | Ready | 03 |
+| US-008 | Mọi tài liệu Sẵn sàng đều là nguồn trả lời | EP-02 | P0 | 5 | Đơn giản hóa (chỉ tìm kiếm vector) | 3 | Ready | 04 |
+| US-009 | Xem danh sách tài liệu | EP-02 | P1 | 2 | **Gộp vào US-006**; bỏ tab / tìm kiếm | 0 | Merged | 03 |
+| US-010 | Admin gỡ tài liệu lỗi thời | EP-02 | P1 | 3 | Đơn giản hóa (xóa ngay) | 2 | Proposed (OQ-013) | 03 |
+| US-024 | Xử lý trùng tên tệp khi tải lên *(bổ sung)* | EP-02 | P1 | 3 | **Hoãn (GĐ2)** — trùng tên thì từ chối (ERR-14) | 0 | Deferred | 03 |
+| US-011 | Hỏi bằng ngôn ngữ tự nhiên, trả lời từ tài liệu | EP-03 | P0 | 8 | Đơn giản hóa | 6 | Ready | 04 |
+| US-012 | Câu trả lời tổng hợp từ nhiều tài liệu | EP-03 | P0 | 5 | Đơn giản hóa (chỉ tinh chỉnh theo golden set) | 2 | Ready | 04 |
+| US-013 | Trích dẫn tên tài liệu và số trang | EP-03 | P0 | 5 | Giữ | 5 | Proposed (OQ-013) | 04 |
+| US-014 | Báo rõ khi không tìm thấy thông tin | EP-03 | P0 | 5 | Đơn giản hóa | 3 | Proposed (OQ-013) | 04 |
+| US-015 | Hỏi và nhận trả lời bằng tiếng Việt / tiếng Anh | EP-03 | P0 | 3 | Đơn giản hóa | 1 | Blocked (OQ-010) | 04 |
+| US-016 | Câu trả lời hiện dần khi đang tạo | EP-03 | P1 | 5 | Đơn giản hóa | 3 | Ready | 04 |
+| US-025 | Dừng tạo câu trả lời *(bổ sung)* | EP-03 | P1 | 2 | **Hoãn (GĐ2)** | 0 | Deferred | 04 |
+| US-017 | Mở đúng trang PDF gốc từ trích dẫn | EP-03 | P1 | 5 | Đơn giản hóa (tab mới tại `#page=N`) | 2 | Ready | 04 |
+| US-018 | Đánh giá câu trả lời | EP-03 | P1 | 2 | **Hoãn (GĐ2)** — khảo sát cuối pilot | 0 | Deferred | 04 |
+| US-019 | Hỏi câu nối tiếp và bắt đầu hội thoại mới | EP-04 | P1 | 5 | **Hoãn (GĐ2)** — mỗi câu hỏi độc lập | 0 | Deferred | 02, 04 |
+| US-020 | Xem lại lịch sử hội thoại | EP-04 | P2 | 3 | **Hoãn (GĐ2)** | 0 | Deferred | 05 |
+| US-021 | Ghi nhận số liệu sử dụng | EP-05 | P1 | 3 | **Hoãn (GĐ2)** — truy vấn SQL trên `messages` | 0 | Deferred | — |
+| US-022 | Bảng số liệu sử dụng cho Admin / Quản lý | EP-05 | P2 | 5 | **Hoãn (GĐ2)** | 0 | Deferred | 07 |
 
 **Tổng:**
 
-| Ưu tiên | Số story | Story point |
-|---|---|---|
-| P0 | 13 | 53 |
-| P1 | 10 | 35 |
-| P2 | 2 | 8 |
-| **Cộng** | **25** | **96** |
+| Phạm vi | Số story | SP gốc | SP MVP v0.2 |
+|---|---|---|---|
+| Giữ / Đơn giản hóa (MVP) | 16 | 66 | **40** |
+| Gộp | 1 (US-009) | 2 | 0 |
+| Hoãn sang giai đoạn 2 | 8 (US-004, 018, 019, 020, 021, 022, 024, 025) | 28 | 0 |
+| **Cộng** | **25** | **96** | **40** |
 
-> Phạm vi ra mắt MVP gồm toàn bộ story P0. Story P1 được đưa vào nếu còn năng lực trong timeline (OQ-006). Story P2 được chuyển sang giai đoạn sau nếu thiếu thời gian.
+### 2.1 AC thay đổi trong MVP v0.2
+
+Mọi AC không có trong bảng dưới đây **giữ nguyên**. Story bị hoãn không áp dụng AC nào trong MVP.
+
+| Story | AC bỏ trong MVP | AC thay đổi / thay thế |
+|---|---|---|
+| US-001 | AC-US-001-6 (chỉ áp dụng khi dùng SSO), AC-US-001-7 (giữ bản nháp sau khi phiên hết hạn) | — |
+| US-002 | AC-US-002-4 (đăng xuất ngay khi bị vô hiệu hóa — không có màn hình quản trị) | — |
+| US-003 | AC-US-003-4 (danh sách lịch sử / "Gần đây") | — |
+| US-005 | — | Bỏ `Idempotency-Key`; tệp trùng tên với tài liệu đang có bị từ chối với ERR-14 |
+| US-006 | — | Danh sách tài liệu hiển thị tên, số trang, người tải, ngày tải, trạng thái (lấy từ AC-US-009-1); không có tab và tìm kiếm |
+| US-007 | AC-US-007-6 (nút Thử lại sau 3 lần retry) | Lỗi tạm thời: người dùng gỡ và tải lại tệp |
+| US-008 | — | Truy xuất chỉ bằng vector; AC-US-008-2 vẫn đo trên golden set |
+| US-010 | AC-US-010-4 (trích dẫn hiển thị "Tài liệu đã bị gỡ"), AC-US-010-5 (job xóa sau 30 ngày) | Gỡ = xóa ngay PDF, chunk và vector; trích dẫn cũ tới tài liệu đã xóa không mở được |
+| US-011 | AC-US-011-9 (rate limit) | AC-US-011-8: timeout 30 s + retry của SDK, không có circuit breaker |
+| US-014 | AC-US-014-5 chuyển thành **kiểm thử thủ công** (≥ 5 ca prompt injection) | — |
+| US-015 | AC-US-015-2 (câu hỏi tiếng Anh), AC-US-015-3 (câu không dấu) | MVP chỉ cam kết tiếng Việt; câu trả lời theo ngôn ngữ câu hỏi nhờ prompt, không kiểm thử riêng |
+| US-016 | AC-US-016-5 (giữ phần đã nhận khi mất mạng) | Mất mạng giữa chừng → hiển thị lỗi kèm nút "Hỏi lại" |
+| US-017 | AC-US-017-1 (panel bên phải, tô sáng), AC-US-017-2, 3, 5, 6 | Bấm trích dẫn → mở PDF ở **tab mới tại đúng trang** (`#page=N`) |
+
+> Phạm vi MVP v0.2 gồm 16 story trên. Story bị hoãn được đưa vào backlog giai đoạn 2 nếu đánh giá MVP (BO-003) cho kết quả tích cực.
 
 ---
 
@@ -154,7 +182,7 @@ Các tiêu chí dưới đây áp dụng cho **mọi** story. Không cần lặp
 
 ---
 
-### US-004 — Admin quản lý tài khoản và vai trò
+### US-004 — Admin quản lý tài khoản và vai trò · ⏸ Hoãn (GĐ2)
 
 | Ưu tiên | SP | Trace | Use case | Trạng thái |
 |---|---|---|---|---|
@@ -265,7 +293,7 @@ Các tiêu chí dưới đây áp dụng cho **mọi** story. Không cần lặp
 
 ---
 
-### US-009 — Xem danh sách tài liệu
+### US-009 — Xem danh sách tài liệu · ↪ Gộp vào US-006 (MVP)
 
 | Ưu tiên | SP | Trace | Use case | Trạng thái |
 |---|---|---|---|---|
@@ -302,7 +330,7 @@ Các tiêu chí dưới đây áp dụng cho **mọi** story. Không cần lặp
 
 ---
 
-### US-024 — Xử lý trùng tên tệp khi tải lên *(bổ sung)*
+### US-024 — Xử lý trùng tên tệp khi tải lên *(bổ sung)* · ⏸ Hoãn (GĐ2)
 
 | Ưu tiên | SP | Trace | Use case | Trạng thái |
 |---|---|---|---|---|
@@ -429,7 +457,7 @@ Các tiêu chí dưới đây áp dụng cho **mọi** story. Không cần lặp
 
 ---
 
-### US-025 — Dừng tạo câu trả lời *(bổ sung)*
+### US-025 — Dừng tạo câu trả lời *(bổ sung)* · ⏸ Hoãn (GĐ2)
 
 | Ưu tiên | SP | Trace | Use case | Trạng thái |
 |---|---|---|---|---|
@@ -464,7 +492,7 @@ Các tiêu chí dưới đây áp dụng cho **mọi** story. Không cần lặp
 
 ---
 
-### US-018 — Đánh giá câu trả lời
+### US-018 — Đánh giá câu trả lời · ⏸ Hoãn (GĐ2)
 
 | Ưu tiên | SP | Trace | Use case | Trạng thái |
 |---|---|---|---|---|
@@ -484,7 +512,7 @@ Các tiêu chí dưới đây áp dụng cho **mọi** story. Không cần lặp
 
 ## 7. Epic EP-04 — Hội thoại & lịch sử
 
-### US-019 — Hỏi câu nối tiếp và bắt đầu hội thoại mới
+### US-019 — Hỏi câu nối tiếp và bắt đầu hội thoại mới · ⏸ Hoãn (GĐ2)
 
 | Ưu tiên | SP | Trace | Use case | Trạng thái |
 |---|---|---|---|---|
@@ -503,7 +531,7 @@ Các tiêu chí dưới đây áp dụng cho **mọi** story. Không cần lặp
 
 ---
 
-### US-020 — Xem lại lịch sử hội thoại
+### US-020 — Xem lại lịch sử hội thoại · ⏸ Hoãn (GĐ2)
 
 | Ưu tiên | SP | Trace | Use case | Trạng thái |
 |---|---|---|---|---|
@@ -524,7 +552,7 @@ Các tiêu chí dưới đây áp dụng cho **mọi** story. Không cần lặp
 
 ## 8. Epic EP-05 — Đo lường sử dụng
 
-### US-021 — Ghi nhận số liệu sử dụng
+### US-021 — Ghi nhận số liệu sử dụng · ⏸ Hoãn (GĐ2)
 
 | Ưu tiên | SP | Trace | Use case | Trạng thái |
 |---|---|---|---|---|
@@ -542,7 +570,7 @@ Các tiêu chí dưới đây áp dụng cho **mọi** story. Không cần lặp
 
 ---
 
-### US-022 — Bảng số liệu sử dụng cho Admin / Quản lý
+### US-022 — Bảng số liệu sử dụng cho Admin / Quản lý · ⏸ Hoãn (GĐ2)
 
 | Ưu tiên | SP | Trace | Use case | Trạng thái |
 |---|---|---|---|---|
