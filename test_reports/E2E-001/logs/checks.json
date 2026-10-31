@@ -1,0 +1,46 @@
+{
+  "verdict": "✅ Đạt",
+  "results": [
+    {
+      "n": 1,
+      "action": "Mở /documents",
+      "expect": "Tiêu đề \"Tài liệu dự án\"; \"Chưa có tài liệu nào\"; \"0/50 tài liệu\"",
+      "actual": "Có tiêu đề và trạng thái trống; \"0/50 tài liệu\" xuất hiện 1 lần",
+      "ok": true,
+      "shot": "screenshots/01-buoc-1-mo-documents.png"
+    },
+    {
+      "n": 2,
+      "action": "Chọn 3 PDF mẫu + fake.pdf",
+      "expect": "fake.pdf bị từ chối \"Không phải tệp PDF hợp lệ\"; nút \"Đang tải lên…\" khi gửi",
+      "actual": "fake.pdf: \"Không phải tệp PDF hợp lệ\"; trạng thái \"Đang tải lên…\" đã hiển thị",
+      "ok": true,
+      "shot": "screenshots/02-buoc-2-chon-3-pdf-mau-fake-pdf.png"
+    },
+    {
+      "n": 3,
+      "action": "Chờ phản hồi tải lên",
+      "expect": "Thông báo \"Đã tải lên 3 tệp, đang chờ xử lý.\"; bảng 3 dòng; ghi chú tự cập nhật",
+      "actual": "Toast \"Đã tải lên 3 tệp…\" hiện; 3 dòng; trạng thái: Đang chờ xử lý, Đang chờ xử lý, Đang chờ xử lý; ghi chú tự cập nhật: có",
+      "ok": true,
+      "shot": "screenshots/03-buoc-3-cho-phan-hoi-tai-len.png"
+    },
+    {
+      "n": 4,
+      "action": "Không tải lại trang, chờ tới khi cả 3 Sẵn sàng (≤ 5 phút)",
+      "expect": "Mỗi dòng chuyển \"Sẵn sàng\"; mỗi tài liệu có toast \"<tên>\" đã sẵn sàng để hỏi đáp.",
+      "actual": "3/3 dòng Sẵn sàng; toast sẵn sàng cho 3/3 tệp (Bien_ban_hop_doi_tac_15-09.pdf, De_xuat_hop_tac_Minh_Phat.pdf, Hop_dong_khung_ABC_2026.pdf)",
+      "ok": true,
+      "shot": "screenshots/05-buoc-4-khong-tai-lai-trang-cho-toi-khi-ca-3-san-sang-5-phut.png"
+    },
+    {
+      "n": 5,
+      "action": "Kiểm tra bảng và sidebar",
+      "expect": "Cột Tên tệp/Số trang/Ngày tải lên/Trạng thái; ngày dd/mm/yyyy; sidebar 3 (title \"3 tài liệu Sẵn sàng\"); không tải lại trang",
+      "actual": "Cột: Tên tệp / Số trang / Ngày tải lên / Trạng thái; ngày: 31/10/2026, 31/10/2026, 31/10/2026; sidebar \"3\" (title \"3 tài liệu Sẵn sàng\"); số lần tải trang (load): 1",
+      "ok": true,
+      "shot": "screenshots/06-buoc-5-kiem-tra-bang-va-sidebar.png"
+    }
+  ],
+  "notes": []
+}

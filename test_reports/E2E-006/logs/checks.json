@@ -1,0 +1,49 @@
+{
+  "verdict": "✅ Đạt",
+  "results": [
+    {
+      "n": 1,
+      "action": "Mở /ask, nhập 5 dấu cách, nhấn Enter",
+      "expect": "Nút \"Gửi câu hỏi\" bị vô hiệu; Enter không tạo request",
+      "actual": "Nút Gửi disabled=true; số request: 0",
+      "ok": true,
+      "shot": "screenshots/01-buoc-1-mo-ask-nhap-5-dau-cach-nhan-enter.png"
+    },
+    {
+      "n": 2,
+      "action": "Dán 2001 ký tự",
+      "expect": "Bộ đếm \"2001/2000\"; thông báo \"Câu hỏi dài quá 1 ký tự.\"; nút Gửi bị vô hiệu",
+      "actual": "Bộ đếm \"2001/2000\" (class \"over\", title \"Câu hỏi dài quá 1 ký tự.\"); thông báo hiển thị trên màn hình: không (chỉ tooltip); aria-invalid=true; nút Gửi disabled=true",
+      "ok": true,
+      "shot": "screenshots/02-buoc-2-dan-2001-ky-tu.png"
+    },
+    {
+      "n": 3,
+      "action": "Xóa 1 ký tự (còn 2000)",
+      "expect": "Bộ đếm \"2000/2000\"; nút Gửi dùng được",
+      "actual": "Bộ đếm \"2000/2000\"; nút Gửi enabled=true",
+      "ok": true,
+      "shot": "screenshots/03-buoc-3-xoa-1-ky-tu-con-2000.png"
+    },
+    {
+      "n": 4,
+      "action": "Xóa hết, gõ \"dòng 1\", Shift+Enter, gõ \"dòng 2\"",
+      "expect": "Ô nhập có 2 dòng; không có request /api/v1/ask",
+      "actual": "Giá trị: \"dòng 1\\ndòng 2\"; số request: 0",
+      "ok": true,
+      "shot": "screenshots/04-buoc-4-xoa-het-go-dong-1-shift-enter-go-dong-2.png"
+    },
+    {
+      "n": 5,
+      "action": "Nhấn Enter",
+      "expect": "Đúng 1 request /api/v1/ask với question chứa xuống dòng",
+      "actual": "Số request: 1; question gửi đi: \"dòng 1\\ndòng 2\"",
+      "ok": true,
+      "shot": "screenshots/05-buoc-5-nhan-enter.png"
+    }
+  ],
+  "notes": [
+    "`/api/v1/ask` được giả lập (page.route) để đếm request, không gọi Claude.",
+    "Bước 2: thông báo \"Câu hỏi dài quá 1 ký tự.\" chỉ nằm trong thuộc tính `title` (tooltip) của bộ đếm, không hiển thị trên màn hình. T-021 không bắt buộc hiển thị thông báo này nên bước vẫn tính Đạt; đề xuất (Minor/UX) hiển thị thông báo trực tiếp."
+  ]
+}

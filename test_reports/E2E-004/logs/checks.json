@@ -1,0 +1,30 @@
+{
+  "verdict": "✅ Đạt",
+  "results": [
+    {
+      "n": 1,
+      "action": "Mở http://localhost:5173/",
+      "expect": "Tự chuyển tới /ask",
+      "actual": "URL: http://localhost:5173/ask",
+      "ok": true,
+      "shot": "screenshots/01-buoc-1-mo-http-localhost-5173.png"
+    },
+    {
+      "n": 2,
+      "action": "Quan sát vùng hỏi đáp",
+      "expect": "\"Tải lên tài liệu để bắt đầu\" + \"Chưa có tài liệu nào ở trạng thái Sẵn sàng…\"; ô nhập và nút \"Gửi câu hỏi\" bị vô hiệu",
+      "actual": "Tiêu đề khóa: có; textarea disabled=true, placeholder=\"Tải lên tài liệu để bắt đầu\"; nút Gửi disabled=true",
+      "ok": true,
+      "shot": "screenshots/02-buoc-2-quan-sat-vung-hoi-dap.png"
+    },
+    {
+      "n": 3,
+      "action": "Bấm \"Tải lên tài liệu\"",
+      "expect": "Chuyển tới /documents",
+      "actual": "URL: http://localhost:5173/documents",
+      "ok": true,
+      "shot": "screenshots/03-buoc-3-bam-tai-len-tai-lieu.png"
+    }
+  ],
+  "notes": []
+}

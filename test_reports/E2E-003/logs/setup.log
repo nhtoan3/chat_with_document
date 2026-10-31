@@ -1,0 +1,8 @@
+$ check_stack && reset_data && for i in $(seq -w 1 11); do cp "$FIXTURES/sample/Hop_dong_khung_ABC_2026.pdf" "$DATA_DIR/tep_$i.pdf"; done && make_pdf big21mb "$DATA_DIR/qua_lon.pdf"
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+-rw-r--r--@ 1 huytoan  staff  22020105 Oct 31 22:18 /Users/huytoan/AI Training/chat_with_document/test_reports/E2E-003/data/qua_lon.pdf
+
+$ reset_data
+TRUNCATE TABLE
+

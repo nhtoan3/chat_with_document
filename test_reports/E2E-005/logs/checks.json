@@ -1,0 +1,32 @@
+{
+  "verdict": "✅ Đạt",
+  "results": [
+    {
+      "n": 1,
+      "action": "Mở /ask",
+      "expect": "Sidebar 3 tài liệu Sẵn sàng; \"Bạn muốn tìm hiểu điều gì?\"; ô nhập dùng được",
+      "actual": "Sidebar \"3\"; lời chào hiển thị; textarea enabled=true",
+      "ok": true,
+      "shot": "screenshots/01-buoc-1-mo-ask.png"
+    },
+    {
+      "n": 2,
+      "action": "Nhập \"Điều khoản tạm ứng trong hợp đồng khung với ABC là gì?\" và nhấn Enter",
+      "expect": "Bong bóng câu hỏi; \"Đang tìm câu trả lời…\" và \"Có thể mất tới 20 giây\"",
+      "actual": "Bong bóng: \"Điều khoản tạm ứng trong hợp đồng khung với ABC là gì?\"; trạng thái chờ: \"Đang tìm câu trả lời… Có thể mất tới 20 giây\"",
+      "ok": true,
+      "shot": "screenshots/02-buoc-2-nhap-dieu-khoan-tam-ung-trong-hop-dong-khung-voi-abc-.png"
+    },
+    {
+      "n": 3,
+      "action": "Chờ câu trả lời (tối đa 60 s)",
+      "expect": "Câu trả lời Markdown nêu tạm ứng 30%; nhãn \"Câu trả lời do AI tạo — hãy đối chiếu tài liệu gốc\"; \"Trả lời trong N giây\"",
+      "actual": "In đậm: 30%, 10 ngày làm việc; 2 mục danh sách; chân: \"Câu trả lời do AI tạo — hãy đối chiếu tài liệu gốc Trả lời trong 8,4 giây\"; số request /ask (giả lập): 1",
+      "ok": true,
+      "shot": "screenshots/03-buoc-3-cho-cau-tra-loi-toi-da-60-s.png"
+    }
+  ],
+  "notes": [
+    "Không có ANTHROPIC_API_KEY trên máy chạy test: gọi thật `POST /api/v1/ask` trả `503 ai_unavailable`. Các bước 2–3 dùng **API giả lập** (page.route, trễ 3 s) theo điều kiện tiên quyết của test case; phần gọi Claude thật chưa được kiểm chứng (xem INT-022, EVAL-*)."
+  ]
+}

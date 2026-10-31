@@ -1,0 +1,40 @@
+{
+  "verdict": "✅ Đạt",
+  "results": [
+    {
+      "n": 1,
+      "action": "Mở /ask và gửi một câu hỏi bất kỳ",
+      "expect": "Câu trả lời giả lập hiển thị; \"In đậm\" được in đậm",
+      "actual": "Câu trả lời hiển thị; <strong>: In đậm",
+      "ok": true,
+      "shot": "screenshots/01-buoc-1-mo-ask-va-gui-mot-cau-hoi-bat-ky.png"
+    },
+    {
+      "n": 2,
+      "action": "Kiểm tra hộp thoại",
+      "expect": "Không có dialog nào",
+      "actual": "Số dialog: 0",
+      "ok": true,
+      "shot": "screenshots/02-buoc-2-kiem-tra-hop-thoai.png"
+    },
+    {
+      "n": 3,
+      "action": "Kiểm tra DOM vùng câu trả lời",
+      "expect": "Không có <script>; không có thuộc tính on*; không có href javascript:",
+      "actual": "script: 0; img: 1; thuộc tính on*: không có; href javascript:: 0; số thẻ <a>: 1. outerHTML lưu ở logs/answer-dom.html",
+      "ok": true,
+      "shot": "screenshots/03-buoc-3-kiem-tra-dom-vung-cau-tra-loi.png"
+    },
+    {
+      "n": 4,
+      "action": "Bấm vào liên kết \"bấm vào\" (nếu còn)",
+      "expect": "Không có alert, không điều hướng sang javascript:",
+      "actual": "Sau khi bấm: dialog 0; URL http://localhost:5173/ask",
+      "ok": true,
+      "shot": "screenshots/04-buoc-4-bam-vao-lien-ket-bam-vao-neu-con.png"
+    }
+  ],
+  "notes": [
+    "`/api/v1/ask` được giả lập trả `answer` = `**In đậm**\\n\\n<img src=x onerror=\"alert('xss-img')\">\\n<script>alert('xss-script')</script>\\n\\n[bấm vào](javascript:alert('xss-link'))`."
+  ]
+}

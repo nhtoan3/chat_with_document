@@ -1,0 +1,30 @@
+{
+  "verdict": "✅ Đạt",
+  "results": [
+    {
+      "n": 1,
+      "action": "Mở /documents, theo dõi request POST /api/v1/documents",
+      "expect": "Trang trống",
+      "actual": "Trang trống \"Chưa có tài liệu nào\"",
+      "ok": true,
+      "shot": "screenshots/01-buoc-1-mo-documents-theo-doi-request-post-api-v1-documents.png"
+    },
+    {
+      "n": 2,
+      "action": "Chọn 11 tệp",
+      "expect": "Banner \"Mỗi lần chỉ tải tối đa 10 tệp. Bạn đã chọn 11 tệp — vui lòng chọn lại.\"; không có request POST",
+      "actual": "11 tệp được chọn; banner: \"Mỗi lần chỉ tải tối đa 10 tệp. Bạn đã chọn 11 tệp — vui lòng chọn lại.\"; số request POST: 0",
+      "ok": true,
+      "shot": "screenshots/02-buoc-2-chon-11-tep.png"
+    },
+    {
+      "n": 3,
+      "action": "Chọn qua_lon.pdf (21 MB) và 1 PDF mẫu",
+      "expect": "qua_lon.pdf – \"Vượt quá 20 MB\"; đúng 1 request POST chỉ chứa tệp hợp lệ; \"Đã tải lên 1 tệp, đang chờ xử lý.\"",
+      "actual": "qua_lon.pdf: \"Vượt quá 20 MB\"; số request POST: 1; kích thước body: 0.00 MB (chỉ tệp hợp lệ); toast \"Đã tải lên 1 tệp, đang chờ xử lý.\" hiện",
+      "ok": true,
+      "shot": "screenshots/03-buoc-3-chon-qua-lon-pdf-21-mb-va-1-pdf-mau.png"
+    }
+  ],
+  "notes": []
+}

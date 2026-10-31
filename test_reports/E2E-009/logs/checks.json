@@ -1,0 +1,24 @@
+{
+  "verdict": "✅ Đạt",
+  "results": [
+    {
+      "n": 1,
+      "action": "Gửi \"Câu hỏi 1\" rồi \"Câu hỏi 2\"",
+      "expect": "Hiển thị 2 cặp theo thứ tự Câu hỏi 1 → Trả lời 1 → Câu hỏi 2 → Trả lời 2",
+      "actual": "Thứ tự: Câu hỏi 1 → Trả lời 1 → Câu hỏi 2 → Trả lời 2",
+      "ok": true,
+      "shot": "screenshots/01-buoc-1-gui-cau-hoi-1-roi-cau-hoi-2.png"
+    },
+    {
+      "n": 2,
+      "action": "Tải lại trang",
+      "expect": "Không còn cặp hỏi–đáp; hiện \"Bạn muốn tìm hiểu điều gì?\"",
+      "actual": "Số bong bóng câu hỏi còn lại: 0; lời chào hiển thị",
+      "ok": true,
+      "shot": "screenshots/02-buoc-2-tai-lai-trang.png"
+    }
+  ],
+  "notes": [
+    "`/api/v1/ask` được giả lập trả lần lượt \"Trả lời 1\", \"Trả lời 2\"."
+  ]
+}

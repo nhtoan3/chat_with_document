@@ -1,0 +1,10 @@
+$ check_stack && reset_data && seed_samples && wait_idle 300
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+{"items":[{"filename":"Bien_ban_hop_doi_tac_15-09.pdf","document_id":"77bafe84-18c9-4ab4-9c2b-d3b0b5817538","status":"queued"},{"filename":"De_xuat_hop_tac_Minh_Phat.pdf","document_id":"d9f71eaa-d6b8-4468-adf2-80ae4ed4d6b9","status":"queued"},{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"714dd14f-bfef-4e11-a892-538cb0102ba0","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~8s · counts={"ready":3,"processing":0,"failed":0,"total":3}
+
+$ reset_data
+TRUNCATE TABLE
+

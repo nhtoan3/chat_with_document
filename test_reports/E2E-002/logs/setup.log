@@ -1,0 +1,10 @@
+$ check_stack && reset_data && upload "$FIXTURES/sample/Hop_dong_khung_ABC_2026.pdf" && wait_idle 300
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+{"items":[{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"c388e632-0270-4be1-95ed-b7bd3d294967","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~4s · counts={"ready":1,"processing":0,"failed":0,"total":1}
+
+$ reset_data
+TRUNCATE TABLE
+

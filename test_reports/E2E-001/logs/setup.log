@@ -1,0 +1,7 @@
+$ check_stack && reset_data
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+
+$ reset_data
+TRUNCATE TABLE
+

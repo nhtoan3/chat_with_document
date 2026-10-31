@@ -1,0 +1,38 @@
+{
+  "verdict": "✅ Đạt",
+  "results": [
+    {
+      "n": 1,
+      "action": "Mở /documents",
+      "expect": "1 dòng \"Sẵn sàng\"",
+      "actual": "1 dòng: Hop_dong_khung_ABC_2026.pdf 2 31/10/2026 Sẵn sàng",
+      "ok": true,
+      "shot": "screenshots/01-buoc-1-mo-documents.png"
+    },
+    {
+      "n": 2,
+      "action": "Tải lên encrypted.pdf, scanned.pdf, corrupted.pdf",
+      "expect": "3 dòng mới ở trạng thái đang chờ / đang xử lý",
+      "actual": "4 dòng; encrypted.pdf: Đang chờ xử lý; scanned.pdf: Đang chờ xử lý; corrupted.pdf: Đang chờ xử lý",
+      "ok": true,
+      "shot": "screenshots/02-buoc-2-tai-len-encrypted-pdf-scanned-pdf-corrupted-pdf.png"
+    },
+    {
+      "n": 3,
+      "action": "Chờ tới khi không còn tài liệu đang xử lý",
+      "expect": "encrypted → Lỗi + \"Tệp có mật khẩu\"; scanned → Lỗi + \"PDF dạng ảnh chưa được hỗ trợ\"; corrupted → Lỗi + \"Tệp bị hỏng\"",
+      "actual": "encrypted.pdf: Lỗi – \"Tệp có mật khẩu\"; scanned.pdf: Lỗi – \"PDF dạng ảnh chưa được hỗ trợ\"; corrupted.pdf: Lỗi – \"Tệp bị hỏng\"",
+      "ok": true,
+      "shot": "screenshots/03-buoc-3-cho-toi-khi-khong-con-tai-lieu-dang-xu-ly.png"
+    },
+    {
+      "n": 4,
+      "action": "Kiểm tra tài liệu Sẵn sàng ban đầu",
+      "expect": "Hop_dong_khung_ABC_2026.pdf vẫn \"Sẵn sàng\"; sidebar vẫn 1",
+      "actual": "ABC: Sẵn sàng; sidebar \"1\"",
+      "ok": true,
+      "shot": "screenshots/04-buoc-4-kiem-tra-tai-lieu-san-sang-ban-dau.png"
+    }
+  ],
+  "notes": []
+}

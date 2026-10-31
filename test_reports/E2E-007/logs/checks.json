@@ -1,0 +1,41 @@
+{
+  "verdict": "✅ Đạt",
+  "results": [
+    {
+      "n": 1,
+      "action": "Mở /ask, gửi \"Mức phạt khi chậm thanh toán là bao nhiêu?\"",
+      "expect": "Spinner \"Đang tìm câu trả lời…\"",
+      "actual": "Spinner \"Đang tìm câu trả lời…\" hiển thị",
+      "ok": true,
+      "shot": "screenshots/01-buoc-1-mo-ask-gui-muc-phat-khi-cham-thanh-toan-la-bao-nhieu.png"
+    },
+    {
+      "n": 2,
+      "action": "Quan sát phản hồi lỗi",
+      "expect": "\"Hệ thống đang bận, vui lòng thử lại.\" + \"Câu hỏi của bạn không bị mất.\"; nút \"Hỏi lại\"; không có chữ kỹ thuật",
+      "actual": "Nội dung: \"Hệ thống đang bận, vui lòng thử lại. Câu hỏi của bạn không bị mất. Hỏi lại\"; nút Hỏi lại: 1; chữ kỹ thuật: không",
+      "ok": true,
+      "shot": "screenshots/02-buoc-2-quan-sat-phan-hoi-loi.png"
+    },
+    {
+      "n": 3,
+      "action": "Bấm \"Hỏi lại\"",
+      "expect": "Hiện \"Câu trả lời sau khi hỏi lại.\" kèm nhãn AI; tổng 2 request",
+      "actual": "Câu trả lời: \"Câu trả lời sau khi hỏi lại.\"; nhãn AI: 1; số request: 2; khối lỗi còn lại: 0; câu hỏi gửi lại: \"Mức phạt khi chậm thanh toán là bao nhiêu?\"",
+      "ok": true,
+      "shot": "screenshots/03-buoc-3-bam-hoi-lai.png"
+    },
+    {
+      "n": 4,
+      "action": "(Ghi nhận) Giả lập 504 HTML như Nginx timeout",
+      "expect": "Ghi lại thông điệp và việc có nút Hỏi lại (không tính đạt / không đạt) — RISK-008",
+      "actual": "\"Hệ thống đang bận, vui lòng thử lại. Câu hỏi của bạn không bị mất. Hỏi lại\"; nút Hỏi lại: có",
+      "ok": true,
+      "shot": "screenshots/04-buoc-4-ghi-nhan-gia-lap-504-html-nhu-nginx-timeout.png"
+    }
+  ],
+  "notes": [
+    "`/api/v1/ask` được giả lập: lần 1 trả 503 `ai_unavailable` (problem+json), lần 2 trả 200; bước 4 trả 504 HTML giống Nginx timeout.",
+    "Bước 4 (ghi nhận RISK-008): với 504 HTML, giao diện hiện \"Hệ thống đang bận, vui lòng thử lại. Câu hỏi của bạn không bị mất. Hỏi lại\", nút Hỏi lại: có."
+  ]
+}
