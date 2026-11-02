@@ -85,6 +85,12 @@
 | [T-023 — Tinh chỉnh chất lượng câu trả lời](T-023-quality-tuning.md) | F2 — Hỏi đáp AI | BE | 2 ngày | BE1 + BE2 + QA | T-022, T-008 |
 | [T-024 — UAT và go-live](T-024-uat-go-live.md) | — | OPS | 1,5 ngày | TL + PO + QA | T-023, T-015, T-021, T-006 |
 
+## Sửa lỗi sau kiểm thử (từ `docs/07-verification/test-report.md`)
+
+| Task | Tính năng | Loại | Ước lượng | Phụ trách | Phụ thuộc |
+|---|---|---|---|---|---|
+| [T-025 — Bổ sung thông điệp `not_found` và test đồng bộ mã lỗi ↔ `vi.json`](T-025-not-found-message.md) | Nền tảng | BE + FE | 0,5 ngày | FE | T-005, T-007 |
+
 ## Chuỗi task quyết định ngày go-live
 
 T-001 → T-002 → T-004 → T-010 → T-013 → T-020 (cần T-017, T-019) → T-022 → T-023 → T-024
