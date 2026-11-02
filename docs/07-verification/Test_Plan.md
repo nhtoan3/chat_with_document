@@ -876,7 +876,7 @@ Việc ký dưới đây xác nhận đồng ý với phạm vi, cách tiếp c�
 
 ## Phụ lục B. Đối chiếu checklist IEEE 829
 
-Đối chiếu với `docs/Test_Plan_IEEE_829_Checklist.xlsx`.
+Đối chiếu với `sdlc/verification/Test_Plan_IEEE_829_Checklist.xlsx` (báº£n ÄÃ£ cháº¥m: `docs/07-verification/Test_Plan_IEEE_829_Checklist.xlsx`).
 
 | Hạng mục checklist | Mục trong tài liệu | Trạng thái |
 |---|---|---|

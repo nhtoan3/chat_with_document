@@ -6,7 +6,7 @@
 
 | ID | Nguồn | Loại | Chủ sở hữu | Ngày | Nội dung chứng minh | Độ tin cậy |
 |---|---|---|---|---|---|---|
-| SRC-001 | Yêu cầu của quản lý: mục 2.1 của `docs/BRD_Prompt_IEEE_standard.md` (trích nguyên văn ở §2) | Sponsor brief | Quản lý [TBD: OQ-001] | 2026-10-20 | Vấn đề, người dùng mục tiêu, mục tiêu MVP, ràng buộc web + PDF + chat AI | Sơ cấp; mô tả là "bối cảnh giả sử" |
+| SRC-001 | Yêu cầu của quản lý: mục 2.1 của `docs/02-requirements/BRD_Prompt_IEEE_standard.md` (trích nguyên văn ở §2) | Sponsor brief | Quản lý [TBD: OQ-001] | 2026-10-20 | Vấn đề, người dùng mục tiêu, mục tiêu MVP, ràng buộc web + PDF + chat AI | Sơ cấp; mô tả là "bối cảnh giả sử" |
 | SRC-002 | Đề xuất của nhóm BA trong `BRD.md` | Phân tích BA | Nhóm BA | 2026-10-20 | Tính năng bổ sung, quy tắc, chỉ số | Đề xuất; **chờ quản lý xác nhận (OQ-013)** |
 
 ## 2. Trích nguyên văn SRC-001
@@ -46,7 +46,7 @@ Các tài liệu này do dự án tự soạn từ nguồn ở §1, nên **khôn
 | Tên | Phiên bản | Vị trí |
 |---|---|---|
 | Quy trình Agentic SDLC | — | `sdlc/agentic-sdlc-process.md` |
-| BRD Prompt — IEEE standard | 1.0 | `docs/BRD_Prompt_IEEE_standard.md` |
+| BRD Prompt — IEEE standard | 1.0 | `docs/02-requirements/BRD_Prompt_IEEE_standard.md` |
 | ISO/IEC/IEEE 29148 — Requirements engineering | 2018 | Chuẩn quốc tế |
 
 ## 6. Quy tắc sử dụng nguồn

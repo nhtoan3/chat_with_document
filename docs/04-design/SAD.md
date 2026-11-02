@@ -1,7 +1,7 @@
 # Tài liệu Thiết kế Kiến trúc Phần mềm (SAD) — "Chat với tài liệu" (MVP)
 
 > **Chuẩn tham chiếu:** IEEE 1016-2009 (Software Design Descriptions)
-> **Prompt nguồn:** `docs/SAD_Prompt_IEEE_standard.md`
+> **Prompt nguồn:** `sdlc/design/SAD_Prompt_IEEE_standard.md`
 > **Tài liệu đầu vào:** `docs/02-requirements/PRD.md` (PRD-CWD-001 v0.1), `docs/02-requirements/BRD.md` (BRD-CWD-001 v0.1), `docs/04-design/UseCase_ChatWithDocument.drawio`
 
 ---

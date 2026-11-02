@@ -1,7 +1,7 @@
 # Tài liệu Yêu cầu Sản phẩm (PRD) — "Chat với tài liệu" (MVP)
 
-> **Chuẩn tham chiếu:** IEEE 29148-2018 · **Prompt nguồn:** `docs/PRD_Prompt_IEEE_standard.md`
-> **Tài liệu đầu vào:** `docs/02-requirements/BRD.md` (BRD-CWD-001 v0.1) và kết quả review trong `docs/BRD_IEEE_29148_Checklist.xlsx`
+> **Chuẩn tham chiếu:** IEEE 29148-2018 · **Prompt nguồn:** `sdlc/analysis/PRD_Prompt_IEEE_standard.md`
+> **Tài liệu đầu vào:** `docs/02-requirements/BRD.md` (BRD-CWD-001 v0.1) và kết quả review trong `docs/02-requirements/BRD_IEEE_29148_Checklist.xlsx`
 
 ---
 

@@ -1,7 +1,7 @@
 # Tài liệu Yêu cầu Nghiệp vụ (BRD) — Công cụ "Chat với tài liệu" (MVP)
 
 > **Chuẩn áp dụng:** IEEE 29148-2018 · **Giai đoạn SDLC:** 5.2 Requirements and discovery
-> **Prompt nguồn:** `docs/BRD_Prompt_IEEE_standard.md` v1.0
+> **Prompt nguồn:** `docs/02-requirements/BRD_Prompt_IEEE_standard.md` v1.0
 
 ---
 
@@ -11,7 +11,7 @@
 
 | Source ID | Nguồn | Loại | Chủ sở hữu | Ngày / Phiên bản | Nội dung chứng minh |
 |---|---|---|---|---|---|
-| SRC-001 | Yêu cầu của quản lý: mục 2.1 "Business foundation" trong `docs/BRD_Prompt_IEEE_standard.md` | Sponsor brief (bản mô tả ngắn) | Quản lý giao việc (chưa rõ tên — OQ-001) | 2026-10-20 | Vấn đề nghiệp vụ, người dùng mục tiêu, mục tiêu MVP, ràng buộc web + PDF + chat AI, cho phép BA đề xuất tính năng |
+| SRC-001 | Yêu cầu của quản lý: mục 2.1 "Business foundation" trong `docs/02-requirements/BRD_Prompt_IEEE_standard.md` | Sponsor brief (bản mô tả ngắn) | Quản lý giao việc (chưa rõ tên — OQ-001) | 2026-10-20 | Vấn đề nghiệp vụ, người dùng mục tiêu, mục tiêu MVP, ràng buộc web + PDF + chat AI, cho phép BA đề xuất tính năng |
 | SRC-002 | Đề xuất của nhóm BA trong tài liệu này | Phân tích BA | Nhóm BA (người soạn) | 2026-10-20 | Các tính năng bổ sung, quy tắc và chỉ số được BA đề xuất. **Mọi mục có nguồn SRC-002 đều cần quản lý xác nhận (OQ-013)** |
 
 **Đầu vào còn thiếu**
@@ -412,7 +412,7 @@ Người phụ trách được ghi theo vai trò vì chưa có tên (OQ-001). Ng
 
 | Tên | Phiên bản | Vị trí | Ngày truy cập |
 |---|---|---|---|
-| BRD Prompt — IEEE standard | 1.0 | `docs/BRD_Prompt_IEEE_standard.md` | 2026-10-20 |
+| BRD Prompt — IEEE standard | 1.0 | `docs/02-requirements/BRD_Prompt_IEEE_standard.md` | 2026-10-20 |
 | ISO/IEC/IEEE 29148 — Requirements engineering | 2018 | Chuẩn quốc tế (bản có bản quyền) | 2026-10-20 |
 
 ---

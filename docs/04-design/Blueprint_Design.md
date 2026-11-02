@@ -1,7 +1,7 @@
 # Bản thiết kế phần mềm (Software Blueprint Design) — "Chat với tài liệu" (MVP)
 
 > **Chuẩn:** IEEE 1016-2009 — Software Design Descriptions
-> **Prompt nguồn:** `docs/bluePrint_design_prompt.md`
+> **Prompt nguồn:** `sdlc/design/bluePrint_design_prompt.md`
 > **Tài liệu đầu vào:**
 > - `docs/02-requirements/PRD.md` (PRD-CWD-001 v0.1)
 > - `docs/04-design/SAD.md` (SAD-CWD-001 v0.1)
