@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/codegraph_context.py\" --on-edit"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "sdlc-06-build",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/codegraph_context.py\" --on-start"
+          }
+        ]
+      }
+    ]
+  }
+}
