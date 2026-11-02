@@ -64,6 +64,6 @@ Ngoài ra, reviewer thiết kế ghi nhận: `DATABASE_URL` có `?ssl=require` t
 
 1. Quản lý quyết định OQ-008 và duyệt phạm vi v0.4 (phiếu ở `docs/05-development/evidence/`).
 2. Chỉ định người duyệt độc lập (OQ-001) rồi mở cổng duyệt Phase 1 → 5.
-3. Sửa DEF-04 qua `/sdlc-run 6 T-025` (task card đã tạo) để thử quy trình.
+3. Sửa DEF-04 (nhỏ, có test UT-027 đang đỏ) qua `/sdlc-run 6` để thử quy trình.
 4. Nhận golden set, có khóa API → chạy EVAL-001…005, T-023.
 5. Dựng AWS (T-006) → kiểm chứng DEF-01, DEF-03, `ssl=require`, SEC-*, PERF-002.
