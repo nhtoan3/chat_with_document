@@ -1,0 +1,12 @@
+[
+  {
+    "step": 2,
+    "ok": true,
+    "actual": "Câu trả lời hiển thị, innerText: \"x\""
+  },
+  {
+    "step": 3,
+    "ok": true,
+    "actual": "dialog: 0; script: 0; iframe: 0; on*: 0; javascript: 0. outerHTML ở logs/answer-dom.html"
+  }
+]

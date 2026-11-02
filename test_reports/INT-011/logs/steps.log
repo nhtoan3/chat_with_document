@@ -1,0 +1,52 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Tải lên 3 PDF mẫu, sau 2 giây tải thêm corrupted.pdf
+{"items":[{"filename":"Bien_ban_hop_doi_tac_15-09.pdf","document_id":"f942c9f6-9bdd-4faa-bc9f-d062653f0ffc","status":"queued"},{"filename":"De_xuat_hop_tac_Minh_Phat.pdf","document_id":"f972cfc3-6e5c-4437-8dbe-d8724fb71f56","status":"queued"},{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"b79aeaf2-a7ae-401e-88cf-b8c7d0f2dab7","status":"queued"}]}
+HTTP 202
+{"items":[{"filename":"corrupted.pdf","document_id":"f52e18e2-e325-43c4-92fe-4177a6bbb923","status":"queued"}]}
+HTTP 202
+### Bước 3: Gọi GET ngay khi còn tài liệu đang xử lý
+{
+  "counts": {
+    "ready": 0,
+    "processing": 4,
+    "failed": 0,
+    "total": 4
+  },
+  "by_status": {
+    "processing": 2,
+    "queued": 2
+  }
+}
+### Bước 4: Chờ xử lý xong rồi gọi lại
+Hết tài liệu đang xử lý sau ~6s · counts={"ready":3,"processing":0,"failed":1,"total":4}
+{
+  "counts": {
+    "ready": 3,
+    "processing": 0,
+    "failed": 1,
+    "total": 4
+  },
+  "limit": 50
+}
+### Bước 5: Kiểm tra trường và thứ tự
+{
+  "keys": [
+    "error_code",
+    "filename",
+    "id",
+    "pages",
+    "status",
+    "uploaded_at"
+  ],
+  "order": [
+    "corrupted.pdf",
+    "Bien_ban_hop_doi_tac_15-09.pdf",
+    "De_xuat_hop_tac_Minh_Phat.pdf",
+    "Hop_dong_khung_ABC_2026.pdf"
+  ],
+  "sorted_desc": true
+}
+
+[exit code 0]

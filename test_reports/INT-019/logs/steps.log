@@ -1,0 +1,26 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Nạp PDF mẫu
+{"items":[{"filename":"Bien_ban_hop_doi_tac_15-09.pdf","document_id":"35705ec6-9840-4657-9352-537b11cdb01c","status":"queued"},{"filename":"De_xuat_hop_tac_Minh_Phat.pdf","document_id":"6d59891b-2dce-4311-87b2-6e86ad6cbd2f","status":"queued"},{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"d32eb192-5952-416b-9f6b-c0355af587e1","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~8s · counts={"ready":3,"processing":0,"failed":0,"total":3}
+### Bước 3: Dừng TEI
+ Container chat-with-document-tei-1 Stopping 
+ Container chat-with-document-tei-1 Stopped 
+### Bước 4: Hỏi một câu
+{"type":"about:blank","title":"AI service unavailable","status":503,"code":"ai_unavailable"}
+HTTP 503 · 0.041995s
+### Bước 5: Kiểm tra qa_log
+ id | status | latency_ms 
+----+--------+------------
+  1 | error  |         28
+(1 row)
+
+### Bước 6: Bật lại TEI
+ Container chat-with-document-tei-1 Starting 
+ Container chat-with-document-tei-1 Started 
+NAME                       IMAGE                                                   COMMAND                  SERVICE   CREATED      STATUS                            PORTS
+chat-with-document-tei-1   ghcr.io/huggingface/text-embeddings-inference:cpu-1.7   "text-embeddings-rou…"   tei       6 days ago   Up 5 seconds (health: starting)   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
+
+[exit code 0]

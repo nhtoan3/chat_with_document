@@ -1,0 +1,19 @@
+### Bước 1: Ghi nhận môi trường: commit, phiên bản Python và trạng thái stack localhost
+c02cc72
+Python 3.12.16
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+### Bước 2: Chạy tests/unit/test_anthropic_adapter.py::test_unrelated_type_error_is_not_swallowed
+============================= test session starts ==============================
+platform darwin -- Python 3.12.16, pytest-8.4.2, pluggy-1.7.0 -- /Users/huytoan/AI Training/chat_with_document/backend/.venv/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /Users/huytoan/AI Training/chat_with_document/backend
+configfile: pyproject.toml
+plugins: asyncio-0.26.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/unit/test_anthropic_adapter.py::test_unrelated_type_error_is_not_swallowed PASSED [100%]
+
+============================== 1 passed in 1.42s ===============================
+
+[exit code 0]

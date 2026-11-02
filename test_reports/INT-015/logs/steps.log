@@ -1,0 +1,38 @@
+### Bước 1: Chạy test tự động tests/integration/test_ask.py::test_invalid_question (Testcontainers)
+============================= test session starts ==============================
+platform darwin -- Python 3.12.16, pytest-8.4.2, pluggy-1.7.0 -- /Users/huytoan/AI Training/chat_with_document/backend/.venv/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /Users/huytoan/AI Training/chat_with_document/backend
+configfile: pyproject.toml
+plugins: asyncio-0.26.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 3 items
+
+tests/integration/test_ask.py::test_invalid_question[body0] PASSED       [ 33%]
+tests/integration/test_ask.py::test_invalid_question[body1] PASSED       [ 66%]
+tests/integration/test_ask.py::test_invalid_question[body2] PASSED       [100%]
+
+=============================== warnings summary ===============================
+tests/integration/test_ask.py::test_invalid_question[body0]
+  /Users/huytoan/AI Training/chat_with_document/backend/tests/integration/conftest.py:26: DeprecationWarning: testcontainers.postgres is deprecated, use testcontainers.community.postgres instead
+    from testcontainers.postgres import PostgresContainer
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 3 passed, 1 warning in 4.28s =========================
+### Bước 2: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 3: Hỏi chuỗi rỗng
+{"type":"about:blank","title":"Question is empty or too long","status":422,"code":"question_invalid"}
+HTTP 422 · 0.009301s
+### Bước 4: Hỏi chuỗi chỉ có khoảng trắng
+{"type":"about:blank","title":"Question is empty or too long","status":422,"code":"question_invalid"}
+HTTP 422 · 0.005745s
+### Bước 5: Hỏi chuỗi 2001 ký tự
+{"type":"about:blank","title":"Question is empty or too long","status":422,"code":"question_invalid"}
+HTTP 422 · 0.003366s
+### Bước 6: Hỏi chuỗi đúng 2000 ký tự (chưa có tài liệu)
+{"type":"about:blank","title":"No ready documents to answer from","status":409,"code":"no_documents"}
+HTTP 409 · 0.003189s
+
+[exit code 0]

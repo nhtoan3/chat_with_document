@@ -1,0 +1,38 @@
+### Bước 1: Chạy test tự động tests/integration/test_ask.py::test_retrieval_ranks_relevant_chunk_and_skips_unready (Testcontainers)
+============================= test session starts ==============================
+platform darwin -- Python 3.12.16, pytest-8.4.2, pluggy-1.7.0 -- /Users/huytoan/AI Training/chat_with_document/backend/.venv/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /Users/huytoan/AI Training/chat_with_document/backend
+configfile: pyproject.toml
+plugins: asyncio-0.26.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/integration/test_ask.py::test_retrieval_ranks_relevant_chunk_and_skips_unready PASSED [100%]
+
+=============================== warnings summary ===============================
+tests/integration/test_ask.py::test_retrieval_ranks_relevant_chunk_and_skips_unready
+  /Users/huytoan/AI Training/chat_with_document/backend/tests/integration/conftest.py:26: DeprecationWarning: testcontainers.postgres is deprecated, use testcontainers.community.postgres instead
+    from testcontainers.postgres import PostgresContainer
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 1 passed, 1 warning in 4.50s =========================
+### Bước 2: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 3: Nạp 3 PDF mẫu và chờ Sẵn sàng
+{"items":[{"filename":"Bien_ban_hop_doi_tac_15-09.pdf","document_id":"50566852-6457-4915-8129-8f82278e4fad","status":"queued"},{"filename":"De_xuat_hop_tac_Minh_Phat.pdf","document_id":"4c6780d9-b4fe-4946-8eac-2b880d69d933","status":"queued"},{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"22a2fae2-dd5d-4637-b795-96a33bae195b","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~8s · counts={"ready":3,"processing":0,"failed":0,"total":3}
+### Bước 4: Embed câu hỏi "Mức phạt khi chậm thanh toán là bao nhiêu?" bằng TEI và lấy top-3 chunk theo cosine
+           filename            | page_start | similarity 
+-------------------------------+------------+------------
+ Hop_dong_khung_ABC_2026.pdf   |          2 |      0.739
+ Hop_dong_khung_ABC_2026.pdf   |          1 |      0.560
+ De_xuat_hop_tac_Minh_Phat.pdf |          1 |      0.470
+(3 rows)
+
+### Bước 5: Xác nhận câu truy vấn truy xuất có lọc status = 'ready'
+14:     WHERE d.status = 'ready'
+
+[exit code 0]

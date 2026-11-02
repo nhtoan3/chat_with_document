@@ -1,0 +1,14 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Nạp tài liệu và chờ Sẵn sàng
+{"items":[{"filename":"Bien_ban_hop_doi_tac_15-09.pdf","document_id":"20413929-cd66-4532-add7-7337bef9ea75","status":"queued"},{"filename":"De_xuat_hop_tac_Minh_Phat.pdf","document_id":"d1c96cbe-2fe2-484e-9ecc-45da1c31b381","status":"queued"},{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"af8fc5ba-8490-44c5-b298-1099c9991af0","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~8s · counts={"ready":3,"processing":0,"failed":0,"total":3}
+### Bước 3: Xác nhận điều kiện tiên quyết: có khóa API trong container api?
+len(ANTHROPIC_API_KEY)=0
+.env: ls: .env: No such file or directory
+{"type":"about:blank","title":"AI service unavailable","status":503,"code":"ai_unavailable"}
+HTTP 503 · 0.575575s
+
+[exit code 0]

@@ -1,0 +1,31 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Chạy make seed
+cd backend && .venv/bin/python tests/fixtures/make_pdfs.py
+fixtures written to /Users/huytoan/AI Training/chat_with_document/backend/tests/fixtures/pdfs
+curl -sf -X POST http://localhost:8000/api/v1/documents \
+	  -F "files=@backend/tests/fixtures/pdfs/sample/Bien_ban_hop_doi_tac_15-09.pdf" -F "files=@backend/tests/fixtures/pdfs/sample/De_xuat_hop_tac_Minh_Phat.pdf" -F "files=@backend/tests/fixtures/pdfs/sample/Hop_dong_khung_ABC_2026.pdf" | python3 -m json.tool
+{
+    "items": [
+        {
+            "filename": "Bien_ban_hop_doi_tac_15-09.pdf",
+            "document_id": "0a133258-a8a2-49e7-b34c-c5accf6a3339",
+            "status": "queued"
+        },
+        {
+            "filename": "De_xuat_hop_tac_Minh_Phat.pdf",
+            "document_id": "9e0c30de-762c-4623-8d84-28c4384eabd9",
+            "status": "queued"
+        },
+        {
+            "filename": "Hop_dong_khung_ABC_2026.pdf",
+            "document_id": "b90f9508-5dcc-4296-b791-01263146bbbc",
+            "status": "queued"
+        }
+    ]
+}
+### Bước 3: Chờ xử lý
+Hết tài liệu đang xử lý sau ~8s · counts={"ready":3,"processing":0,"failed":0,"total":3}
+
+[exit code 0]

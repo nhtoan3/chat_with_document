@@ -1,0 +1,54 @@
+### Bước 1: Chạy test tự động tests/integration/test_documents.py::test_bad_pdfs_fail_with_code (Testcontainers)
+============================= test session starts ==============================
+platform darwin -- Python 3.12.16, pytest-8.4.2, pluggy-1.7.0 -- /Users/huytoan/AI Training/chat_with_document/backend/.venv/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /Users/huytoan/AI Training/chat_with_document/backend
+configfile: pyproject.toml
+plugins: asyncio-0.26.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 4 items
+
+tests/integration/test_documents.py::test_bad_pdfs_fail_with_code[encrypted] PASSED [ 25%]
+tests/integration/test_documents.py::test_bad_pdfs_fail_with_code[scanned] PASSED [ 50%]
+tests/integration/test_documents.py::test_bad_pdfs_fail_with_code[truncated] PASSED [ 75%]
+tests/integration/test_documents.py::test_bad_pdfs_fail_with_code[too_many_pages] PASSED [100%]
+
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+tests/integration/test_documents.py::test_bad_pdfs_fail_with_code[encrypted]
+  /Users/huytoan/AI Training/chat_with_document/backend/tests/integration/conftest.py:26: DeprecationWarning: testcontainers.postgres is deprecated, use testcontainers.community.postgres instead
+    from testcontainers.postgres import PostgresContainer
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 4 passed, 6 warnings in 5.05s =========================
+sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+### Bước 2: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 3: Sinh PDF 301 trang
+-rw-r--r--@ 1 huytoan  staff  122822 Nov  2 21:42 /Users/huytoan/AI Training/chat_with_document/test_reports/INT-007/data/301_pages.pdf
+### Bước 4: Tải lên 4 tệp lỗi
+{"items":[{"filename":"encrypted.pdf","document_id":"d05cb89d-3144-4315-9f54-6889b4d43b25","status":"queued"},{"filename":"scanned.pdf","document_id":"7cd59466-9a78-4efb-962b-f5616ccdef53","status":"queued"},{"filename":"corrupted.pdf","document_id":"caa13ed6-3bea-4e2e-b457-46c38eb1ee12","status":"queued"},{"filename":"301_pages.pdf","document_id":"d7a7c3ad-5030-4865-9d94-73d415355c98","status":"queued"}]}
+HTTP 202
+### Bước 5: Chờ xử lý và xem mã lỗi
+Hết tài liệu đang xử lý sau ~2s · counts={"ready":0,"processing":0,"failed":4,"total":4}
+   filename    | status |   error_code   
+---------------+--------+----------------
+ 301_pages.pdf | failed | too_many_pages
+ corrupted.pdf | failed | corrupted
+ encrypted.pdf | failed | encrypted_pdf
+ scanned.pdf   | failed | no_text_layer
+(4 rows)
+
+
+[exit code 0]

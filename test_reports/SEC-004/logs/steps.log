@@ -1,0 +1,15 @@
+### Bước 1: (CLI) Chạy npx vitest run src/features/ask/markdown.test.ts
+
+ RUN  v2.1.9 /Users/huytoan/AI Training/chat_with_document/frontend
+
+ ✓ src/features/ask/markdown.test.ts > renderMarkdown > render danh sách và in đậm
+ ✓ src/features/ask/markdown.test.ts > renderMarkdown > loại bỏ <img onerror> và <script>
+ ✓ src/features/ask/markdown.test.ts > renderMarkdown > chặn link javascript:
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  21:52:11
+   Duration  695ms (transform 31ms, setup 82ms, collect 15ms, tests 26ms, environment 327ms, prepare 50ms)
+
+
+[exit code 0]

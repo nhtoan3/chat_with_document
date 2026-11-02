@@ -1,0 +1,19 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Sinh PDF 50 trang
+-rw-r--r--@ 1 huytoan  staff  86502 Nov  2 22:09 /Users/huytoan/AI Training/chat_with_document/test_reports/PERF-001/data/hop_dong_50_trang.pdf
+### Bước 3: Tải lên và chờ
+22:09:35
+{"items":[{"filename":"hop_dong_50_trang.pdf","document_id":"11742488-9578-4db2-bf15-5b896c521d43","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~140s · counts={"ready":0,"processing":0,"failed":1,"total":1}
+22:11:58
+### Bước 4: Đọc số đo trong CSDL
+       filename        | pages | status | seconds_to_ready | processing_ms 
+-----------------------+-------+--------+------------------+---------------
+ hop_dong_50_trang.pdf |       | failed |                  |              
+(1 row)
+
+
+[exit code 0]

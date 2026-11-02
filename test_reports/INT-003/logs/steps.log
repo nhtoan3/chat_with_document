@@ -1,0 +1,11 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: POST multipart không có trường files
+{"type":"about:blank","title":"Too many files in one upload","status":422,"code":"too_many_files"}
+HTTP 422
+### Bước 3: POST không có body
+{"type":"about:blank","title":"Too many files in one upload","status":422,"code":"too_many_files"}
+HTTP 422
+
+[exit code 0]

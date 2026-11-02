@@ -1,0 +1,32 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Nạp PDF mẫu
+{"items":[{"filename":"Bien_ban_hop_doi_tac_15-09.pdf","document_id":"16b558fd-45e6-4af4-9725-2dba94df6bf2","status":"queued"},{"filename":"De_xuat_hop_tac_Minh_Phat.pdf","document_id":"63912021-5a7b-4377-8624-e9d3c2063708","status":"queued"},{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"ee0a1d4f-6736-41f9-8d0c-5993c64cea15","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~10s · counts={"ready":3,"processing":0,"failed":0,"total":3}
+### Bước 3: Hỏi 2 câu có chứa chuỗi đánh dấu
+{"type":"about:blank","title":"AI service unavailable","status":503,"code":"ai_unavailable"}
+HTTP 503 · 0.708354s
+{"type":"about:blank","title":"AI service unavailable","status":503,"code":"ai_unavailable"}
+HTTP 503 · 0.661857s
+### Bước 4: Xuất log api và worker
+     377 /Users/huytoan/AI Training/chat_with_document/test_reports/SEC-006/data/containers.log
+### Bước 5: Tìm nội dung trong log
+marker: 0
+van_ban_tai_lieu: 0
+cau_hoi: 0
+### Bước 6: Kiểm tra cột qa_log
+  column_name  |        data_type         
+---------------+--------------------------
+ id            | bigint
+ created_at    | timestamp with time zone
+ status        | text
+ latency_ms    | integer
+ input_tokens  | integer
+ output_tokens | integer
+ chunk_count   | integer
+(7 rows)
+
+
+[exit code 0]

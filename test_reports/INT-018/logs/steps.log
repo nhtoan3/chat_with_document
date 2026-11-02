@@ -1,0 +1,70 @@
+### Bước 1: Chạy test tự động tests/integration/test_ask.py::test_llm_failure_is_503_and_logged (Testcontainers)
+============================= test session starts ==============================
+platform darwin -- Python 3.12.16, pytest-8.4.2, pluggy-1.7.0 -- /Users/huytoan/AI Training/chat_with_document/backend/.venv/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /Users/huytoan/AI Training/chat_with_document/backend
+configfile: pyproject.toml
+plugins: asyncio-0.26.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/integration/test_ask.py::test_llm_failure_is_503_and_logged PASSED [100%]
+
+=============================== warnings summary ===============================
+tests/integration/test_ask.py::test_llm_failure_is_503_and_logged
+  /Users/huytoan/AI Training/chat_with_document/backend/tests/integration/conftest.py:26: DeprecationWarning: testcontainers.postgres is deprecated, use testcontainers.community.postgres instead
+    from testcontainers.postgres import PostgresContainer
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 1 passed, 1 warning in 4.62s =========================
+### Bước 2: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 3: Nạp PDF mẫu
+{"items":[{"filename":"Bien_ban_hop_doi_tac_15-09.pdf","document_id":"739496da-cc21-4404-b09b-164ec048f332","status":"queued"},{"filename":"De_xuat_hop_tac_Minh_Phat.pdf","document_id":"f5aacbd8-ef20-4880-8eeb-53cdb4df3fbd","status":"queued"},{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"f7afe0b3-8a59-4644-8520-1a6be4926b0b","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~8s · counts={"ready":3,"processing":0,"failed":0,"total":3}
+### Bước 4: Khởi động lại api với khóa API không hợp lệ
+ Container chat-with-document-postgres-1 Running 
+ Container chat-with-document-s3-1 Running 
+ Container chat-with-document-migrate-1 Recreate 
+ Container chat-with-document-migrate-1 Recreated 
+ Container chat-with-document-api-1 Recreate 
+ Container chat-with-document-api-1 Recreated 
+ Container chat-with-document-postgres-1 Waiting 
+ Container chat-with-document-postgres-1 Healthy 
+ Container chat-with-document-migrate-1 Starting 
+ Container chat-with-document-migrate-1 Started 
+ Container chat-with-document-migrate-1 Waiting 
+ Container chat-with-document-migrate-1 Exited 
+ Container chat-with-document-api-1 Starting 
+ Container chat-with-document-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+healthz OK
+### Bước 5: Hỏi một câu
+{"type":"about:blank","title":"AI service unavailable","status":503,"code":"ai_unavailable"}
+HTTP 503 · 0.923004s
+### Bước 6: Kiểm tra qa_log
+ id | status | latency_ms | chunk_count 
+----+--------+------------+-------------
+  1 | error  |        843 |           0
+(1 row)
+
+### Bước 7: Khôi phục api với cấu hình gốc
+ Container chat-with-document-postgres-1 Running 
+ Container chat-with-document-s3-1 Running 
+ Container chat-with-document-migrate-1 Recreate 
+ Container chat-with-document-migrate-1 Recreated 
+ Container chat-with-document-api-1 Recreate 
+ Container chat-with-document-api-1 Recreated 
+ Container chat-with-document-postgres-1 Waiting 
+ Container chat-with-document-postgres-1 Healthy 
+ Container chat-with-document-migrate-1 Starting 
+ Container chat-with-document-migrate-1 Started 
+ Container chat-with-document-migrate-1 Waiting 
+ Container chat-with-document-migrate-1 Exited 
+ Container chat-with-document-api-1 Starting 
+ Container chat-with-document-api-1 Started 
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+
+[exit code 0]

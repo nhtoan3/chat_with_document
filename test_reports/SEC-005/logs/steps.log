@@ -1,0 +1,25 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Tải tệp với tên ../../etc/passwd.pdf
+{"items":[{"filename":"passwd.pdf","document_id":"e845c497-0ea5-45fb-aefb-c25901813505","status":"queued"}]}
+HTTP 202
+### Bước 3: Tải tệp có tên 300 ký tự
+{"items":[{"filename":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","document_id":"842c4f71-7ba9-4157-b807-23a68aa69a76","status":"queued"}]}
+HTTP 202
+### Bước 4: Tải tệp có tên Unicode dạng tổ hợp (NFD) Báo_cáo.pdf
+{"items":[{"filename":"Báo_cáo.pdf","document_id":"4188688b-29d0-43b8-8ded-ad8674b5f889","status":"queued"}]}
+HTTP 202
+### Bước 5: Kiểm tra tên và khóa lưu trữ trong CSDL
+                 filename                 | len | is_nfc |                    storage_key                     
+------------------------------------------+-----+--------+----------------------------------------------------
+ passwd.pdf                               |  10 | t      | documents/e845c497-0ea5-45fb-aefb-c25901813505.pdf
+ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | 255 | t      | documents/842c4f71-7ba9-4157-b807-23a68aa69a76.pdf
+ Báo_cáo.pdf                              |  11 | t      | documents/4188688b-29d0-43b8-8ded-ad8674b5f889.pdf
+(3 rows)
+
+### Bước 6: Tải fake.pdf và tệp 21 MB
+{"items":[{"filename":"fake.pdf","error_code":"not_pdf"},{"filename":"qua_lon.pdf","error_code":"file_too_large"}]}
+HTTP 202
+
+[exit code 0]

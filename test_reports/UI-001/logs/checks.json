@@ -1,0 +1,32 @@
+{
+  "verdict": "✅ Đạt",
+  "results": [
+    {
+      "n": 1,
+      "action": "Chụp 03-documents.html và /documents cùng kích thước 1440×900",
+      "expect": "2 ảnh để so sánh",
+      "actual": "Đã chụp 2 ảnh 1440×900",
+      "ok": true,
+      "shot": "screenshots/03-buoc-1-chup-03-documents-html-va-documents-cung-kich-thuoc-1.png"
+    },
+    {
+      "n": 2,
+      "action": "Chụp 04-chat.html và /ask (sau khi hỏi 1 câu, API giả lập)",
+      "expect": "2 ảnh để so sánh",
+      "actual": "Đã chụp 2 ảnh 1440×900",
+      "ok": true,
+      "shot": "screenshots/06-buoc-2-chup-04-chat-html-va-ask-sau-khi-hoi-1-cau-api-gia-la.png"
+    },
+    {
+      "n": 3,
+      "action": "So sánh và lập bảng khác biệt trong báo cáo",
+      "expect": "Bố cục, màu, nhãn tương đương; không có thành phần đã bỏ (Tài liệu: kéo-thả, thanh tiến trình, tab, tìm kiếm, nút gỡ; Hỏi đáp: trích dẫn, Nguồn, panel PDF, đánh giá, nút Dừng, Gần đây)",
+      "actual": "Thành phần đã bỏ — Tài liệu: {\"dragText\":false,\"rowProgress\":0,\"tabs\":0,\"search\":0,\"removeBtn\":0,\"h1\":\"Tài liệu dự án\",\"cols\":[\"Tên tệp\",\"Số trang\",\"Ngày tải lên\",\"Trạng thái\"]}; Hỏi đáp: {\"cite\":0,\"sources\":0,\"panel\":0,\"feedback\":0,\"stop\":false,\"recent\":false}. (Chỉ phần này được assert tự động; so sánh bố cục xem ghi chú.)",
+      "ok": true,
+      "shot": "screenshots/07-buoc-3-so-sanh-va-lap-bang-khac-biet-trong-bao-cao.png"
+    }
+  ],
+  "notes": [
+    "`/api/v1/ask` được giả lập ở bước 2 (test case cho phép \"có thể giả lập API\"): trả câu trả lời mẫu không có trích dẫn."
+  ]
+}

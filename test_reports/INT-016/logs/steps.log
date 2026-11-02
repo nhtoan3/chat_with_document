@@ -1,0 +1,19 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Body không phải JSON
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 02 Nov 2026 14:44:12 GMT
+server: uvicorn
+content-length: 130
+content-type: application/problem+json
+x-request-id: 681073c5c1b5420f87aa251af99c7b09
+
+{"type":"about:blank","title":"Question is empty or too long","status":422,"code":"question_invalid","detail":"JSON decode error"}### Bước 3: Body {}
+{"type":"about:blank","title":"Question is empty or too long","status":422,"code":"question_invalid","detail":"Field required"}
+HTTP 422
+### Bước 4: Body {"question": 123}
+{"type":"about:blank","title":"Question is empty or too long","status":422,"code":"question_invalid","detail":"Input should be a valid string"}
+HTTP 422
+
+[exit code 0]

@@ -1,0 +1,39 @@
+### Bước 1: Chạy test tự động tests/integration/test_ask.py::test_no_ready_documents (Testcontainers)
+============================= test session starts ==============================
+platform darwin -- Python 3.12.16, pytest-8.4.2, pluggy-1.7.0 -- /Users/huytoan/AI Training/chat_with_document/backend/.venv/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /Users/huytoan/AI Training/chat_with_document/backend
+configfile: pyproject.toml
+plugins: asyncio-0.26.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/integration/test_ask.py::test_no_ready_documents PASSED            [100%]
+
+=============================== warnings summary ===============================
+tests/integration/test_ask.py::test_no_ready_documents
+  /Users/huytoan/AI Training/chat_with_document/backend/tests/integration/conftest.py:26: DeprecationWarning: testcontainers.postgres is deprecated, use testcontainers.community.postgres instead
+    from testcontainers.postgres import PostgresContainer
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 1 passed, 1 warning in 4.29s =========================
+### Bước 2: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 3: Hỏi khi bộ tài liệu rỗng
+{"type":"about:blank","title":"No ready documents to answer from","status":409,"code":"no_documents"}
+HTTP 409 · 0.007600s
+### Bước 4: Tải lên corrupted.pdf, chờ failed, hỏi lại
+{"items":[{"filename":"corrupted.pdf","document_id":"9c08e477-3d20-4952-a89b-24e357347c06","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~2s · counts={"ready":0,"processing":0,"failed":1,"total":1}
+{"type":"about:blank","title":"No ready documents to answer from","status":409,"code":"no_documents"}
+HTTP 409 · 0.005515s
+### Bước 5: Kiểm tra qa_log
+ count 
+-------
+     0
+(1 row)
+
+
+[exit code 0]

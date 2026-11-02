@@ -1,0 +1,21 @@
+### Bước 4b: Kiểm tra lại endpoint sau khi web sẵn sàng
+SERVICE    STATE     <no value>   STATUS
+api        running                Up 2 minutes
+migrate    exited                 Exited (0) 2 minutes ago
+postgres   running   healthy      Up 2 minutes (healthy)
+s3         running                Up 2 minutes
+tei        running   healthy      Up 2 minutes (healthy)
+web        running                Up 2 minutes
+worker     running                Up About a minute
+worker     running                Up About a minute
+web-1  | 2026-10-31T15:13:25.649379459Z   VITE v5.4.21  ready in 139 ms
+web-1  | 2026-11-02T14:35:57.790681388Z added 297 packages, and audited 298 packages in 1m
+web-1  | 2026-11-02T14:35:58.289920388Z   VITE v5.4.21  ready in 158 ms
+web StartedAt 2026-11-02T14:34:56.714563721Z
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+API /healthz 200
+Web / 200
+TEI 200
+S3Mock 200
+
+[exit code 0]

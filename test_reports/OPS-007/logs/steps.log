@@ -1,0 +1,43 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Sinh PDF 50 trang và tải lên
+-rw-r--r--@ 1 huytoan  staff  86502 Nov  2 21:59 /Users/huytoan/AI Training/chat_with_document/test_reports/OPS-007/data/dai.pdf
+{"items":[{"filename":"dai.pdf","document_id":"c7f0107e-529c-4556-9f01-ff6f44430d4b","status":"queued"}]}
+HTTP 202
+### Bước 3: Chờ job vào running rồi kill cả 2 worker
+job: running
+ Container chat-with-document-worker-2 Killing 
+ Container chat-with-document-worker-1 Killing 
+ Container chat-with-document-worker-1 Killed 
+ Container chat-with-document-worker-2 Killed 
+  state  | attempt |         started_at          
+---------+---------+-----------------------------
+ running |       1 | 2026-11-02 14:59:28.4891+00
+(1 row)
+
+### Bước 4: Giả lập job đã treo quá 10 phút rồi bật lại worker
+UPDATE 1
+ Container chat-with-document-postgres-1 Waiting 
+ Container chat-with-document-postgres-1 Healthy 
+ Container chat-with-document-migrate-1 Starting 
+ Container chat-with-document-migrate-1 Started 
+ Container chat-with-document-tei-1 Waiting 
+ Container chat-with-document-migrate-1 Waiting 
+ Container chat-with-document-tei-1 Healthy 
+ Container chat-with-document-migrate-1 Exited 
+ Container chat-with-document-worker-1 Starting 
+ Container chat-with-document-worker-1 Started 
+ Container chat-with-document-worker-2 Starting 
+ Container chat-with-document-worker-2 Started 
+### Bước 5: Chờ thu hồi và xử lý xong (tối đa 3 phút)
+Hết tài liệu đang xử lý sau ~102s · counts={"ready":0,"processing":0,"failed":1,"total":1}
+worker-1  | {"count": 1, "event": "stale_jobs_reclaimed", "level": "warning", "timestamp": "2026-11-02T14:59:32.031621Z"}
+### Bước 6: Kiểm tra không trùng lặp
+ docs | jobs | chunks | chunk_idx 
+------+------+--------+-----------
+    1 |    1 |      0 |         0
+(1 row)
+
+
+[exit code 0]

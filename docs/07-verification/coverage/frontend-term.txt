@@ -1,0 +1,58 @@
+
+ RUN  v2.1.9 /Users/huytoan/AI Training/chat_with_document/frontend
+      Coverage enabled with v8
+
+ ✓ src/features/ask/validate.test.ts (3 tests) 2ms
+ ✓ src/features/documents/validate.test.ts (4 tests) 6ms
+ ✓ src/shared/api/client.test.ts (5 tests) 7ms
+ ✓ src/features/ask/markdown.test.ts (3 tests) 38ms
+
+ Test Files  4 passed (4)
+      Tests  15 passed (15)
+   Start at  22:18:23
+   Duration  1.17s (transform 98ms, setup 481ms, collect 106ms, tests 53ms, environment 1.93s, prepare 328ms)
+
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |    7.11 |    55.35 |   27.27 |    7.11 |                   
+ e2e               |       0 |        0 |       0 |       0 |                   
+  evidence.mjs     |       0 |        0 |       0 |       0 | 1-129             
+  run-cli.mjs      |       0 |        0 |       0 |       0 | 1-103             
+  runner.mjs       |       0 |        0 |       0 |       0 | 1-148             
+ src               |       0 |        0 |       0 |       0 |                   
+  main.tsx         |       0 |        0 |       0 |       0 | 1-15              
+ src/app           |       0 |        0 |       0 |       0 |                   
+  AppShell.tsx     |       0 |        0 |       0 |       0 | 1-76              
+  providers.tsx    |       0 |        0 |       0 |       0 | 1-20              
+  router.tsx       |       0 |        0 |       0 |       0 | 1-16              
+ src/features/ask  |    7.28 |       60 |      50 |    7.28 |                   
+  AskPage.tsx      |       0 |        0 |       0 |       0 | 1-180             
+  markdown.ts      |     100 |      100 |     100 |     100 |                   
+  useAsk.ts        |       0 |        0 |       0 |       0 | 1-49              
+  validate.ts      |     100 |      100 |     100 |     100 |                   
+ ...ures/documents |     7.6 |    78.57 |      40 |     7.6 |                   
+  ...mentsPage.tsx |       0 |        0 |       0 |       0 | 1-231             
+  useDocuments.ts  |       0 |        0 |       0 |       0 | 1-13              
+  useUpload.ts     |       0 |        0 |       0 |       0 | 1-11              
+  validate.ts      |     100 |      100 |     100 |     100 |                   
+ src/shared/api    |   42.59 |    80.95 |    62.5 |   42.59 |                   
+  ask.ts           |       0 |        0 |       0 |       0 | 1-10              
+  client.ts        |    82.5 |    92.85 |      75 |    82.5 | 53-59             
+  documents.ts     |       0 |        0 |       0 |       0 | 1-43              
+  errors.ts        |   86.66 |       80 |     100 |   86.66 | 19-20             
+ src/shared/i18n   |      50 |        0 |       0 |      50 |                   
+  format.ts        |       0 |        0 |       0 |       0 | 1-12              
+  index.ts         |     100 |      100 |     100 |     100 |                   
+ src/shared/ui     |       0 |        0 |       0 |       0 |                   
+  Badge.tsx        |       0 |        0 |       0 |       0 | 1-15              
+  Banner.tsx       |       0 |        0 |       0 |       0 | 1-28              
+  Button.tsx       |       0 |        0 |       0 |       0 | 1-18              
+  EmptyState.tsx   |       0 |        0 |       0 |       0 | 1-22              
+  Icon.tsx         |       0 |        0 |       0 |       0 | 1-41              
+  Table.tsx        |       0 |        0 |       0 |       0 | 1-17              
+  Toast.tsx        |       0 |        0 |       0 |       0 | 1-53              
+  index.ts         |       0 |        0 |       0 |       0 | 1-7               
+-------------------|---------|----------|---------|---------|-------------------
+frontend exit=0

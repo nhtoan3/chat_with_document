@@ -1,0 +1,5 @@
+### Bước 2b: Gọi trang web gốc và tìm phần tử root trong toàn bộ HTML
+Web / HTTP 200
+26:    <div id="root"></div>
+
+[exit code 0]

@@ -1,0 +1,24 @@
+{
+  "documents": {
+    "dragText": false,
+    "rowProgress": 0,
+    "tabs": 0,
+    "search": 0,
+    "removeBtn": 0,
+    "h1": "Tài liệu dự án",
+    "cols": [
+      "Tên tệp",
+      "Số trang",
+      "Ngày tải lên",
+      "Trạng thái"
+    ]
+  },
+  "ask": {
+    "cite": 0,
+    "sources": 0,
+    "panel": 0,
+    "feedback": 0,
+    "stop": false,
+    "recent": false
+  }
+}

@@ -1,0 +1,22 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Dừng S3Mock
+ Container chat-with-document-s3-1 Stopping 
+ Container chat-with-document-s3-1 Stopped 
+### Bước 3: Tải lên 1 PDF mẫu
+{"items":[{"filename":"Hop_dong_khung_ABC_2026.pdf","error_code":"storage_error"}]}
+HTTP 202
+### Bước 4: Kiểm tra không có bản ghi mồ côi
+ documents | jobs 
+-----------+------
+         0 |    0
+(1 row)
+
+### Bước 5: Bật lại S3Mock và thử lại
+ Container chat-with-document-s3-1 Starting 
+ Container chat-with-document-s3-1 Started 
+{"items":[{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"0f65ab50-106e-456b-a06c-8702ddd3c404","status":"queued"}]}
+HTTP 202
+
+[exit code 0]

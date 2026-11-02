@@ -1,0 +1,13 @@
+[
+  {
+    "step": 2,
+    "ok": true,
+    "actual": "Spinner \"Đang tìm câu trả lời…\"; ô nhập gõ được (\"thử gõ khi đang chờ\"); cuộn thực hiện không lỗi"
+  },
+  {
+    "step": 3,
+    "ok": false,
+    "seconds": 182.5,
+    "actual": "Thông báo xuất hiện sau 182.5 s (mục tiêu ≤ 30 s). Nội dung: \"Hệ thống đang bận, vui lòng thử lại. Câu hỏi của bạn không bị mất. Hỏi lại\"; nút Hỏi lại: 1"
+  }
+]

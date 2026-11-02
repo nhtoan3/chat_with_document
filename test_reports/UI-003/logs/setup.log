@@ -1,0 +1,9 @@
+$ check_stack && reset_data && "${COMPOSE[@]}" stop worker
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+
+$ "${COMPOSE[@]}" start worker
+
+$ "${COMPOSE[@]}" start worker && reset_data
+TRUNCATE TABLE
+

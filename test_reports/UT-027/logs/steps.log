@@ -1,0 +1,8 @@
+### Bước 1: Liệt kê mã lỗi phía backend (ERRORS + mã ingestion)
+['ai_unavailable', 'collection_full', 'duplicate_name', 'file_too_large', 'internal_error', 'no_documents', 'not_found', 'not_pdf', 'question_invalid', 'storage_error', 'too_many_files']
+ingestion: encrypted_pdf no_text_layer too_many_pages corrupted transient_exhausted
+### Bước 2: So sánh với errors trong vi.json
+THIẾU: ['not_found']
+Thừa (chỉ phía frontend, chấp nhận được): ['network', 'unknown']
+
+[exit code 0]

@@ -1,0 +1,2 @@
+2026-11-02T15:00:03.473228001Z {"document_id": "c7f0107e-529c-4556-9f01-ff6f44430d4b", "attempt": 2, "error": "EmbeddingUnavailable('')", "event": "ingest_retry", "level": "warning", "timestamp": "2026-11-02T15:00:03.472541Z"}
+2026-11-02T15:01:14.403778340Z {"document_id": "c7f0107e-529c-4556-9f01-ff6f44430d4b", "attempt": 3, "error": "EmbeddingUnavailable('')", "event": "ingest_gave_up", "level": "error", "timestamp": "2026-11-02T15:01:14.403511Z"}

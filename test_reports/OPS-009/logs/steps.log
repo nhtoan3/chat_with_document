@@ -1,0 +1,20 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Tạo vài dòng qa_log (không cần khóa API)
+{"items":[{"filename":"Bien_ban_hop_doi_tac_15-09.pdf","document_id":"c38a49b2-339f-4b1a-9ef8-a1e96f8717e7","status":"queued"},{"filename":"De_xuat_hop_tac_Minh_Phat.pdf","document_id":"691d959c-4a2e-499e-af68-acf387896027","status":"queued"},{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"93965ea7-9e32-4ff3-8c0b-0683c4b3ad9b","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~8s · counts={"ready":3,"processing":0,"failed":0,"total":3}
+ count 
+-------
+     3
+(1 row)
+
+### Bước 3: Chạy truy vấn số liệu của T-024
+          tuan          | so_cau_hoi | p90_ms 
+------------------------+------------+--------
+ 2026-11-02 00:00:00+00 |          3 |  201.8
+(1 row)
+
+
+[exit code 0]

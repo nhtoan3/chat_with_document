@@ -1,0 +1,48 @@
+### Bước 1: Chạy test tự động tests/integration/test_ask.py::test_ask_returns_answer_and_logs_without_content (Testcontainers)
+============================= test session starts ==============================
+platform darwin -- Python 3.12.16, pytest-8.4.2, pluggy-1.7.0 -- /Users/huytoan/AI Training/chat_with_document/backend/.venv/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /Users/huytoan/AI Training/chat_with_document/backend
+configfile: pyproject.toml
+plugins: asyncio-0.26.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/integration/test_ask.py::test_ask_returns_answer_and_logs_without_content PASSED [100%]
+
+=============================== warnings summary ===============================
+tests/integration/test_ask.py::test_ask_returns_answer_and_logs_without_content
+  /Users/huytoan/AI Training/chat_with_document/backend/tests/integration/conftest.py:26: DeprecationWarning: testcontainers.postgres is deprecated, use testcontainers.community.postgres instead
+    from testcontainers.postgres import PostgresContainer
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 1 passed, 1 warning in 4.29s =========================
+### Bước 2: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 3: Nạp 3 PDF mẫu
+{"items":[{"filename":"Bien_ban_hop_doi_tac_15-09.pdf","document_id":"e29ab2a4-c620-4249-b038-bace686c7d82","status":"queued"},{"filename":"De_xuat_hop_tac_Minh_Phat.pdf","document_id":"94801016-8819-4bb3-899d-8ddc03902d69","status":"queued"},{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"80a7f278-e365-4b2e-b835-f2eed4c10895","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~8s · counts={"ready":3,"processing":0,"failed":0,"total":3}
+### Bước 4: Hỏi "Điều khoản tạm ứng trong hợp đồng khung với ABC là gì?"
+{"type":"about:blank","title":"AI service unavailable","status":503,"code":"ai_unavailable"}
+HTTP 503 · 0.618942s
+### Bước 5: Kiểm tra cột và dòng mới nhất của qa_log
+  column_name  
+---------------
+ id
+ created_at
+ status
+ latency_ms
+ input_tokens
+ output_tokens
+ chunk_count
+(7 rows)
+
+ id |          created_at           | status | latency_ms | input_tokens | output_tokens | chunk_count 
+----+-------------------------------+--------+------------+--------------+---------------+-------------
+  1 | 2026-11-02 14:44:01.677988+00 | error  |        561 |            0 |             0 |           0
+(1 row)
+
+
+[exit code 0]

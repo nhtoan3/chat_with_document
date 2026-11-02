@@ -1,0 +1,53 @@
+### Bước 1: Chạy test tự động tests/integration/test_documents.py::test_too_many_files_rejects_whole_batch (Testcontainers)
+============================= test session starts ==============================
+platform darwin -- Python 3.12.16, pytest-8.4.2, pluggy-1.7.0 -- /Users/huytoan/AI Training/chat_with_document/backend/.venv/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /Users/huytoan/AI Training/chat_with_document/backend
+configfile: pyproject.toml
+plugins: asyncio-0.26.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/integration/test_documents.py::test_too_many_files_rejects_whole_batch PASSED [100%]
+
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+tests/integration/test_documents.py::test_too_many_files_rejects_whole_batch
+  /Users/huytoan/AI Training/chat_with_document/backend/tests/integration/conftest.py:26: DeprecationWarning: testcontainers.postgres is deprecated, use testcontainers.community.postgres instead
+    from testcontainers.postgres import PostgresContainer
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 1 passed, 6 warnings in 6.02s =========================
+sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+### Bước 2: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 3: Tạo 11 PDF hợp lệ có tên khác nhau
+tep_01.pdf
+tep_02.pdf
+tep_03.pdf
+tep_04.pdf
+tep_05.pdf
+tep_06.pdf
+tep_07.pdf
+tep_08.pdf
+tep_09.pdf
+tep_10.pdf
+tep_11.pdf
+### Bước 4: Tải lên 11 tệp trong một request
+{"type":"about:blank","title":"Too many files in one upload","status":422,"code":"too_many_files"}
+HTTP 422
+### Bước 5: Kiểm tra không có tài liệu nào được lưu
+{"ready":0,"processing":0,"failed":0,"total":0}
+
+[exit code 0]

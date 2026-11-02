@@ -1,0 +1,44 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Khởi động lại api với khóa rỗng
+ Container chat-with-document-postgres-1 Running 
+ Container chat-with-document-s3-1 Running 
+ Container chat-with-document-api-1 Recreate 
+ Container chat-with-document-api-1 Recreated 
+ Container chat-with-document-postgres-1 Waiting 
+ Container chat-with-document-postgres-1 Healthy 
+ Container chat-with-document-migrate-1 Starting 
+ Container chat-with-document-migrate-1 Started 
+ Container chat-with-document-migrate-1 Waiting 
+ Container chat-with-document-migrate-1 Exited 
+ Container chat-with-document-api-1 Starting 
+ Container chat-with-document-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+curl: (56) Recv failure: Connection reset by peer
+len(ANTHROPIC_API_KEY)=0
+### Bước 3: Tải lên và chờ Sẵn sàng
+{"items":[{"filename":"Bien_ban_hop_doi_tac_15-09.pdf","document_id":"7c87b8d5-ee4d-4790-bad8-09007bd702a3","status":"queued"},{"filename":"De_xuat_hop_tac_Minh_Phat.pdf","document_id":"f51a6222-8546-4b44-8c7a-89f6e61a5d89","status":"queued"},{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"16b5d24d-dd26-4a13-a3e4-4c9cd289b9b6","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~8s · counts={"ready":3,"processing":0,"failed":0,"total":3}
+### Bước 4: Hỏi một câu
+{"type":"about:blank","title":"AI service unavailable","status":503,"code":"ai_unavailable"}
+HTTP 503 · 0.430539s
+### Bước 5: Gọi danh sách tài liệu
+GET /documents 200
+### Bước 6: Khôi phục api với .env
+ Container chat-with-document-postgres-1 Running 
+ Container chat-with-document-s3-1 Running 
+ Container chat-with-document-api-1 Recreate 
+ Container chat-with-document-api-1 Recreated 
+ Container chat-with-document-postgres-1 Waiting 
+ Container chat-with-document-postgres-1 Healthy 
+ Container chat-with-document-migrate-1 Starting 
+ Container chat-with-document-migrate-1 Started 
+ Container chat-with-document-migrate-1 Waiting 
+ Container chat-with-document-migrate-1 Exited 
+ Container chat-with-document-api-1 Starting 
+ Container chat-with-document-api-1 Started 
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+
+[exit code 0]

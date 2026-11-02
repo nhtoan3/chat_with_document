@@ -1,0 +1,32 @@
+{
+  "verdict": "✅ Đạt",
+  "results": [
+    {
+      "n": 1,
+      "action": "Mở /documents, tải lên 3 PDF mẫu và corrupted.pdf; chụp ngay sau khi tải",
+      "expect": "Thấy badge \"Đang chờ xử lý\" và/hoặc \"Đang xử lý\"",
+      "actual": "4 badge \"Đang chờ xử lý\" (worker đang dừng)",
+      "ok": true,
+      "shot": "screenshots/02-buoc-1-mo-documents-tai-len-3-pdf-mau-va-corrupted-pdf-chup-.png"
+    },
+    {
+      "n": 2,
+      "action": "Chờ hết xử lý, chụp bảng",
+      "expect": "Badge \"Sẵn sàng\" và \"Lỗi\" (kèm \"Tệp bị hỏng\")",
+      "actual": "3 \"Sẵn sàng\"; 1 \"Lỗi\" kèm \"Tệp bị hỏng\"; bắt được \"Đang xử lý\": có",
+      "ok": true,
+      "shot": "screenshots/06-buoc-2-cho-het-xu-ly-chup-bang.png"
+    },
+    {
+      "n": 3,
+      "action": "Kiểm tra DOM từng badge (chụp cận cảnh từng loại)",
+      "expect": "Mỗi badge có phần tử icon (svg) và chữ; ghi outerHTML của mỗi loại vào logs/badges.html",
+      "actual": "queued: svg=1, chữ=\"Đang chờ xử lý\"; processing: svg=1, chữ=\"Đang xử lý\"; ready: svg=1, chữ=\"Sẵn sàng\"; failed: svg=1, chữ=\"Lỗi\"",
+      "ok": true,
+      "shot": "screenshots/07-buoc-3-kiem-tra-dom-tung-badge-chup-can-canh-tung-loai.png"
+    }
+  ],
+  "notes": [
+    "Theo ghi chú của test case: dừng `worker` trước khi tải lên để chụp \"Đang chờ xử lý\", rồi bật lại để bắt \"Đang xử lý\" (lấy mẫu DOM mỗi 100 ms)."
+  ]
+}

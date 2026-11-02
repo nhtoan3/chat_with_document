@@ -1,0 +1,22 @@
+### Bước 1: (CLI) Chuẩn bị: nạp tài liệu, khởi động lại api với override
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+{"items":[{"filename":"Bien_ban_hop_doi_tac_15-09.pdf","document_id":"31f871c1-6f59-4ab2-920f-47bc4c2c9801","status":"queued"},{"filename":"De_xuat_hop_tac_Minh_Phat.pdf","document_id":"4eeb1e9f-ce8f-44bd-bab7-9acad77bcf9d","status":"queued"},{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"b44c90b5-ec35-4ae6-85ca-6cbffb168ff6","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~8s · counts={"ready":3,"processing":0,"failed":0,"total":3}
+ Container chat-with-document-s3-1 Running 
+ Container chat-with-document-postgres-1 Running 
+ Container chat-with-document-api-1 Recreate 
+ Container chat-with-document-api-1 Recreated 
+ Container chat-with-document-postgres-1 Waiting 
+ Container chat-with-document-postgres-1 Healthy 
+ Container chat-with-document-migrate-1 Starting 
+ Container chat-with-document-migrate-1 Started 
+ Container chat-with-document-migrate-1 Waiting 
+ Container chat-with-document-migrate-1 Exited 
+ Container chat-with-document-api-1 Starting 
+ Container chat-with-document-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+healthz OK
+
+[exit code 0]

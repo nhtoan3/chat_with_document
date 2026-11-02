@@ -1,0 +1,66 @@
+..................................................                       [100%]
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+tests/integration/test_ask.py::test_retrieval_ranks_relevant_chunk_and_skips_unready
+  /Users/huytoan/AI Training/chat_with_document/backend/tests/integration/conftest.py:26: DeprecationWarning: testcontainers.postgres is deprecated, use testcontainers.community.postgres instead
+    from testcontainers.postgres import PostgresContainer
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+______________ coverage: platform darwin, python 3.12.16-final-0 _______________
+
+Name                                               Stmts   Miss  Cover
+----------------------------------------------------------------------
+app/__init__.py                                        0      0   100%
+app/api/__init__.py                                    0      0   100%
+app/api/deps.py                                       22      7    68%
+app/api/main.py                                       18      1    94%
+app/api/routers/__init__.py                            0      0   100%
+app/api/routers/ask.py                                32      7    78%
+app/api/routers/documents.py                          26      9    65%
+app/modules/__init__.py                                0      0   100%
+app/modules/documents/__init__.py                      0      0   100%
+app/modules/documents/adapters/__init__.py             0      0   100%
+app/modules/documents/adapters/job_queue.py           30      0   100%
+app/modules/documents/adapters/sql_repo.py            20      4    80%
+app/modules/documents/application/__init__.py          0      0   100%
+app/modules/documents/application/upload.py           84     29    65%
+app/modules/documents/ingestion/__init__.py            0      0   100%
+app/modules/documents/ingestion/chunker.py            92     19    79%
+app/modules/documents/ingestion/pdf_extractor.py      50      3    94%
+app/modules/qa/__init__.py                             0      0   100%
+app/modules/qa/adapters/__init__.py                    0      0   100%
+app/modules/qa/adapters/anthropic_llm.py              38      4    89%
+app/modules/qa/adapters/pg_retrieval.py               13      0   100%
+app/modules/qa/adapters/tei_embedding.py              20     14    30%
+app/modules/qa/application/__init__.py                 0      0   100%
+app/modules/qa/application/ask.py                     35      0   100%
+app/modules/qa/ports.py                               18      0   100%
+app/modules/qa/prompts.py                             11      0   100%
+app/platform/__init__.py                               0      0   100%
+app/platform/config.py                                29      0   100%
+app/platform/db.py                                    11      1    91%
+app/platform/db_schema.py                             14      0   100%
+app/platform/errors.py                                32      4    88%
+app/platform/logging.py                               25      3    88%
+app/platform/storage.py                               42     27    36%
+app/worker/__init__.py                                 0      0   100%
+app/worker/ingest.py                                  58      7    88%
+app/worker/main.py                                    48     48     0%
+----------------------------------------------------------------------
+TOTAL                                                768    187    76%
+Coverage HTML written to dir /Users/huytoan/AI Training/chat_with_document/docs/07-verification/coverage/backend-html
+Coverage XML written to file /Users/huytoan/AI Training/chat_with_document/docs/07-verification/coverage/backend-coverage.xml
+50 passed, 6 warnings in 13.22s
+sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+backend exit=0

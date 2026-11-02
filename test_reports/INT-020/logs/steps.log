@@ -1,0 +1,21 @@
+### Bước 1: Kiểm tra stack localhost
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+### Bước 2: Dừng PostgreSQL
+ Container chat-with-document-postgres-1 Stopping 
+ Container chat-with-document-postgres-1 Stopped 
+### Bước 3: Gọi GET /documents
+HTTP/1.1 500 Internal Server Error
+date: Mon, 02 Nov 2026 14:53:33 GMT
+server: uvicorn
+content-length: 91
+content-type: application/problem+json
+
+{"type":"about:blank","title":"Internal server error","status":500,"code":"internal_error"}### Bước 4: Tìm dấu vết kỹ thuật trong response
+0
+### Bước 5: Bật lại PostgreSQL
+ Container chat-with-document-postgres-1 Starting 
+ Container chat-with-document-postgres-1 Started 
+curl: (22) The requested URL returned error: 500
+{"ready":0,"processing":0,"failed":0,"total":0}
+
+[exit code 0]

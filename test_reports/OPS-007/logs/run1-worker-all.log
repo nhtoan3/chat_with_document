@@ -1,0 +1,419 @@
+worker-1  | 2026-11-02T14:35:54.460876678Z Found credentials in environment variables.
+worker-1  | 2026-11-02T14:35:54.674214011Z {"event": "worker_started", "level": "info", "timestamp": "2026-11-02T14:35:54.673887Z"}
+worker-1  | 2026-11-02T14:40:56.479660554Z HTTP Request: GET https://huggingface.co/api/agent-harnesses "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:40:56.778784512Z HTTP Request: HEAD https://huggingface.co/BAAI/bge-m3/resolve/main/tokenizer.json "HTTP/1.1 302 Found"
+worker-1  | 2026-11-02T14:40:56.779847637Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-2  | 2026-11-02T14:35:54.454309136Z Found credentials in environment variables.
+worker-2  | 2026-11-02T14:35:54.675284220Z {"event": "worker_started", "level": "info", "timestamp": "2026-11-02T14:35:54.674916Z"}
+worker-2  | 2026-11-02T14:40:56.486764137Z HTTP Request: GET https://huggingface.co/api/agent-harnesses "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:40:56.786720971Z HTTP Request: HEAD https://huggingface.co/BAAI/bge-m3/resolve/main/tokenizer.json "HTTP/1.1 302 Found"
+worker-1  | 2026-11-02T14:40:56.779869471Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-1  | 2026-11-02T14:41:00.228209958Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:40:56.787223971Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-2  | 2026-11-02T14:40:56.787238429Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-2  | 2026-11-02T14:41:00.227792000Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:41:00.242384583Z {"document_id": "ccd78ab8-b848-4df3-9ec3-76bb3eab079f", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 4286, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:41:00.242169Z"}
+worker-2  | 2026-11-02T14:41:03.474959376Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:41:03.480634043Z {"document_id": "09e1186e-decf-46e7-9331-d32f1f434f7c", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 3232, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:41:03.480502Z"}
+worker-2  | 2026-11-02T14:41:35.204586294Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:41:35.210618210Z {"document_id": "81b0b726-2cfd-45c5-aed1-94d75d0ab9d6", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 3589, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:41:35.210403Z"}
+worker-2  | 2026-11-02T14:41:50.973043468Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:41:50.996038093Z {"document_id": "046fb208-a6aa-4108-9548-49b7fd965fa4", "attempt": 1, "error": "IntegrityError('(sqlalchemy.dialects.postgresql.asyncpg.ForeignKeyViolationError) insert or update on table \"chunks\" violates foreign key constraint \"chunks_document_id_fkey\"')", "event": "ingest_retry", "level": "warning", "timestamp": "2026-11-02T14:41:50.991340Z"}
+worker-2  | 2026-11-02T14:42:09.102679254Z {"document_id": "d05cb89d-3144-4315-9f54-6889b4d43b25", "attempt": 1, "error_code": "encrypted_pdf", "event": "ingest_rejected", "level": "info", "timestamp": "2026-11-02T14:42:09.102312Z"}
+worker-2  | 2026-11-02T14:42:09.113936296Z {"document_id": "7cd59466-9a78-4efb-962b-f5616ccdef53", "attempt": 1, "error_code": "no_text_layer", "event": "ingest_rejected", "level": "info", "timestamp": "2026-11-02T14:42:09.113776Z"}
+worker-2  | 2026-11-02T14:42:09.123101004Z MuPDF error: format error: object is not a stream
+worker-2  | 2026-11-02T14:42:09.123117462Z 
+worker-2  | 2026-11-02T14:42:09.123174004Z {"document_id": "caa13ed6-3bea-4e2e-b457-46c38eb1ee12", "attempt": 1, "error_code": "corrupted", "event": "ingest_rejected", "level": "info", "timestamp": "2026-11-02T14:42:09.123105Z"}
+worker-2  | 2026-11-02T14:42:09.131695962Z {"document_id": "d7a7c3ad-5030-4865-9d94-73d415355c98", "attempt": 1, "error_code": "too_many_pages", "event": "ingest_rejected", "level": "info", "timestamp": "2026-11-02T14:42:09.131522Z"}
+worker-2  | 2026-11-02T14:42:49.900392092Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:42:49.914208509Z {"document_id": "51423497-9bb0-4895-9dd4-f79f93d46f49", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 2627, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:42:49.913912Z"}
+worker-1  | 2026-11-02T14:41:00.242711625Z {"document_id": "e20332a3-d2ba-4901-8f4f-27a89358cba6", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 4287, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:41:00.242453Z"}
+worker-1  | 2026-11-02T14:42:02.436226209Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:42:52.981073594Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:42:52.987329927Z {"document_id": "c5ca0a71-001b-4f84-abf8-bbced6a606c3", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 3063, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:42:52.987197Z"}
+worker-2  | 2026-11-02T14:42:56.146511470Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:42:56.156779470Z {"document_id": "129b739b-4e8a-41f9-9684-14164370acfb", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 3153, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:42:56.156619Z"}
+worker-1  | 2026-11-02T14:42:02.441867376Z {"document_id": "1c88e7fa-e993-4b95-bec2-10b14eeb5c2d", "attempt": 1, "error": "IntegrityError('(sqlalchemy.dialects.postgresql.asyncpg.ForeignKeyViolationError) insert or update on table \"chunks\" violates foreign key constraint \"chunks_document_id_fkey\"')", "event": "ingest_retry", "level": "warning", "timestamp": "2026-11-02T14:42:02.441644Z"}
+worker-1  | 2026-11-02T14:42:48.404351675Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:42:48.410628133Z {"document_id": "e446e9bf-19d4-4ca3-86d8-196df27c63f2", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 1812, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:42:48.410329Z"}
+worker-1  | 2026-11-02T14:42:51.505212051Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:42:59.200874888Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:42:59.209699680Z {"document_id": "51d03b9c-26d0-40b9-85dc-7ec1a28cb8ec", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 3040, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:42:59.209056Z"}
+worker-2  | 2026-11-02T14:43:02.206395376Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:43:02.210070126Z {"document_id": "4f0f609b-3a86-403b-aad1-5834519e5c9b", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 2992, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:43:02.209954Z"}
+worker-2  | 2026-11-02T14:43:20.017159801Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:43:20.029035426Z {"document_id": "f942c9f6-9bdd-4faa-bc9f-d062653f0ffc", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 1740, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:43:20.028746Z"}
+worker-1  | 2026-11-02T14:42:51.512459676Z {"document_id": "d8dbc093-c253-4fb0-b23e-4a1621ab8dd8", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 3093, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:42:51.512287Z"}
+worker-1  | 2026-11-02T14:42:54.575877678Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:42:54.580154970Z {"document_id": "e0609cf6-8b42-4f22-b22f-c86ae8983870", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 3058, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:42:54.579958Z"}
+worker-1  | 2026-11-02T14:42:57.696202929Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:42:57.702494013Z {"document_id": "ab1b3d5b-9fba-40d5-955c-861ec833908f", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 3116, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:42:57.702308Z"}
+worker-1  | 2026-11-02T14:43:00.658174166Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:43:00.665028041Z {"document_id": "814b811c-2f0b-4404-aa04-a5cb630f9ab8", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 2953, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:43:00.664771Z"}
+worker-1  | 2026-11-02T14:43:21.851528302Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:43:21.866993677Z {"document_id": "f972cfc3-6e5c-4437-8dbe-d8724fb71f56", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 3127, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:43:21.866320Z"}
+worker-1  | 2026-11-02T14:43:21.886931677Z MuPDF error: format error: object is not a stream
+worker-2  | 2026-11-02T14:43:25.082402553Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:43:25.088586886Z {"document_id": "b79aeaf2-a7ae-401e-88cf-b8c7d0f2dab7", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 5045, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:43:25.088440Z"}
+worker-2  | 2026-11-02T14:43:36.565745628Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:43:21.887155927Z 
+worker-1  | 2026-11-02T14:43:21.887693760Z {"document_id": "f52e18e2-e325-43c4-92fe-4177a6bbb923", "attempt": 1, "error_code": "corrupted", "event": "ingest_rejected", "level": "info", "timestamp": "2026-11-02T14:43:21.887541Z"}
+worker-1  | 2026-11-02T14:43:38.588737879Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:43:38.601079212Z {"document_id": "4c6780d9-b4fe-4946-8eac-2b880d69d933", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 2638, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:43:38.600874Z"}
+worker-1  | 2026-11-02T14:43:57.122738637Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:43:36.571937378Z {"document_id": "50566852-6457-4915-8129-8f82278e4fad", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 1435, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:43:36.571755Z"}
+worker-2  | 2026-11-02T14:43:42.059992422Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:43:42.065927005Z {"document_id": "22a2fae2-dd5d-4637-b795-96a33bae195b", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 5483, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:43:42.065797Z"}
+worker-2  | 2026-11-02T14:43:55.555664220Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:43:57.138103387Z {"document_id": "94801016-8819-4bb3-899d-8ddc03902d69", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 2458, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:43:57.137835Z"}
+worker-1  | 2026-11-02T14:44:23.265092136Z MuPDF error: format error: object is not a stream
+worker-1  | 2026-11-02T14:44:23.265146427Z 
+worker-1  | 2026-11-02T14:44:23.265948677Z {"document_id": "9c08e477-3d20-4952-a89b-24e357347c06", "attempt": 1, "error_code": "corrupted", "event": "ingest_rejected", "level": "info", "timestamp": "2026-11-02T14:44:23.265674Z"}
+worker-1  | 2026-11-02T14:44:34.059921876Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:43:55.566259428Z {"document_id": "e29ab2a4-c620-4249-b038-bace686c7d82", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 1442, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:43:55.566141Z"}
+worker-2  | 2026-11-02T14:44:00.138347875Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:44:00.142783750Z {"document_id": "80a7f278-e365-4b2e-b835-f2eed4c10895", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 4572, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:44:00.142605Z"}
+worker-1  | 2026-11-02T14:44:34.070532085Z {"document_id": "842c4f71-7ba9-4157-b807-23a68aa69a76", "attempt": 1, "error": "IntegrityError('(sqlalchemy.dialects.postgresql.asyncpg.ForeignKeyViolationError) insert or update on table \"chunks\" violates foreign key constraint \"chunks_document_id_fkey\"')", "event": "ingest_retry", "level": "warning", "timestamp": "2026-11-02T14:44:34.067775Z"}
+worker-1  | 2026-11-02T14:44:37.209400003Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:44:37.222366586Z {"document_id": "63912021-5a7b-4377-8624-e9d3c2063708", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 3141, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:44:37.222258Z"}
+worker-1  | 2026-11-02T14:44:48.708864842Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:44:31.724614834Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:44:31.729590667Z {"document_id": "e845c497-0ea5-45fb-aefb-c25901813505", "attempt": 1, "error": "IntegrityError('(sqlalchemy.dialects.postgresql.asyncpg.ForeignKeyViolationError) insert or update on table \"chunks\" violates foreign key constraint \"chunks_document_id_fkey\"')", "event": "ingest_retry", "level": "warning", "timestamp": "2026-11-02T14:44:31.729390Z"}
+worker-2  | 2026-11-02T14:44:35.525707335Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:44:48.714023383Z {"document_id": "0a133258-a8a2-49e7-b34c-c5accf6a3339", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 1462, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:44:48.713089Z"}
+worker-1  | 2026-11-02T14:44:54.331689969Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:44:54.339591219Z {"document_id": "b90f9508-5dcc-4296-b791-01263146bbbc", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 5612, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:44:54.339460Z"}
+worker-1  | 2026-11-02T14:44:59.823840389Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:44:59.831215680Z {"document_id": "c38a49b2-339f-4b1a-9ef8-a1e96f8717e7", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 1463, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:44:59.831043Z"}
+worker-1  | 2026-11-02T14:45:04.627535002Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:45:04.633422127Z {"document_id": "93965ea7-9e32-4ff3-8c0b-0683c4b3ad9b", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 4793, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:45:04.633294Z"}
+worker-1  | 2026-11-02T14:45:56.429657137Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:45:56.436319179Z {"document_id": "75380824-8de4-40cf-af82-bd5654ffeb80", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 1572, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:45:56.436144Z"}
+worker-2  | 2026-11-02T14:44:35.533806419Z {"document_id": "16b558fd-45e6-4af4-9725-2dba94df6bf2", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 3795, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:44:35.533603Z"}
+worker-2  | 2026-11-02T14:44:40.305885004Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:44:40.311779629Z {"document_id": "ee0a1d4f-6736-41f9-8d0c-5993c64cea15", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 4768, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:44:40.311672Z"}
+worker-2  | 2026-11-02T14:44:50.559276926Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:44:50.568086509Z {"document_id": "9e0c30de-762c-4623-8d84-28c4384eabd9", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 2211, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:44:50.567353Z"}
+worker-2  | 2026-11-02T14:45:01.533195125Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:45:01.552403667Z {"document_id": "691d959c-4a2e-499e-af68-acf387896027", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 2947, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:45:01.552256Z"}
+worker-2  | 2026-11-02T14:45:58.044746930Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:46:00.965311833Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:46:00.971455458Z {"document_id": "739c192d-473a-4bb5-81d4-bf3080abbc4b", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 4528, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:46:00.971287Z"}
+worker-1  | 2026-11-02T14:46:08.681067337Z {"event": "worker_stopped", "level": "info", "timestamp": "2026-11-02T14:46:08.680820Z"}
+worker-1  | 2026-11-02T14:46:12.987614422Z Found credentials in environment variables.
+worker-2  | 2026-11-02T14:45:58.055387221Z {"document_id": "56303861-349b-4fa1-b386-7118f4165523", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 2276, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:45:58.055085Z"}
+worker-2  | 2026-11-02T14:45:58.071955096Z MuPDF error: format error: object is not a stream
+worker-2  | 2026-11-02T14:45:58.071986846Z 
+worker-2  | 2026-11-02T14:45:58.072116430Z {"document_id": "45771100-4b3b-4742-b47a-7c2695eeedb8", "attempt": 1, "error_code": "corrupted", "event": "ingest_rejected", "level": "info", "timestamp": "2026-11-02T14:45:58.072040Z"}
+worker-2  | 2026-11-02T14:46:08.681053045Z {"event": "worker_stopped", "level": "info", "timestamp": "2026-11-02T14:46:08.680846Z"}
+worker-2  | 2026-11-02T14:46:13.034486381Z Found credentials in environment variables.
+worker-1  | 2026-11-02T14:46:13.041556464Z {"event": "worker_started", "level": "info", "timestamp": "2026-11-02T14:46:13.041361Z"}
+worker-1  | 2026-11-02T14:46:13.537253964Z HTTP Request: HEAD https://huggingface.co/BAAI/bge-m3/resolve/main/tokenizer.json "HTTP/1.1 302 Found"
+worker-1  | 2026-11-02T14:46:13.537830131Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-1  | 2026-11-02T14:46:13.537839714Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-2  | 2026-11-02T14:46:13.087510756Z {"event": "worker_started", "level": "info", "timestamp": "2026-11-02T14:46:13.087312Z"}
+worker-2  | 2026-11-02T14:46:13.537593006Z HTTP Request: HEAD https://huggingface.co/BAAI/bge-m3/resolve/main/tokenizer.json "HTTP/1.1 302 Found"
+worker-2  | 2026-11-02T14:46:13.538196298Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-1  | 2026-11-02T14:46:17.815934008Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:46:17.833467675Z {"document_id": "4cfe1d23-2798-4299-88c3-bc03c26e4e19", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 4755, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:46:17.832195Z"}
+worker-1  | 2026-11-02T14:46:21.798203260Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:46:21.803406260Z {"document_id": "c0a330cb-6d7e-43a4-b882-33ffa4431401", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 3951, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:46:21.803229Z"}
+worker-1  | 2026-11-02T14:52:16.711650507Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:52:16.717723841Z {"document_id": "de911874-9e11-4d49-9c9a-3140e2a16399", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 1466, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:52:16.717490Z"}
+worker-1  | 2026-11-02T14:52:21.600939510Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:52:21.607029010Z {"document_id": "c7f4be94-c354-4f85-931c-effef4c2513b", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 4883, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:52:21.606869Z"}
+worker-1  | 2026-11-02T14:52:46.263268341Z {"event": "worker_stopped", "level": "info", "timestamp": "2026-11-02T14:52:46.263099Z"}
+worker-1  | 2026-11-02T14:52:50.658617384Z Found credentials in environment variables.
+worker-1  | 2026-11-02T14:52:50.708855384Z {"event": "worker_started", "level": "info", "timestamp": "2026-11-02T14:52:50.708663Z"}
+worker-1  | 2026-11-02T14:52:51.161454676Z HTTP Request: HEAD https://huggingface.co/BAAI/bge-m3/resolve/main/tokenizer.json "HTTP/1.1 302 Found"
+worker-1  | 2026-11-02T14:52:51.161841926Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-1  | 2026-11-02T14:52:51.161851510Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-1  | 2026-11-02T14:52:55.442777678Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:52:55.482847220Z {"document_id": "0f4c960f-a290-4ce2-a2cd-007a0eac4f2f", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 4720, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:52:55.481432Z"}
+worker-1  | 2026-11-02T14:52:59.286753430Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:52:59.293759013Z {"document_id": "2bf4ea34-604a-4139-a874-aeb70483525c", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 3792, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:52:59.293458Z"}
+worker-1  | 2026-11-02T14:53:16.828823841Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:53:16.836670841Z {"document_id": "0f65ab50-106e-456b-a06c-8702ddd3c404", "attempt": 1, "error": "IntegrityError('(sqlalchemy.dialects.postgresql.asyncpg.ForeignKeyViolationError) insert or update on table \"chunks\" violates foreign key constraint \"chunks_document_id_fkey\"')", "event": "ingest_retry", "level": "warning", "timestamp": "2026-11-02T14:53:16.836538Z"}
+worker-1  | 2026-11-02T14:53:19.731711009Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:53:19.735646926Z {"document_id": "6d59891b-2dce-4311-87b2-6e86ad6cbd2f", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 2885, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:53:19.735393Z"}
+worker-2  | 2026-11-02T14:46:13.538214464Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-2  | 2026-11-02T14:46:19.921121676Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:53:33.798920251Z Traceback (most recent call last):
+worker-1  | 2026-11-02T14:53:33.799011126Z   File "<frozen runpy>", line 198, in _run_module_as_main
+worker-1  | 2026-11-02T14:53:33.799023210Z   File "<frozen runpy>", line 88, in _run_code
+worker-1  | 2026-11-02T14:53:33.799032751Z   File "/app/app/worker/main.py", line 65, in <module>
+worker-1  | 2026-11-02T14:53:33.805040626Z     main()
+worker-2  | 2026-11-02T14:46:19.959464176Z {"document_id": "94a60861-d46d-426c-931d-cc2dc932ad1a", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 6798, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:46:19.959127Z"}
+worker-2  | 2026-11-02T14:46:19.997886134Z MuPDF error: format error: object is not a stream
+worker-2  | 2026-11-02T14:46:19.999340051Z 
+worker-2  | 2026-11-02T14:46:19.999353301Z {"document_id": "4d5ef9cc-e1e0-4925-9d64-865037c04790", "attempt": 1, "error_code": "corrupted", "event": "ingest_rejected", "level": "info", "timestamp": "2026-11-02T14:46:19.998290Z"}
+worker-1  | 2026-11-02T14:53:33.805379710Z   File "/app/app/worker/main.py", line 61, in main
+worker-1  | 2026-11-02T14:53:33.807231626Z     asyncio.run(_run())
+worker-1  | 2026-11-02T14:53:33.807246793Z   File "/usr/local/lib/python3.12/asyncio/runners.py", line 195, in run
+worker-1  | 2026-11-02T14:53:33.807271876Z     return runner.run(main)
+worker-1  | 2026-11-02T14:53:33.807620710Z            ^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.807633001Z   File "/usr/local/lib/python3.12/asyncio/runners.py", line 118, in run
+worker-1  | 2026-11-02T14:53:33.807731960Z     return self._loop.run_until_complete(task)
+worker-2  | 2026-11-02T14:52:18.387655508Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:52:18.399515050Z {"document_id": "f618ab35-4b2f-48b4-9598-f9e6bfca6dee", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 2928, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:52:18.399320Z"}
+worker-2  | 2026-11-02T14:52:46.261568716Z {"event": "worker_stopped", "level": "info", "timestamp": "2026-11-02T14:52:46.261368Z"}
+worker-2  | 2026-11-02T14:52:50.730899884Z Found credentials in environment variables.
+worker-1  | 2026-11-02T14:53:33.808059793Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.808085418Z   File "/usr/local/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+worker-1  | 2026-11-02T14:53:33.808833626Z     return future.result()
+worker-1  | 2026-11-02T14:53:33.809034210Z            ^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.809046210Z   File "/app/app/worker/main.py", line 59, in _run
+worker-1  | 2026-11-02T14:53:33.809621335Z     await run_forever(stop)
+worker-1  | 2026-11-02T14:53:33.809712710Z   File "/app/app/worker/main.py", line 37, in run_forever
+worker-1  | 2026-11-02T14:53:33.810100126Z     async with engine.begin() as conn:
+worker-1  | 2026-11-02T14:53:33.812298835Z                ^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:52:50.777067801Z {"event": "worker_started", "level": "info", "timestamp": "2026-11-02T14:52:50.776916Z"}
+worker-2  | 2026-11-02T14:52:51.208220760Z HTTP Request: HEAD https://huggingface.co/BAAI/bge-m3/resolve/main/tokenizer.json "HTTP/1.1 302 Found"
+worker-2  | 2026-11-02T14:52:51.208562176Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-1  | 2026-11-02T14:53:33.812342376Z   File "/usr/local/lib/python3.12/contextlib.py", line 210, in __aenter__
+worker-1  | 2026-11-02T14:53:33.812352168Z     return await anext(self.gen)
+worker-1  | 2026-11-02T14:53:33.812354876Z            ^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:52:51.208570176Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-2  | 2026-11-02T14:52:57.524257804Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:52:57.559347763Z {"document_id": "597dbfe1-c157-4ae8-b536-e1c51a32ef49", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 6732, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:52:57.559222Z"}
+worker-2  | 2026-11-02T14:52:57.592926263Z MuPDF error: format error: object is not a stream
+worker-1  | 2026-11-02T14:53:33.812357085Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1086, in begin
+worker-1  | 2026-11-02T14:53:33.812359210Z     async with conn:
+worker-1  | 2026-11-02T14:53:33.812361043Z                ^^^^
+worker-1  | 2026-11-02T14:53:33.812362876Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/base.py", line 152, in __aenter__
+worker-2  | 2026-11-02T14:52:57.593072471Z 
+worker-2  | 2026-11-02T14:52:57.593562013Z {"document_id": "0cb72fc9-df8f-43cf-972b-ab4bb657e2c4", "attempt": 1, "error_code": "corrupted", "event": "ingest_rejected", "level": "info", "timestamp": "2026-11-02T14:52:57.593369Z"}
+worker-2  | 2026-11-02T14:53:18.167901883Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:53:18.178994050Z {"document_id": "35705ec6-9840-4657-9352-537b11cdb01c", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 2508, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:53:18.178824Z"}
+worker-1  | 2026-11-02T14:53:33.812366543Z     return await self.start(is_ctxmanager=True)
+worker-1  | 2026-11-02T14:53:33.812590918Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.812599960Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/engine.py", line 283, in start
+worker-1  | 2026-11-02T14:53:33.812687710Z     await greenlet_spawn(self.sync_engine.connect)
+worker-1  | 2026-11-02T14:53:33.812729126Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/concurrency.py", line 210, in greenlet_spawn
+worker-1  | 2026-11-02T14:53:33.813190376Z     result = context.throw(*sys.exc_info())
+worker-1  | 2026-11-02T14:53:33.827288626Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.827307918Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3275, in connect
+worker-1  | 2026-11-02T14:53:33.827309376Z     return self._connection_cls(self)
+worker-1  | 2026-11-02T14:53:33.827310251Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.827311168Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 149, in __init__
+worker-2  | 2026-11-02T14:53:22.658509094Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:53:22.664419802Z {"document_id": "d32eb192-5952-416b-9f6b-c0355af587e1", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 4472, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:53:22.664293Z"}
+worker-2  | 2026-11-02T14:53:34.741803543Z Traceback (most recent call last):
+worker-2  | 2026-11-02T14:53:34.741835960Z   File "<frozen runpy>", line 198, in _run_module_as_main
+worker-2  | 2026-11-02T14:53:34.742279085Z   File "<frozen runpy>", line 88, in _run_code
+worker-2  | 2026-11-02T14:53:34.742287127Z   File "/app/app/worker/main.py", line 65, in <module>
+worker-2  | 2026-11-02T14:53:34.752162710Z     main()
+worker-2  | 2026-11-02T14:53:34.752178585Z   File "/app/app/worker/main.py", line 61, in main
+worker-2  | 2026-11-02T14:53:34.752179918Z     asyncio.run(_run())
+worker-2  | 2026-11-02T14:53:34.752180960Z   File "/usr/local/lib/python3.12/asyncio/runners.py", line 195, in run
+worker-1  | 2026-11-02T14:53:33.827312126Z     self._dbapi_connection = engine.raw_connection()
+worker-1  | 2026-11-02T14:53:33.827312918Z                              ^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.827319085Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3299, in raw_connection
+worker-1  | 2026-11-02T14:53:33.827320126Z     return self.pool.connect()
+worker-1  | 2026-11-02T14:53:33.827320918Z            ^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752182043Z     return runner.run(main)
+worker-2  | 2026-11-02T14:53:34.752183043Z            ^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752183960Z   File "/usr/local/lib/python3.12/asyncio/runners.py", line 118, in run
+worker-2  | 2026-11-02T14:53:34.752185002Z     return self._loop.run_until_complete(task)
+worker-1  | 2026-11-02T14:53:33.827321668Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 445, in connect
+worker-1  | 2026-11-02T14:53:33.827322585Z     return _ConnectionFairy._checkout(self)
+worker-1  | 2026-11-02T14:53:33.827323418Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752185960Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752186960Z   File "/usr/local/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+worker-2  | 2026-11-02T14:53:34.752188043Z     return future.result()
+worker-1  | 2026-11-02T14:53:33.827324210Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 1405, in _checkout
+worker-1  | 2026-11-02T14:53:33.828678918Z     with util.safe_reraise():
+worker-1  | 2026-11-02T14:53:33.828718126Z          ^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.828758543Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 166, in __exit__
+worker-1  | 2026-11-02T14:53:33.829648793Z     raise exc_value.with_traceback(exc_tb)
+worker-1  | 2026-11-02T14:53:33.829757501Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 1402, in _checkout
+worker-1  | 2026-11-02T14:53:33.830303710Z     fairy._connection_record.get_connection()
+worker-2  | 2026-11-02T14:53:34.752189002Z            ^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752189918Z   File "/app/app/worker/main.py", line 59, in _run
+worker-2  | 2026-11-02T14:53:34.752190877Z     await run_forever(stop)
+worker-2  | 2026-11-02T14:53:34.752191835Z   File "/app/app/worker/main.py", line 37, in run_forever
+worker-2  | 2026-11-02T14:53:34.752192835Z     async with engine.begin() as conn:
+worker-1  | 2026-11-02T14:53:33.830318168Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 848, in get_connection
+worker-1  | 2026-11-02T14:53:33.830435835Z     self.__connect()
+worker-1  | 2026-11-02T14:53:33.830439793Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 916, in __connect
+worker-1  | 2026-11-02T14:53:33.830440793Z     with util.safe_reraise():
+worker-1  | 2026-11-02T14:53:33.830441585Z          ^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.830442376Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 166, in __exit__
+worker-2  | 2026-11-02T14:53:34.752193793Z                ^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752194835Z   File "/usr/local/lib/python3.12/contextlib.py", line 210, in __aenter__
+worker-2  | 2026-11-02T14:53:34.752195877Z     return await anext(self.gen)
+worker-2  | 2026-11-02T14:53:34.752196793Z            ^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.830443335Z     raise exc_value.with_traceback(exc_tb)
+worker-1  | 2026-11-02T14:53:33.830444168Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 912, in __connect
+worker-1  | 2026-11-02T14:53:33.830497293Z     self.dbapi_connection = connection = pool._invoke_creator(self)
+worker-2  | 2026-11-02T14:53:34.752197752Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/engine.py", line 1086, in begin
+worker-2  | 2026-11-02T14:53:34.752198960Z     async with conn:
+worker-2  | 2026-11-02T14:53:34.752199918Z                ^^^^
+worker-2  | 2026-11-02T14:53:34.752200835Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/base.py", line 152, in __aenter__
+worker-2  | 2026-11-02T14:53:34.752201918Z     return await self.start(is_ctxmanager=True)
+worker-2  | 2026-11-02T14:53:34.752212085Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752214918Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/engine.py", line 283, in start
+worker-2  | 2026-11-02T14:53:34.752215877Z     await greenlet_spawn(self.sync_engine.connect)
+worker-1  | 2026-11-02T14:53:33.830529293Z                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.830535126Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/create.py", line 645, in connect
+worker-1  | 2026-11-02T14:53:33.831185210Z     return dialect.connect(*cargs_tup, **cparams)
+worker-1  | 2026-11-02T14:53:33.831230835Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752216710Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/concurrency.py", line 210, in greenlet_spawn
+worker-2  | 2026-11-02T14:53:34.752217585Z     result = context.throw(*sys.exc_info())
+worker-2  | 2026-11-02T14:53:34.752218377Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752219168Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3275, in connect
+worker-2  | 2026-11-02T14:53:34.752220085Z     return self._connection_cls(self)
+worker-2  | 2026-11-02T14:53:34.752220835Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752221627Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 149, in __init__
+worker-2  | 2026-11-02T14:53:34.752222543Z     self._dbapi_connection = engine.raw_connection()
+worker-2  | 2026-11-02T14:53:34.752223335Z                              ^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752225002Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3299, in raw_connection
+worker-1  | 2026-11-02T14:53:33.831239710Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 869, in connect
+worker-1  | 2026-11-02T14:53:33.832488918Z     return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+worker-1  | 2026-11-02T14:53:33.832599043Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.832646960Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 967, in connect
+worker-2  | 2026-11-02T14:53:34.752225877Z     return self.pool.connect()
+worker-2  | 2026-11-02T14:53:34.752226627Z            ^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752227418Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 445, in connect
+worker-2  | 2026-11-02T14:53:34.752228293Z     return _ConnectionFairy._checkout(self)
+worker-1  | 2026-11-02T14:53:33.835649418Z     return await_(
+worker-1  | 2026-11-02T14:53:33.835677210Z            ^^^^^^^
+worker-1  | 2026-11-02T14:53:33.835684251Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/concurrency.py", line 167, in await_
+worker-1  | 2026-11-02T14:53:33.835833918Z     return current.parent.switch(awaitable)  # type: ignore[no-any-return]
+worker-2  | 2026-11-02T14:53:34.752229043Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752229835Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 1405, in _checkout
+worker-2  | 2026-11-02T14:53:34.752230668Z     with util.safe_reraise():
+worker-1  | 2026-11-02T14:53:33.835839668Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.835841835Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/concurrency.py", line 205, in greenlet_spawn
+worker-1  | 2026-11-02T14:53:33.835844001Z     value = await result
+worker-1  | 2026-11-02T14:53:33.835845751Z             ^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.835847501Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/connectors/asyncio.py", line 378, in create
+worker-2  | 2026-11-02T14:53:34.752231418Z          ^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752232293Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 166, in __exit__
+worker-2  | 2026-11-02T14:53:34.752233127Z     raise exc_value.with_traceback(exc_tb)
+worker-2  | 2026-11-02T14:53:34.752233960Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 1402, in _checkout
+worker-1  | 2026-11-02T14:53:33.836312085Z     cls._handle_exception_no_connection(dbapi, error)
+worker-1  | 2026-11-02T14:53:33.836359585Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 841, in _handle_exception_no_connection
+worker-1  | 2026-11-02T14:53:33.836498043Z     super()._handle_exception_no_connection(dbapi, error)
+worker-2  | 2026-11-02T14:53:34.752234793Z     fairy._connection_record.get_connection()
+worker-2  | 2026-11-02T14:53:34.752235668Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 848, in get_connection
+worker-2  | 2026-11-02T14:53:34.752236627Z     self.__connect()
+worker-1  | 2026-11-02T14:53:33.836503585Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/connectors/asyncio.py", line 409, in _handle_exception_no_connection
+worker-1  | 2026-11-02T14:53:33.836574335Z     raise error.with_traceback(exc_info[2])
+worker-1  | 2026-11-02T14:53:33.836580085Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/connectors/asyncio.py", line 376, in create
+worker-2  | 2026-11-02T14:53:34.752237418Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 916, in __connect
+worker-2  | 2026-11-02T14:53:34.752238252Z     with util.safe_reraise():
+worker-2  | 2026-11-02T14:53:34.752239002Z          ^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752239793Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 166, in __exit__
+worker-1  | 2026-11-02T14:53:33.836642751Z     connection = await connection_awaitable
+worker-1  | 2026-11-02T14:53:33.836682293Z                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.836690460Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 2498, in connect
+worker-2  | 2026-11-02T14:53:34.752242502Z     raise exc_value.with_traceback(exc_tb)
+worker-2  | 2026-11-02T14:53:34.752243335Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 912, in __connect
+worker-2  | 2026-11-02T14:53:34.752244210Z     self.dbapi_connection = connection = pool._invoke_creator(self)
+worker-2  | 2026-11-02T14:53:34.752245085Z                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.837660418Z     return await connect_utils._connect(
+worker-1  | 2026-11-02T14:53:33.837671460Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.837706710Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connect_utils.py", line 1307, in _connect
+worker-1  | 2026-11-02T14:53:33.838395001Z     raise last_error or exceptions.TargetServerAttributeNotMatched(
+worker-1  | 2026-11-02T14:53:33.838405585Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connect_utils.py", line 1278, in _connect
+worker-2  | 2026-11-02T14:53:34.752245918Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/create.py", line 645, in connect
+worker-2  | 2026-11-02T14:53:34.752246793Z     return dialect.connect(*cargs_tup, **cparams)
+worker-2  | 2026-11-02T14:53:34.752247585Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.838535043Z     conn = await _connect_addr(
+worker-1  | 2026-11-02T14:53:33.838585418Z            ^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.838595793Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connect_utils.py", line 1092, in _connect_addr
+worker-1  | 2026-11-02T14:53:33.838661251Z     return await __connect_addr(params, True, *args)
+worker-2  | 2026-11-02T14:53:34.752248377Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 869, in connect
+worker-2  | 2026-11-02T14:53:34.752249293Z     return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+worker-2  | 2026-11-02T14:53:34.752250168Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.838737335Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.838753751Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connect_utils.py", line 1162, in __connect_addr
+worker-1  | 2026-11-02T14:53:33.838972293Z     tr, pr = await connector
+worker-2  | 2026-11-02T14:53:34.752251002Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 967, in connect
+worker-1  | 2026-11-02T14:53:33.838979085Z              ^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.838982418Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connect_utils.py", line 996, in _create_ssl_connection
+worker-1  | 2026-11-02T14:53:33.839088876Z     tr, pr = await loop.create_connection(
+worker-1  | 2026-11-02T14:53:33.839097168Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.839138335Z   File "/usr/local/lib/python3.12/asyncio/base_events.py", line 1132, in create_connection
+worker-1  | 2026-11-02T14:53:33.839294085Z     raise exceptions[0]
+worker-2  | 2026-11-02T14:53:34.752251877Z     return await_(
+worker-2  | 2026-11-02T14:53:34.752252627Z            ^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752253543Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/concurrency.py", line 167, in await_
+worker-1  | 2026-11-02T14:53:33.839305251Z   File "/usr/local/lib/python3.12/asyncio/base_events.py", line 1107, in create_connection
+worker-1  | 2026-11-02T14:53:33.839448751Z     sock = await self._connect_sock(
+worker-1  | 2026-11-02T14:53:33.839454918Z            ^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752254418Z     return current.parent.switch(awaitable)  # type: ignore[no-any-return]
+worker-2  | 2026-11-02T14:53:34.752255252Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752256085Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/concurrency.py", line 205, in greenlet_spawn
+worker-1  | 2026-11-02T14:53:33.839458251Z   File "/usr/local/lib/python3.12/asyncio/base_events.py", line 1010, in _connect_sock
+worker-1  | 2026-11-02T14:53:33.839688001Z     await self.sock_connect(sock, address)
+worker-1  | 2026-11-02T14:53:33.839695626Z   File "/usr/local/lib/python3.12/asyncio/selector_events.py", line 651, in sock_connect
+worker-1  | 2026-11-02T14:53:33.839773001Z     return await fut
+worker-2  | 2026-11-02T14:53:34.752257002Z     value = await result
+worker-2  | 2026-11-02T14:53:34.752257877Z             ^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.752258627Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/connectors/asyncio.py", line 378, in create
+worker-2  | 2026-11-02T14:53:34.752259627Z     cls._handle_exception_no_connection(dbapi, error)
+worker-1  | 2026-11-02T14:53:33.839778210Z            ^^^^^^^^^
+worker-1  | 2026-11-02T14:53:33.839780168Z   File "/usr/local/lib/python3.12/asyncio/selector_events.py", line 691, in _sock_connect_cb
+worker-1  | 2026-11-02T14:53:33.839928710Z     raise OSError(err, f'Connect call failed {address}')
+worker-2  | 2026-11-02T14:53:34.752260460Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 841, in _handle_exception_no_connection
+worker-2  | 2026-11-02T14:53:34.755471835Z     super()._handle_exception_no_connection(dbapi, error)
+worker-2  | 2026-11-02T14:53:34.755507877Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/connectors/asyncio.py", line 409, in _handle_exception_no_connection
+worker-2  | 2026-11-02T14:53:34.755511168Z     raise error.with_traceback(exc_info[2])
+worker-1  | 2026-11-02T14:53:33.839971960Z ConnectionRefusedError: [Errno 111] Connect call failed ('172.21.0.4', 5432)
+worker-1  | 2026-11-02T14:55:01.758734709Z Found credentials in environment variables.
+worker-1  | 2026-11-02T14:55:01.809493042Z {"event": "worker_started", "level": "info", "timestamp": "2026-11-02T14:55:01.809298Z"}
+worker-1  | 2026-11-02T14:55:02.632254209Z HTTP Request: HEAD https://huggingface.co/BAAI/bge-m3/resolve/main/tokenizer.json "HTTP/1.1 302 Found"
+worker-2  | 2026-11-02T14:53:34.755513252Z   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/connectors/asyncio.py", line 376, in create
+worker-2  | 2026-11-02T14:53:34.755515502Z     connection = await connection_awaitable
+worker-2  | 2026-11-02T14:53:34.755517502Z                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:55:02.633758042Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-1  | 2026-11-02T14:55:02.633782417Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-1  | 2026-11-02T14:55:33.187045293Z {"document_id": "ee806869-0d66-4aa9-a3b3-49ac02fb3fd3", "attempt": 1, "error": "EmbeddingUnavailable('')", "event": "ingest_retry", "level": "warning", "timestamp": "2026-11-02T14:55:33.186754Z"}
+worker-1  | 2026-11-02T14:56:14.000908131Z {"document_id": "ee806869-0d66-4aa9-a3b3-49ac02fb3fd3", "attempt": 2, "error": "EmbeddingUnavailable('')", "event": "ingest_retry", "level": "warning", "timestamp": "2026-11-02T14:56:14.000296Z"}
+worker-2  | 2026-11-02T14:53:34.755532543Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 2498, in connect
+worker-2  | 2026-11-02T14:53:34.755535002Z     return await connect_utils._connect(
+worker-2  | 2026-11-02T14:53:34.755563543Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-1  | 2026-11-02T14:58:17.101029674Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-1  | 2026-11-02T14:58:17.135569424Z {"document_id": "f51a6222-8546-4b44-8c7a-89f6e61a5d89", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 2771, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:58:17.133928Z"}
+worker-2  | 2026-11-02T14:53:34.755571627Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connect_utils.py", line 1307, in _connect
+worker-2  | 2026-11-02T14:53:34.755575002Z     raise last_error or exceptions.TargetServerAttributeNotMatched(
+worker-2  | 2026-11-02T14:53:34.755577210Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connect_utils.py", line 1278, in _connect
+worker-2  | 2026-11-02T14:53:34.755579335Z     conn = await _connect_addr(
+worker-2  | 2026-11-02T14:53:34.756235752Z            ^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.756248335Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connect_utils.py", line 1092, in _connect_addr
+worker-2  | 2026-11-02T14:53:34.756249793Z     return await __connect_addr(params, True, *args)
+worker-2  | 2026-11-02T14:53:34.756250752Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.756251627Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connect_utils.py", line 1162, in __connect_addr
+worker-2  | 2026-11-02T14:53:34.756252585Z     tr, pr = await connector
+worker-2  | 2026-11-02T14:53:34.756253335Z              ^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.756254210Z   File "/usr/local/lib/python3.12/site-packages/asyncpg/connect_utils.py", line 996, in _create_ssl_connection
+worker-2  | 2026-11-02T14:53:34.756695043Z     tr, pr = await loop.create_connection(
+worker-2  | 2026-11-02T14:53:34.757644043Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.757666002Z   File "/usr/local/lib/python3.12/asyncio/base_events.py", line 1083, in create_connection
+worker-2  | 2026-11-02T14:53:34.757669210Z     infos = await self._ensure_resolved(
+worker-2  | 2026-11-02T14:53:34.761851502Z             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.761885627Z   File "/usr/local/lib/python3.12/asyncio/base_events.py", line 1466, in _ensure_resolved
+worker-2  | 2026-11-02T14:53:34.761890668Z     return await loop.getaddrinfo(host, port, family=family, type=type,
+worker-2  | 2026-11-02T14:53:34.761896168Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.761898168Z   File "/usr/local/lib/python3.12/asyncio/base_events.py", line 905, in getaddrinfo
+worker-2  | 2026-11-02T14:53:34.761903835Z     return await self.run_in_executor(
+worker-2  | 2026-11-02T14:53:34.761906127Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.761907877Z   File "/usr/local/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+worker-2  | 2026-11-02T14:53:34.761909793Z     result = self.fn(*self.args, **self.kwargs)
+worker-2  | 2026-11-02T14:53:34.761912460Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.761917127Z   File "/usr/local/lib/python3.12/socket.py", line 978, in getaddrinfo
+worker-2  | 2026-11-02T14:53:34.761919002Z     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+worker-2  | 2026-11-02T14:53:34.761937502Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+worker-2  | 2026-11-02T14:53:34.761941168Z socket.gaierror: [Errno -2] Name or service not known
+worker-2  | 2026-11-02T14:55:01.815272917Z Found credentials in environment variables.
+worker-2  | 2026-11-02T14:55:01.870665709Z {"event": "worker_started", "level": "info", "timestamp": "2026-11-02T14:55:01.870462Z"}
+worker-2  | 2026-11-02T14:56:54.971369636Z HTTP Request: HEAD https://huggingface.co/BAAI/bge-m3/resolve/main/tokenizer.json "HTTP/1.1 302 Found"
+worker-2  | 2026-11-02T14:56:54.973146386Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-2  | 2026-11-02T14:56:54.973177553Z Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+worker-2  | 2026-11-02T14:57:25.573192970Z {"document_id": "ee806869-0d66-4aa9-a3b3-49ac02fb3fd3", "attempt": 3, "error": "EmbeddingUnavailable('')", "event": "ingest_gave_up", "level": "error", "timestamp": "2026-11-02T14:57:25.572885Z"}
+worker-2  | 2026-11-02T14:58:15.402840715Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:58:15.430628965Z {"document_id": "7c87b8d5-ee4d-4790-bad8-09007bd702a3", "attempt": 1, "pages": 1, "chunks": 1, "processing_ms": 1675, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:58:15.430292Z"}
+worker-2  | 2026-11-02T14:58:20.146244509Z HTTP Request: POST http://tei/embed "HTTP/1.1 200 OK"
+worker-2  | 2026-11-02T14:58:20.152072926Z {"document_id": "16b5d24d-dd26-4a13-a3e4-4c9cd289b9b6", "attempt": 1, "pages": 2, "chunks": 2, "processing_ms": 4714, "event": "ingest_done", "level": "info", "timestamp": "2026-11-02T14:58:20.151954Z"}

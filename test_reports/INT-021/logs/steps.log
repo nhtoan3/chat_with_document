@@ -1,0 +1,41 @@
+### Bước 1: Gọi /healthz
+HTTP/1.1 200 OK
+date: Mon, 02 Nov 2026 14:37:15 GMT
+server: uvicorn
+content-length: 15
+content-type: application/json
+x-request-id: c0fb09b1c13540488961ebffa66ccb2b
+
+{"status":"ok"}### Bước 2: Gọi trang web gốc
+HTTP/1.1 200 OK
+Vary: Origin
+Content-Type: text/html
+Cache-Control: no-cache
+Etag: W/"4a9-WLjzBHrwlhAQas04Pigh/6J/ebA"
+Date: Mon, 02 Nov 2026 14:37:16 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Content-Length: 1193
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat với tài liệu</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232450D8'/%3E%3Cpath d='M24 19a2 2 0 0 1-2 2H12l-4 4V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+
+[exit code 0]

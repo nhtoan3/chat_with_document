@@ -1,0 +1,5 @@
+boto3 1.43.123 botocore 1.43.123 endpoint http://s3:9090
+1 MB upload_fileobj OK
+7 MB upload_fileobj OK
+9 MB upload_fileobj FAIL ClientError An error occurred (BadRequest) when calling the CompleteMultipartUpload operation: The upload was created using a crc32 checksum. The complete request must include the checksum for each part. It was missing for part 1 in the request.
+20 MB upload_fileobj FAIL ClientError An error occurred (BadRequest) when calling the CompleteMultipartUpload operation: The upload was created using a crc32 checksum. The complete request must include the checksum for each part. It was missing for part 1 in the request.

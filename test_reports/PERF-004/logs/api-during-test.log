@@ -1,0 +1,2 @@
+api-1  | {"method": "POST", "path": "/api/v1/ask", "status": 503, "latency_ms": 182283, "event": "request", "request_id": "5c32f2a174c6449db6837fc4a087e83b", "level": "info", "timestamp": "2026-11-02T15:07:54.151014Z"}
+api-1  | INFO:     172.21.0.6:49268 - "POST /api/v1/ask HTTP/1.1" 503 Service Unavailable

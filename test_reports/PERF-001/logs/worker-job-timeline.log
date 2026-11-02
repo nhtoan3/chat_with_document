@@ -1,0 +1,3 @@
+2026-11-02T15:10:06.636616669Z {"document_id": "11742488-9578-4db2-bf15-5b896c521d43", "attempt": 1, "error": "EmbeddingUnavailable('')", "event": "ingest_retry", "level": "warning", "timestamp": "2026-11-02T15:10:06.636399Z"}
+2026-11-02T15:10:47.473328466Z {"document_id": "11742488-9578-4db2-bf15-5b896c521d43", "attempt": 2, "error": "EmbeddingUnavailable('')", "event": "ingest_retry", "level": "warning", "timestamp": "2026-11-02T15:10:47.473163Z"}
+2026-11-02T15:11:58.095233929Z {"document_id": "11742488-9578-4db2-bf15-5b896c521d43", "attempt": 3, "error": "EmbeddingUnavailable('')", "event": "ingest_gave_up", "level": "error", "timestamp": "2026-11-02T15:11:58.095066Z"}

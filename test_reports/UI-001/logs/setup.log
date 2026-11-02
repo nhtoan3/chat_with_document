@@ -1,0 +1,12 @@
+$ check_stack && reset_data && seed_samples && upload "$FIXTURES/corrupted.pdf" && wait_idle 300
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+{"items":[{"filename":"Bien_ban_hop_doi_tac_15-09.pdf","document_id":"75380824-8de4-40cf-af82-bd5654ffeb80","status":"queued"},{"filename":"De_xuat_hop_tac_Minh_Phat.pdf","document_id":"56303861-349b-4fa1-b386-7118f4165523","status":"queued"},{"filename":"Hop_dong_khung_ABC_2026.pdf","document_id":"739c192d-473a-4bb5-81d4-bf3080abbc4b","status":"queued"}]}
+HTTP 202
+{"items":[{"filename":"corrupted.pdf","document_id":"45771100-4b3b-4742-b47a-7c2695eeedb8","status":"queued"}]}
+HTTP 202
+Hết tài liệu đang xử lý sau ~8s · counts={"ready":3,"processing":0,"failed":1,"total":4}
+
+$ reset_data
+TRUNCATE TABLE
+

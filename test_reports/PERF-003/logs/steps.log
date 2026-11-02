@@ -1,0 +1,24 @@
+### Bước 1: Kiểm tra stack localhost và dọn dữ liệu
+Stack OK: API http://localhost:8000 · Web http://localhost:5173
+TRUNCATE TABLE
+### Bước 2: Sinh 10 tệp 20 MB
+total 409600
+-rw-r--r--@ 1 huytoan  staff    20M Nov  2 22:12 lon_01.pdf
+-rw-r--r--@ 1 huytoan  staff    20M Nov  2 22:12 lon_02.pdf
+-rw-r--r--@ 1 huytoan  staff    20M Nov  2 22:12 lon_03.pdf
+-rw-r--r--@ 1 huytoan  staff    20M Nov  2 22:12 lon_04.pdf
+-rw-r--r--@ 1 huytoan  staff    20M Nov  2 22:12 lon_05.pdf
+-rw-r--r--@ 1 huytoan  staff    20M Nov  2 22:12 lon_06.pdf
+-rw-r--r--@ 1 huytoan  staff    20M Nov  2 22:12 lon_07.pdf
+-rw-r--r--@ 1 huytoan  staff    20M Nov  2 22:12 lon_08.pdf
+-rw-r--r--@ 1 huytoan  staff    20M Nov  2 22:12 lon_09.pdf
+-rw-r--r--@ 1 huytoan  staff    20M Nov  2 22:12 lon_10.pdf
+### Bước 3: Đo RAM nền của api
+chat-with-document-api-1 158.8MiB / 7.75GiB
+### Bước 4: Tải lên trong khi lấy mẫu RAM mỗi giây
+{"items":[{"filename":"lon_01.pdf","error_code":"storage_error"},{"filename":"lon_02.pdf","error_code":"storage_error"},{"filename":"lon_03.pdf","error_code":"storage_error"},{"filename":"lon_04.pdf","error_code":"storage_error"},{"filename":"lon_05.pdf","error_code":"storage_error"},{"filename":"lon_06.pdf","error_code":"storage_error"},{"filename":"lon_07.pdf","error_code":"storage_error"},{"filename":"lon_08.pdf","error_code":"storage_error"},{"filename":"lon_09.pdf","error_code":"storage_error"},{"filename":"lon_10.pdf","error_code":"storage_error"}]}
+HTTP 202
+### Bước 5: Tính mức tăng RAM
+mau: 2 min_MiB: 207.4 max_MiB: 214.3 tang_MiB: 6.9
+
+[exit code 0]

@@ -1,0 +1,140 @@
+### Bước 1: Khởi động stack
+docker compose up --build -d
+ Image chat-with-document-migrate Building 
+ Image chat-with-document-api Building 
+ Image chat-with-document-worker Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.56kB done
+#1 DONE 0.0s
+
+#2 [api internal] load build definition from Dockerfile
+#2 transferring dockerfile: 860B done
+#2 DONE 0.0s
+
+#3 [api internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 1.9s
+
+#4 [worker internal] load .dockerignore
+#4 transferring context: 126B done
+#4 DONE 0.0s
+
+#5 [api 1/7] FROM docker.io/library/python:3.12-slim@sha256:b18b261e1b4974b4f321451ad5251ded85abb22c2b8b262da527dda1d031ab30
+#5 resolve docker.io/library/python:3.12-slim@sha256:b18b261e1b4974b4f321451ad5251ded85abb22c2b8b262da527dda1d031ab30 done
+#5 DONE 0.0s
+
+#6 [api internal] load build context
+#6 transferring context: 9.73kB 0.0s done
+#6 DONE 0.0s
+
+#7 [api 2/7] WORKDIR /app
+#7 CACHED
+
+#8 [api 5/7] COPY . .
+#8 CACHED
+
+#9 [api 6/7] RUN useradd --create-home --uid 10001 app && chown -R app:app /app
+#9 CACHED
+
+#10 [api 3/7] COPY pyproject.toml ./
+#10 CACHED
+
+#11 [api 4/7] RUN python -c "import tomllib; print('\n'.join(tomllib.load(open('pyproject.toml','rb'))['project']['dependencies']))" > requirements.txt  && pip install --upgrade pip  && pip install -r requirements.txt
+#11 CACHED
+
+#12 [api 7/7] RUN python -c "from tokenizers import Tokenizer; Tokenizer.from_pretrained('BAAI/bge-m3')"
+#12 CACHED
+
+#13 [api] exporting to image
+#13 exporting layers done
+#13 exporting manifest sha256:71752ee80de08cab1350d14bd201a6bb6b17f511a481b9310c007ed8b2eb5285 done
+#13 exporting config sha256:7b68a5f868e88ed2e3cc2176be07af0ed112de051d8359429639ef2f14e9e023 done
+#13 exporting attestation manifest sha256:67df59642e48f73ce571d8ed5ec90ba13432b3e1513942c0da6e6b8fc310d3fe 0.0s done
+#13 exporting manifest list sha256:1d541e2bd8f9385d18297aa3a606af4ffc8e523ed1ae4e4a8c339b8c0e4204ef
+#13 exporting manifest list sha256:1d541e2bd8f9385d18297aa3a606af4ffc8e523ed1ae4e4a8c339b8c0e4204ef 0.0s done
+#13 naming to docker.io/library/chat-with-document-api:latest done
+#13 unpacking to docker.io/library/chat-with-document-api:latest 0.0s done
+#13 DONE 0.1s
+
+#14 [migrate] exporting to image
+#14 exporting layers done
+#14 exporting manifest sha256:1bead3de6f9215e6d90f35b118d82b2412385c9d9a022efe4d319214b0305add done
+#14 exporting config sha256:31f7891c4a87d982fc75c1b11e71da1456ebf106f7d3c189433b184b973f13d3 done
+#14 exporting attestation manifest sha256:e246e2c5e6f8d8a459559e532c969e78fa6179325919e627dc2564b5051fa2e2 0.0s done
+#14 exporting manifest list sha256:e6d15e9c34c7c2ac3d32f345f89a194367bfd52c3d275464c3a03a42c644b33a 0.0s done
+#14 naming to docker.io/library/chat-with-document-migrate:latest 0.0s done
+#14 unpacking to docker.io/library/chat-with-document-migrate:latest 0.0s done
+#14 DONE 0.1s
+
+#15 [worker] exporting to image
+#15 exporting layers done
+#15 exporting manifest sha256:27ab9c24b54a9c60c826317cbe4365e78a7c4691372ecbd0438adc9001608904 done
+#15 exporting config sha256:d16f70eb16e5e6923c2c391d359d24fae30b4c18578c09f29f192cdb117ebff4 done
+#15 exporting attestation manifest sha256:0469bcdf42642d3e40329512509857f4b2ad5ff9feb1b2d7d3e0c6925fc45837 0.0s done
+#15 exporting manifest list sha256:395c0ee7e6ea15d97e9a68641d60ad65a7c65819c3b0ad1a3a0dad0e412511a0 0.0s done
+#15 naming to docker.io/library/chat-with-document-worker:latest done
+#15 unpacking to docker.io/library/chat-with-document-worker:latest 0.0s done
+#15 DONE 0.1s
+
+#16 [migrate] resolving provenance for metadata file
+#16 DONE 0.1s
+
+#17 [worker] resolving provenance for metadata file
+#17 DONE 0.1s
+
+#18 [api] resolving provenance for metadata file
+#18 DONE 0.0s
+ Image chat-with-document-migrate Built 
+ Image chat-with-document-api Built 
+ Image chat-with-document-worker Built 
+ Container chat-with-document-migrate-1 Recreate 
+ Container chat-with-document-migrate-1 Recreated 
+ Container chat-with-document-api-1 Recreate 
+ Container chat-with-document-worker-2 Recreate 
+ Container chat-with-document-worker-1 Recreate 
+ Container chat-with-document-api-1 Recreated 
+ Container chat-with-document-worker-2 Recreated 
+ Container chat-with-document-worker-1 Recreated 
+ Container chat-with-document-s3-1 Starting 
+ Container chat-with-document-tei-1 Starting 
+ Container chat-with-document-postgres-1 Starting 
+ Container chat-with-document-tei-1 Started 
+ Container chat-with-document-s3-1 Started 
+ Container chat-with-document-postgres-1 Started 
+ Container chat-with-document-postgres-1 Waiting 
+ Container chat-with-document-postgres-1 Healthy 
+ Container chat-with-document-migrate-1 Starting 
+ Container chat-with-document-migrate-1 Started 
+ Container chat-with-document-tei-1 Waiting 
+ Container chat-with-document-migrate-1 Waiting 
+ Container chat-with-document-migrate-1 Waiting 
+ Container chat-with-document-migrate-1 Exited 
+ Container chat-with-document-api-1 Starting 
+ Container chat-with-document-migrate-1 Exited 
+ Container chat-with-document-api-1 Started 
+ Container chat-with-document-web-1 Starting 
+ Container chat-with-document-web-1 Started 
+ Container chat-with-document-tei-1 Healthy 
+ Container chat-with-document-worker-1 Starting 
+ Container chat-with-document-worker-1 Started 
+ Container chat-with-document-worker-2 Starting 
+ Container chat-with-document-worker-2 Started 
+Web: http://localhost:5173  API: http://localhost:8000/api/v1/docs
+### Bước 2: Chờ TEI healthy (tối đa 15 phút)
+tei: healthy
+### Bước 3: Liệt kê dịch vụ
+NAME                            IMAGE                                                                                  COMMAND                  SERVICE    CREATED              STATUS                        PORTS
+chat-with-document-api-1        chat-with-document-api                                                                 "uvicorn app.api.mai…"   api        About a minute ago   Up 56 seconds                 0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp
+chat-with-document-migrate-1    chat-with-document-migrate                                                             "alembic upgrade head"   migrate    About a minute ago   Exited (0) 57 seconds ago     
+chat-with-document-postgres-1   pgvector/pgvector:pg16                                                                 "docker-entrypoint.s…"   postgres   6 days ago           Up About a minute (healthy)   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
+chat-with-document-s3-1         adobe/s3mock@sha256:ab01a6946750f451ca215a47e91030695b260e4003b8a5a6201d25029b8fca92   "/cnb/process/web"       s3         6 days ago           Up About a minute             0.0.0.0:9090->9090/tcp, [::]:9090->9090/tcp
+chat-with-document-tei-1        ghcr.io/huggingface/text-embeddings-inference:cpu-1.7                                  "text-embeddings-rou…"   tei        6 days ago           Up About a minute (healthy)   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
+chat-with-document-web-1        node:20-alpine                                                                         "docker-entrypoint.s…"   web        6 days ago           Up 56 seconds                 0.0.0.0:5173->5173/tcp, [::]:5173->5173/tcp
+chat-with-document-worker-1     chat-with-document-worker                                                              "python -m app.worke…"   worker     About a minute ago   Up Less than a second         8000/tcp
+chat-with-document-worker-2     chat-with-document-worker                                                              "python -m app.worke…"   worker     About a minute ago   Up Less than a second         8000/tcp
+### Bước 4: Gọi từng endpoint
+curl: (56) Recv failure: Connection reset by peer
+Web http://localhost:5173 không phản hồi — chạy 'make dev'
+TEI 200
+S3Mock 200
+
+[exit code 0]
