@@ -22,13 +22,6 @@
         "test_reports/_mcp"
       ]
     },
-    "agent-browser": {
-      "type": "stdio",
-      "command": "agent-browser",
-      "args": [
-        "mcp"
-      ]
-    },
     "vibe_kanban": {
       "type": "stdio",
       "command": "npx",

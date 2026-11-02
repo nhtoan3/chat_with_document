@@ -57,7 +57,7 @@ Ngoài ra, reviewer thiết kế ghi nhận: `DATABASE_URL` có `?ssl=require` t
 - **CI:** GitHub Actions, job `backend` và `frontend` xanh; job `build` đỏ ở `configure-aws-credentials` vì chưa có AWS. Chưa có coverage, secret scan, dependency scan trong CI.
 - **AWS:** chưa dựng. `infra/` mới là script và hướng dẫn.
 - **Khóa Anthropic:** không có; mọi test cần Claude thật là ⛔.
-- **MCP:** `codegraph` (đã `codegraph init`), `playwright` (npx), `agent-browser` (**chưa cài**), `vibe_kanban` (cần app đang chạy và tài khoản đăng nhập; dự án này đang sunsetting).
+- **MCP:** `codegraph` (đã `codegraph init`), `playwright` (npx), `vibe_kanban` (cần app đang chạy và tài khoản đăng nhập; dự án này đang sunsetting).
 - **Bộ Agentic SDLC:** 25 agent, skill `/sdlc-run`, **chưa chạy thử đầu cuối**.
 
 ## Việc tiếp theo theo thứ tự

@@ -43,7 +43,7 @@
 
 ## Công cụ (`.mcp.json`, `.claude/settings.json`)
 - `codegraph`: cần `codegraph init .` (có `.codegraph/`); hook chèn symbol và file phụ thuộc trước mỗi Edit/Write trong `backend/app`, `frontend/src`; dùng `codegraph_explore` trước khi sửa code.
-- `playwright` (npx, headless), `agent-browser` (chưa cài: `npm i -g agent-browser && agent-browser install`), `vibe_kanban` (cần `npx vibe-kanban` đang chạy và đăng nhập).
+- `playwright` (npx, headless), `vibe_kanban` (cần `npx vibe-kanban` đang chạy và đăng nhập).
 - Script checklist cần `.sdlc/venv`: `python3 -m venv .sdlc/venv && .sdlc/venv/bin/pip install openpyxl`.
 
 ## Agent không được
