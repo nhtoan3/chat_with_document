@@ -3,7 +3,7 @@
 # Claude Code — vận hành Agentic SDLC
 
 ## Đọc trước khi làm
-- `docs/STATUS.md`: phase nào đã duyệt, câu hỏi mở, lỗi mở, hạ tầng. Kết thúc một phase hoặc task thì cập nhật file đó.
+- `docs/sdlc-state.md`: phase nào đã duyệt, câu hỏi mở, lỗi mở, hạ tầng. Kết thúc một phase hoặc task thì cập nhật file đó.
 - Hiện **chưa tài liệu nào được duyệt**; tất cả là `Draft`. Không coi bất kỳ tài liệu nào là baseline.
 
 ## Bản đồ tài liệu (`docs/`)

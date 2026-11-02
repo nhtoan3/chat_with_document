@@ -1,4 +1,4 @@
-# Trạng thái dự án — đọc trước khi làm
+# Trạng thái quy trình SDLC — đọc trước khi làm
 
 > Cập nhật: 2026-11-02 (commit `a091f9b`). **Ai kết thúc một phase hoặc một task thì cập nhật file này**; mọi số liệu dưới đây có nguồn, không ước lượng.
 
