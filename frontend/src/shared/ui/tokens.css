@@ -1,4 +1,4 @@
-/* Design token — sao chép từ docs/design/html_design (:root) */
+/* Design token — sao chép từ docs/04-design/html_design (:root) */
 :root {
   --font: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --bg: #F6F7F9; --surface: #FFFFFF; --surface-2: #F1F3F6; --surface-3: #E9ECF1;

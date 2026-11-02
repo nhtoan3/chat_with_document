@@ -2,7 +2,7 @@
 
 Ứng dụng web cho đội phát triển kinh doanh: tải các tệp PDF của dự án lên, rồi hỏi đáp bằng tiếng Việt. AI (Claude) trả lời **chỉ dựa trên nội dung các tài liệu đã tải lên**.
 
-Phạm vi MVP v0.4 gồm 2 tính năng: **F1 — Xử lý PDF** và **F2 — Hỏi đáp AI**. Không có đăng nhập; truy cập được giới hạn theo IP / VPN công ty ở tầng mạng. Xem [docs/implement/Implement_plan.md](docs/implement/Implement_plan.md).
+Phạm vi MVP v0.4 gồm 2 tính năng: **F1 — Xử lý PDF** và **F2 — Hỏi đáp AI**. Không có đăng nhập; truy cập được giới hạn theo IP / VPN công ty ở tầng mạng. Xem [docs/05-development/Implement_plan.md](docs/05-development/Implement_plan.md).
 
 ## Kiến trúc
 

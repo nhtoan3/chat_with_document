@@ -302,7 +302,7 @@ Các test case dưới đây có trong Test_Plan nhưng **không có file ở đ
 | SEC-003 | SSE-KMS của S3, mã hóa RDS |
 | OPS-003, OPS-004 | CI trên GitHub Actions, đẩy image lên ECR |
 | OPS-005, OPS-006 | `infra/deploy.sh`, `infra/rollback.sh` trên EC2 |
-| UAT-001 … UAT-006 | Do đại diện BD thực hiện trên AWS (biên bản `docs/implement/evidence/UAT.md`) |
+| UAT-001 … UAT-006 | Do đại diện BD thực hiện trên AWS (biên bản `docs/05-development/evidence/UAT.md`) |
 
 ## 8. Thứ tự chạy gợi ý
 

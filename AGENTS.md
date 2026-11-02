@@ -6,10 +6,11 @@ Repo của MVP **"Chat với tài liệu"**: tải PDF dự án lên, hỏi đá
 
 | Câu hỏi | Xem ở |
 |---|---|
-| Làm gì, lịch, phạm vi | `docs/implement/Implement_plan.md` (v0.4) |
-| Đặc tả từng việc | `docs/implement/tasks/T-001 … T-024` |
-| Yêu cầu nào đã được code / test | `docs/implement/traceability.md` |
-| Kiến trúc mục tiêu | `docs/design/SAD.md` (mục "Phạm vi kiến trúc cho MVP" ghi đè phần còn lại) |
+| Vấn đề, mục tiêu, bên liên quan, thuật ngữ, nguồn | `docs/01-intake/` |
+| Làm gì, lịch, phạm vi | `docs/05-development/Implement_plan.md` (v0.4) |
+| Đặc tả từng việc | `docs/05-development/tasks/T-001 … T-024` |
+| Yêu cầu nào đã được code / test | `docs/05-development/traceability.md` |
+| Kiến trúc mục tiêu | `docs/04-design/SAD.md` (mục "Phạm vi kiến trúc cho MVP" ghi đè phần còn lại) |
 
 Khi tài liệu mâu thuẫn: **kế hoạch v0.4 và thư mục `tasks/` có hiệu lực** hơn `User_Stories.md` và `SAD.md` (chưa cập nhật theo v0.4). `Dev_Tasks.md` đã bị thay thế, chỉ để tham khảo cho giai đoạn 2.
 
@@ -55,7 +56,7 @@ Chạy một test backend: `cd backend && .venv/bin/pytest tests/unit/test_chunk
 
 - Mỗi commit thuộc **một task**, tiêu đề bắt đầu bằng mã task: `T-013: Add ingestion pipeline and worker`. Sửa lỗi của task cũ cũng dùng mã task đó.
 - Trước khi commit: `make lint` và `make test` phải xanh.
-- Cập nhật `docs/implement/traceability.md` khi thêm hoặc đổi test cho một yêu cầu.
+- Cập nhật `docs/05-development/traceability.md` khi thêm hoặc đổi test cho một yêu cầu.
 
 ## Môi trường local — lưu ý
 

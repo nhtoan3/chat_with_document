@@ -1,8 +1,8 @@
 # Kế hoạch kiểm thử tổng thể (Master Test Plan) — "Chat với tài liệu" (MVP v0.4)
 
 > **TP-CWD-001** · v0.2 (`Draft`) · 2026-10-31 · Tuân thủ IEEE 829-2008 (Software Test Documentation)
-> **Phạm vi:** MVP v0.4 theo `docs/implement/Implement_plan.md`: **F1 — Xử lý PDF** và **F2 — Hỏi đáp AI**.
-> **Tài liệu có hiệu lực khi mâu thuẫn:** `Implement_plan.md` v0.4 và `docs/implement/tasks/` được ưu tiên hơn `User_Stories.md`, `PRD.md` và `SAD.md` (các tài liệu này chưa cập nhật theo v0.4).
+> **Phạm vi:** MVP v0.4 theo `docs/05-development/Implement_plan.md`: **F1 — Xử lý PDF** và **F2 — Hỏi đáp AI**.
+> **Tài liệu có hiệu lực khi mâu thuẫn:** `Implement_plan.md` v0.4 và `docs/05-development/tasks/` được ưu tiên hơn `User_Stories.md`, `PRD.md` và `SAD.md` (các tài liệu này chưa cập nhật theo v0.4).
 
 **Lịch sử phiên bản**
 
@@ -49,16 +49,16 @@
 
 | Loại | Tài liệu | Phiên bản | Nguồn | Thông tin chính dùng cho kiểm thử |
 |---|---|---|---|---|
-| Kế hoạch phát triển | `docs/implement/Implement_plan.md` | v0.4 (26/10/2026) | Tech lead / PO | Phạm vi F1 + F2, các phần lược bỏ, 4 đánh đổi, lịch S0 / S1 / ổn định, go-live 30/11/2026, rủi ro |
-| Đặc tả task | `docs/implement/tasks/T-001 … T-024` | v0.4 | Tech lead | Đặc tả API, mã lỗi, ca kiểm thử của T-016 và T-022, tiêu chí hoàn thành |
-| Ma trận truy vết | `docs/implement/traceability.md` | 31/10/2026 | Tech lead | Yêu cầu → code → test, trạng thái ✅ / 🖐 / ⏳ |
-| PRD (≈ SRS) | `docs/requirements/PRD.md` | v0.1 | PO / BA | FR, NFR-001..021, EC-01..14, OKR KR2.1 / KR2.3, launch gate §6.1 |
-| User Stories | `docs/requirements/User_Stories.md` | v0.2 (*chưa cập nhật v0.4*) | PO | Tiêu chí chấp nhận AC-US-005..015 (chỉ dùng phần còn trong phạm vi) |
-| SAD (IEEE 1016-2009) | `docs/design/SAD.md` | v0.2 | Kiến trúc sư | Mục "Phạm vi kiến trúc cho MVP", ADR-006 / 010, port `LLMPort` / `EmbeddingPort` / `ObjectStoragePort` |
-| Lược đồ dữ liệu | `docs/design/schema.sql`, `backend/app/migrations/` | `0001_init` | BE | Bảng `documents`, `ingestion_jobs`, `chunks`, `qa_log` |
-| Thiết kế UI / UX | `docs/design/html_design/03-documents.html`, `04-chat.html`, `08-errors.html` | v0.1 | Thiết kế | Bố cục màn hình Tài liệu và Hỏi đáp (bản tối giản theo T-015, T-021) |
+| Kế hoạch phát triển | `docs/05-development/Implement_plan.md` | v0.4 (26/10/2026) | Tech lead / PO | Phạm vi F1 + F2, các phần lược bỏ, 4 đánh đổi, lịch S0 / S1 / ổn định, go-live 30/11/2026, rủi ro |
+| Đặc tả task | `docs/05-development/tasks/T-001 … T-024` | v0.4 | Tech lead | Đặc tả API, mã lỗi, ca kiểm thử của T-016 và T-022, tiêu chí hoàn thành |
+| Ma trận truy vết | `docs/05-development/traceability.md` | 31/10/2026 | Tech lead | Yêu cầu → code → test, trạng thái ✅ / 🖐 / ⏳ |
+| PRD (≈ SRS) | `docs/02-requirements/PRD.md` | v0.1 | PO / BA | FR, NFR-001..021, EC-01..14, OKR KR2.1 / KR2.3, launch gate §6.1 |
+| User Stories | `docs/02-requirements/User_Stories.md` | v0.2 (*chưa cập nhật v0.4*) | PO | Tiêu chí chấp nhận AC-US-005..015 (chỉ dùng phần còn trong phạm vi) |
+| SAD (IEEE 1016-2009) | `docs/04-design/SAD.md` | v0.2 | Kiến trúc sư | Mục "Phạm vi kiến trúc cho MVP", ADR-006 / 010, port `LLMPort` / `EmbeddingPort` / `ObjectStoragePort` |
+| Lược đồ dữ liệu | `docs/04-design/schema.sql`, `backend/app/migrations/` | `0001_init` | BE | Bảng `documents`, `ingestion_jobs`, `chunks`, `qa_log` |
+| Thiết kế UI / UX | `docs/04-design/html_design/03-documents.html`, `04-chat.html`, `08-errors.html` | v0.1 | Thiết kế | Bố cục màn hình Tài liệu và Hỏi đáp (bản tối giản theo T-015, T-021) |
 | Hợp đồng API | `backend/app/api/routers/*.py`, `platform/errors.py` | mã hiện tại | BE | 3 endpoint `/api/v1`, 11 mã lỗi problem+json |
-| Biên bản UAT | `docs/implement/evidence/UAT.md` | mẫu | QA / PO | 5 kịch bản UAT |
+| Biên bản UAT | `docs/05-development/evidence/UAT.md` | mẫu | QA / PO | 5 kịch bản UAT |
 | Golden set | `backend/tests/eval/golden.yaml` | mẫu (4 positive, 2 negative) | BD / QA | Bộ câu hỏi chuẩn; BD bàn giao ≥ 30 positive + ≥ 10 negative |
 
 ### 0.2 Yêu cầu kiểm thử được (trích từ PRD, task và ma trận truy vết)
@@ -237,15 +237,15 @@ Kế hoạch này:
 
 | Tài liệu | Phiên bản | Nguồn |
 |---|---|---|
-| `docs/implement/Implement_plan.md` | v0.4 | Tech lead / PO |
-| `docs/implement/tasks/README.md`, T-001..T-024 | v0.4 | Tech lead |
-| `docs/implement/traceability.md` | 31/10/2026 | Tech lead |
-| `docs/requirements/PRD.md` | v0.1 | PO / BA |
-| `docs/requirements/User_Stories.md` | v0.2 | PO |
-| `docs/requirements/BRD.md` | v0.1 | BA |
-| `docs/design/SAD.md` (IEEE 1016-2009) | v0.2 | Kiến trúc sư |
-| `docs/design/html_design/*.html` | v0.1 | Thiết kế |
-| `docs/implement/evidence/UAT.md` | mẫu | QA |
+| `docs/05-development/Implement_plan.md` | v0.4 | Tech lead / PO |
+| `docs/05-development/tasks/README.md`, T-001..T-024 | v0.4 | Tech lead |
+| `docs/05-development/traceability.md` | 31/10/2026 | Tech lead |
+| `docs/02-requirements/PRD.md` | v0.1 | PO / BA |
+| `docs/02-requirements/User_Stories.md` | v0.2 | PO |
+| `docs/02-requirements/BRD.md` | v0.1 | BA |
+| `docs/04-design/SAD.md` (IEEE 1016-2009) | v0.2 | Kiến trúc sư |
+| `docs/04-design/html_design/*.html` | v0.1 | Thiết kế |
+| `docs/05-development/evidence/UAT.md` | mẫu | QA |
 | `AGENTS.md` | — | Tech lead |
 | IEEE 829-2008 Standard for Software and System Test Documentation | 2008 | IEEE |
 
@@ -267,7 +267,7 @@ Phiên bản được kiểm thử xác định bằng tag image `sha-<short>` d
 | SI-006 | Ứng dụng web | `frontend/src/` | React, TypeScript, Vite | Unit (vitest), E2E (Playwright) |
 | SI-007 | Lược đồ CSDL | `backend/app/migrations/` (`0001_init`) | Alembic, PostgreSQL 16 + `vector` | Integration (Testcontainers), deploy |
 | SI-008 | Cấu hình và hạ tầng | `docker-compose.yml`, `infra/*`, `frontend/nginx.conf`, `.github/workflows/ci.yml` | Docker Compose, Nginx, AWS | Vận hành, bảo mật |
-| SI-009 | Tài liệu cho người dùng | `docs/implement/Huong_dan_su_dung.md` | Markdown | Review trong UAT |
+| SI-009 | Tài liệu cho người dùng | `docs/05-development/Huong_dan_su_dung.md` | Markdown | Review trong UAT |
 
 ### 3.2 Tài sản kiểm thử
 
@@ -280,7 +280,7 @@ Phiên bản được kiểm thử xác định bằng tag image `sha-<short>` d
 | TA-005 | Fake port | Python | `B:fakes/fakes.py` (`FakeLLM`, …) | BE2 |
 | TA-006 | Golden set và script đánh giá | YAML, CSV | `B:eval/golden.yaml`, `run_eval.py`, `score.py`, `results/*.csv` | BD + QA |
 | TA-007 | Môi trường container | Docker Compose, Testcontainers | `docker-compose.yml`, `B:integration/conftest.py` | TL |
-| TA-008 | Biên bản UAT | Markdown | `docs/implement/evidence/UAT.md` | QA / PO |
+| TA-008 | Biên bản UAT | Markdown | `docs/05-development/evidence/UAT.md` | QA / PO |
 
 > **Quy tắc dữ liệu:** fixture chỉ là dữ liệu giả lập. Không commit PDF thật của khách hàng. Nếu OQ-008 cho phép dùng tài liệu thật, chỉ dùng chúng trên môi trường AWS trong UAT.
 
@@ -379,7 +379,7 @@ Các phần dưới đây không được xây dựng trong MVP, nên kế hoạ
 - **Kim tự tháp kiểm thử:** phần lớn là unit và integration chạy trong CI. Chỉ vài kịch bản E2E cho luồng chính. Phần phụ thuộc AI và hạ tầng thật được kiểm thủ công hoặc bán tự động (eval, live, UAT).
 - **Ranh giới giả lập:** use case chỉ phụ thuộc port, nên unit test dùng fake port. Integration dùng PostgreSQL + pgvector thật (Testcontainers) và S3Mock, với `FakeLLM` thay Claude. Claude thật chỉ dùng ở marker `live`, `make eval` và UAT.
 - **Shift-left:** mỗi task có tiêu chí "CI xanh". Commit chỉ được merge khi `make lint` và `make test` xanh.
-- **Truy vết:** mỗi test case có mã và trỏ tới yêu cầu (Phụ lục A). Khi thêm hoặc đổi test thì cập nhật `docs/implement/traceability.md`.
+- **Truy vết:** mỗi test case có mã và trỏ tới yêu cầu (Phụ lục A). Khi thêm hoặc đổi test thì cập nhật `docs/05-development/traceability.md`.
 
 ### 6.2 Tự động và thủ công
 
@@ -531,7 +531,7 @@ Các phần dưới đây không được xây dựng trong MVP, nên kế hoạ
 | **Phụ trách** | ≥ 2 đại diện BD, PO; QA điều phối |
 | **Thời gian** | Thứ Năm 26/11/2026, trên AWS, với tag ứng viên go-live |
 | **Tiêu chí vào** | E2E P0 đạt; EVAL-001, 002 đã có kết quả; SEC-001..003 đạt; hướng dẫn sử dụng đã có |
-| **Tiêu chí ra** | Biên bản `docs/implement/evidence/UAT.md` được ký |
+| **Tiêu chí ra** | Biên bản `docs/05-development/evidence/UAT.md` được ký |
 
 | Mã | Kịch bản | Tiêu chí đạt | Yêu cầu |
 |---|---|---|---|
@@ -687,8 +687,8 @@ Kiểm thử a11y đã bị lược bỏ ở v0.4. Mục này chỉ đối chi�
 | Dữ liệu kiểm thử | Fixture PDF, golden set | `B:fixtures/`, `B:eval/golden.yaml` | BE1, BD | 05/11, 16/11 |
 | Log thực thi | Kết quả CI, CSV eval | GitHub Actions, `B:eval/results/*.csv` | CI, QA | Liên tục |
 | Báo cáo sự cố | GitHub Issues nhãn `bug` | GitHub | Mọi người | Liên tục |
-| Ma trận truy vết | Cập nhật trạng thái | `docs/implement/traceability.md` | TL | Mỗi PR có test |
-| Biên bản UAT | Đã ký | `docs/implement/evidence/UAT.md` | QA / PO | 26/11 |
+| Ma trận truy vết | Cập nhật trạng thái | `docs/05-development/traceability.md` | TL | Mỗi PR có test |
+| Biên bản UAT | Đã ký | `docs/05-development/evidence/UAT.md` | QA / PO | 26/11 |
 | Báo cáo tổng kết kiểm thử | Tổng hợp kết quả (gồm số đo PERF-001..004 và SEC-001..006), lỗi còn mở, khuyến nghị go / no-go | `docs/07-verification/Test_Summary_Report.md` | QA | 27/11 |
 
 ---
