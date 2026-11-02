@@ -14,3 +14,6 @@ backend/tests/eval/results/
 # Test evidence: generated input files are reproducible (frontend/e2e/lib.sh make_pdf)
 test_reports/*/data/
 test_reports/_tmp/
+.sdlc/
+.codegraph/
+test_reports/_mcp/
